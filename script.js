@@ -31,7 +31,6 @@ function directionPermitted(e){
     else{
         return true;
     }
-    
 }
 
 
@@ -41,7 +40,7 @@ var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
 
     // other
 var score = 0;
-var interval = 2000;
+var interval = 500;
 var updatePending = false;
 
 //Events
