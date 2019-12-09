@@ -41,6 +41,7 @@ var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
     // other
 var score = 0;
 var interval = 500;
+var intervalFunction;
 var updatePending = false;
 
 //Events
@@ -105,15 +106,20 @@ function updateState() {
         var h2 = document.getElementsByTagName("h2");
         h2[0].textContent = "Score: " + score;
         newTreatPosition();
-        
+        interval -= 100;
+        drawSnake();
+        drawTreat();
+        updatePending = false;
+        startNewInterval(); 
     }
     else {
+        drawSnake();
+        drawTreat();
+        updatePending = false;
         snake.pop();
     }
 
-    drawSnake();
-    drawTreat();
-    updatePending = false;
+    
     
 }
 
@@ -154,10 +160,11 @@ function collisionDetected(){
 }
 
 function startNewInterval(){
-    clearInterval();
-    setInterval(function(){ 
+    clearInterval(intervalFunction)
+    intervalFunction = setInterval(function(){ 
         
         updateState();
        
    }, interval);
+
 }
