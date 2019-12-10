@@ -43,6 +43,10 @@ var score = 0;
 var interval = 500;
 var intervalFunction;
 var updatePending = false;
+var eatSound = new sound('eat.mp3');
+var failSound = new sound('failure.mp3');
+
+
 
 //Events
 document.onkeydown = function(e) { 
@@ -102,6 +106,7 @@ function updateState() {
     canvasContent.clearRect(0, 0, canvas.width, canvas.height); 
 
     if (treatX == snake[0][0] + 10 && treatY == snake[0][1] + 10){
+        eatSound.play();
         score += 10;
         var h2 = document.getElementsByTagName("h2");
         h2[0].textContent = "Score: " + score;
@@ -142,10 +147,12 @@ function newTreatPosition(){
 
 function collisionDetected(){
     if (snake[0][0] < 0 || snake[0][0] >= canvas.width){
+        failSound.play();
         return true;
     }
 
     else if (snake[0][1] < 0 || snake[0][1] >= canvas.height){
+        failSound.play();
         return true;
     }
     
@@ -153,6 +160,7 @@ function collisionDetected(){
 
         for (var i = 1; i < snake.length; i++){
             if (snake[0][0] == snake[i][0] && (snake[0][1] == snake[i][1])){
+                failSound.play();
                 return true;
             }
         }
@@ -169,3 +177,20 @@ function startNewInterval(){
    }, interval);
 
 }
+
+//This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page. 
+//The audio element is then played in the script.js depending on different events.
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
