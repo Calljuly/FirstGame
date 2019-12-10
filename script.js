@@ -106,7 +106,7 @@ function updateState() {
         var h2 = document.getElementsByTagName("h2");
         h2[0].textContent = "Score: " + score;
         newTreatPosition();
-        interval -= 100;
+        interval *= 0.95;
         drawSnake();
         drawTreat();
         updatePending = false;
@@ -141,10 +141,11 @@ function newTreatPosition(){
 }
 
 function collisionDetected(){
-    if (snake[0][0] < 0 || snake[0][0] > canvas.width){
+    if (snake[0][0] < 0 || snake[0][0] >= canvas.width){
         return true;
     }
-    else if (snake[0][1] < 0 || snake[0][1] > canvas.height){
+
+    else if (snake[0][1] < 0 || snake[0][1] >= canvas.height){
         return true;
     }
     
