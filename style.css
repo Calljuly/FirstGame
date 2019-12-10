@@ -1,0 +1,24 @@
+#gameDiv{
+    --gameWidth: 800px;
+    max-width: var(--gameWidth);
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border: solid 2px black;
+  }
+
+#myVideo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -100;
+    height: 100%;  
+    filter: saturate(0%) blur(5px); 
+  }
+
+  #myCanvas{
+      background-color: rgba(0, 0, 0, 1);
+      
+  }
+
+ 

@@ -4,6 +4,7 @@
     // Canvas
 var canvas = document.getElementById("myCanvas");
 var canvasContent = canvas.getContext("2d");
+var video = document.getElementById("myVideo");
 
 var x = 60;
 var y = 60;
@@ -43,10 +44,14 @@ var score = 0;
 var interval = 500;
 var intervalFunction;
 var updatePending = false;
+
+var backgroundOpacity = 1;
+var backgroundSaturation = 0;
+var backgroundBlur = 5;
+
+  // Sounds
 var eatSound = new sound('eat.mp3');
 var failSound = new sound('failure.mp3');
-
-
 
 //Events
 document.onkeydown = function(e) { 
@@ -68,9 +73,18 @@ startNewInterval();
 function drawSnake(){
     for (var i = 0; i < snake.length; i++){
         canvasContent.beginPath();
-        canvasContent.rect(snake[i][0],snake[i][1],20,20);
-        canvasContent.stroke();
+        var procent = ((i / snake.length) - 1) * -1;
+        canvasContent.fillStyle = "rgba(255,255,255," + procent +")";
+        canvasContent.fillRect(snake[i][0],snake[i][1],20,20);
     }
+}
+
+function drawTreat(){
+    canvasContent.beginPath();
+    canvasContent.fillStyle = "rgba(255,255,255,0.8)";
+    canvasContent.arc(treatX,treatY,10,0,2*Math.PI);
+    canvasContent.fill();
+
 }
 
 function updateState() {
@@ -115,6 +129,21 @@ function updateState() {
         drawSnake();
         drawTreat();
         updatePending = false;
+
+        if (backgroundOpacity < 0.1){
+            backgroundSaturation += 10;
+            backgroundBlur -= 0.5;
+            video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
+        }
+        else{
+            backgroundOpacity -= 0.1;
+            canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
+        }
+        
+
+
+        
+
         startNewInterval(); 
     }
     else {
@@ -126,12 +155,6 @@ function updateState() {
 
     
     
-}
-
-function drawTreat(){
-    canvasContent.beginPath();
-    canvasContent.arc(treatX,treatY,10,0,2*Math.PI);
-    canvasContent.stroke();
 }
 
 function newTreatPosition(){
