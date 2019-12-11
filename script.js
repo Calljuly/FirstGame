@@ -17,20 +17,20 @@ var treatY = 30;
 var direction = 39;
 
 function directionPermitted(e){
-    if (direction == 39 && e.keyCode == 37){
-        return false;
+    if (direction == 39 && (e.keyCode == 40 || e.keyCode == 38)){
+        return true;
     }
-    else if (direction == 37 && e.keyCode == 39){
-        return false;
+    else if (direction == 37 && (e.keyCode == 40 || e.keyCode == 38)){
+        return true;
     }
-    else if (direction == 38 && e.keyCode == 40){
-        return false;
+    else if (direction == 38 && (e.keyCode == 37 || e.keyCode == 39)){
+        return true;
     }
-    else if (direction == 40 && e.keyCode == 38){
-        return false;
+    else if (direction == 40 && (e.keyCode == 37 || e.keyCode == 39)){
+        return true;
     }
     else{
-        return true;
+        return false;
     }
 }
 
@@ -44,6 +44,7 @@ var score = 0;
 var interval = 500;
 var intervalFunction;
 var updatePending = false;
+var paused = false;
 
 var backgroundOpacity = 1;
 var backgroundSaturation = 0;
@@ -61,7 +62,19 @@ document.onkeydown = function(e) {
         direction = e.keyCode;
         updatePending = true;
     }
-     };
+    else if(e.keyCode == 80){
+        if (paused){
+            intervalFunction = setInterval(function(){ 
+        
+                updateState();
+               
+           }, interval);
+        }
+        else{
+            clearInterval(intervalFunction);
+        }
+    }
+};
 
 
 // Call methods on start
@@ -140,12 +153,9 @@ function updateState() {
             canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
         }
         
-
-
-        
-
         startNewInterval(); 
     }
+
     else {
         drawSnake();
         drawTreat();
