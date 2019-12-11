@@ -63,16 +63,8 @@ document.onkeydown = function(e) {
         updatePending = true;
     }
     else if(e.keyCode == 80){
-        if (paused){
-            intervalFunction = setInterval(function(){ 
+        changePauseStatus();
         
-                updateState();
-               
-           }, interval);
-        }
-        else{
-            clearInterval(intervalFunction);
-        }
     }
 };
 
@@ -98,6 +90,17 @@ function drawTreat(){
     canvasContent.arc(treatX,treatY,10,0,2*Math.PI);
     canvasContent.fill();
 
+}
+
+function changePauseStatus(){
+    if (paused){
+        startNewInterval();
+        paused = false;
+    }
+    else{
+        clearInterval(intervalFunction);
+        paused = true;
+    }
 }
 
 function updateState() {
