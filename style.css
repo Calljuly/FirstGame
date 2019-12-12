@@ -21,4 +21,15 @@
       
   }
 
+  .vrtBtnCont{
+    display: flex;
+    justify-content: center;
+  }
+
+  .virtualBtn{
+    text-align: center;
+    width: 15%;
+    padding: 1%;
+  }
+
  
