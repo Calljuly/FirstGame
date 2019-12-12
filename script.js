@@ -9,8 +9,8 @@ var video = document.getElementById("myVideo");
 var x = 60;
 var y = 60;
 
-var treatX = 30;
-var treatY = 30;
+var treatX = 210;
+var treatY = 70;
 
 
     // Direction
@@ -45,11 +45,11 @@ var intervalFunction;
 var updatePending = false;
 var paused = false;
 
-var backgroundOpacity = 1;
+var backgroundOpacity = 1.1;
 var backgroundSaturation = 0;
 var backgroundBlur = 5;
 
-  // Sounds
+// Sounds
 var eatSound = new sound('eat.mp3');
 var failSound = new sound('failure.mp3');
 
@@ -61,8 +61,8 @@ document.onkeydown = function(e) {
         direction = e.keyCode;
         updatePending = true;
     }
-    else if(e.keyCode == 80){
-        changePauseStatus();
+    else if(e.keyCode == 80 || e.keyCode == 32){
+        changePauseState();
         
     }
 };
@@ -113,14 +113,26 @@ function drawSnake(){
 }
 
 function drawTreat(){
-    canvasContent.beginPath();
-    canvasContent.fillStyle = "rgba(255,255,255,0.8)";
-    canvasContent.arc(treatX,treatY,10,0,2*Math.PI);
-    canvasContent.fill();
-
+    if (score < 100){
+        canvasContent.beginPath();
+        var img = document.getElementById("treat");
+        canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
+    }
+    else if (score < 200){
+        canvasContent.beginPath();
+        canvasContent.fillStyle = "rgba(255,255,255,0.8)";
+        canvasContent.arc(treatX,treatY,12.5,0,2*Math.PI);
+        canvasContent.fill();
+    }
+    else{
+        canvasContent.beginPath();
+        var img = document.getElementById("treat");
+        img.src = "Images/treat1.png";
+        canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
+    }
 }
 
-function changePauseStatus(){
+function changePauseState(){
     if (paused){
         startNewInterval();
         paused = false;
@@ -174,7 +186,7 @@ function updateState() {
         drawTreat();
         updatePending = false;
 
-        if (backgroundOpacity < 0.1){
+        if (backgroundOpacity < 0.2){
             backgroundSaturation += 10;
             backgroundBlur -= 0.5;
             video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
