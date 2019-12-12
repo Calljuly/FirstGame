@@ -38,7 +38,6 @@ function directionPermitted(e){
     // Snake
 var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
 
-
     // other
 var score = 0;
 var interval = 500;
@@ -68,6 +67,35 @@ document.onkeydown = function(e) {
     }
 };
 
+$('.virtualBtn').on('click', (event) =>{
+    var e = {};
+    var id = event.target.getAttribute('id');
+    switch(id){
+        case 'up':
+            e.keyCode = 38;
+            break;
+        case 'down':
+                e.keyCode = 40;
+                break;
+        case 'left':
+                e.keyCode = 37;
+                break;
+        case 'right':
+                e.keyCode = 39;
+                break;
+        case 'playPause':
+                changePauseStatus();
+                break;
+        default:
+                alert('unknown');
+    }
+
+    if (directionPermitted(e) && !updatePending)
+    {
+        direction = e.keyCode;
+        updatePending = true;
+    }
+})
 
 // Call methods on start
 drawSnake();
