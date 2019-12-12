@@ -1,0 +1,6 @@
+1. Use your keyboards arrows to guide the snake: up, left, right, and down. 
+2. If you are on a tablet or smartphone, use the virtual keybord.
+3. Eat the treats to gain points.
+4. Don't run the snake into the wall or his own tail.
+5. The "space" key will pause the game, press "space" again to resume.
+6. If you score high enough, your name will be added to the highscore list!
