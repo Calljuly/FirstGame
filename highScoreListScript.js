@@ -36,8 +36,8 @@ submittBTN.onclick = function()
 
     highScoreList.push(new Player(choosenName, Number(myTest),1));
     
-    localStorage.setItem("score", highScoreList);
     sortHighScoreList(highScoreList);
+    localStorage.setItem("score", JSON.stringify(highScoreList));
     updateHighScore();
 }
 
@@ -63,7 +63,7 @@ function updateHighScore()
 {
     $("#scoreList tr").next().remove(); 
     count = 1;
-    var ww = localStorage.getItem("score");
+    var ww = JSON.parse(localStorage.getItem("score"));
     alert(ww[0]);
 
     for(var p in ww)
