@@ -21,6 +21,11 @@
       
   }
 
+  #treat{
+    display: none;
+
+  }
+
   .vrtBtnCont{
     display: flex;
     justify-content: center;
