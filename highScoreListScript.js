@@ -6,6 +6,15 @@ var showScoreBTN = document.getElementById('showScore');
 var submittBTN = document.getElementById('submittBTN');
 var deleteBTN = document.getElementById('deleteBTN');
 
+if(localStorage.getItem("score")== null)
+{
+    localStorage.setItem("score", JSON.stringify(highScoreList));
+}
+else
+{
+    highScoreList = JSON.parse(localStorage.getItem("score"));
+}
+
 class Player 
 {
     constructor(name, score, time)
@@ -64,7 +73,6 @@ function updateHighScore()
     $("#scoreList tr").next().remove(); 
     count = 1;
     var ww = JSON.parse(localStorage.getItem("score"));
-    alert(ww[0]);
 
     for(var p in ww)
     {
