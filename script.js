@@ -84,7 +84,7 @@ $('.virtualBtn').on('click', (event) =>{
                 e.keyCode = 39;
                 break;
         case 'playPause':
-                changePauseStatus();
+                changePauseState();
                 break;
         default:
                 alert('unknown');
