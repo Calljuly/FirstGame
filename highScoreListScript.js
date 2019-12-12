@@ -7,8 +7,8 @@ var showScoreBTN = document.getElementById('showScore');
 var submittBTN = document.getElementById('submittBTN');
 var player;
 
-class Player {
-
+class Player 
+{
     constructor(name, score, time)
     {
         this.name = name;
@@ -44,7 +44,6 @@ function sortHighScoreList(points)
 
 function insertToBoard(name, score, time)
 {
-
     var tableScore = document.getElementById('scoreList'); 
     var currentRow = tableScore.insertRow(count);
     var cell1 = currentRow.insertCell(0);
