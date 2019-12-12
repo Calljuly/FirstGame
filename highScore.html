@@ -10,21 +10,6 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <button id="startButton">Starta spelet</button>
-    <button id="submittBTN">Add Player</button>
-    <button id="deleteBTN">Delete Storage</button>
-              
-        <form id="myForm">
-            <label for="name">User Name : </label>
-            <input type="text" name="userName" id="userName"><br>
-            <label for="points">Points : </label>
-            <input type="number" name="userPoint" id="userPoint">
-
-        </form>
-
-        
-
         <table id="scoreList">
             <tr class="head">
                 <th>
@@ -40,7 +25,21 @@
             </tr>
 
         </table>
+      
+    <div id="container">
+     <div id="btnGroup"> 
+        <button id="startButton">Starta spelet</button>
+        <button id="submittBTN">Add Player</button>
+        <button id="deleteBTN">Delete Storage</button>
+    </div>     
+        <form id="myForm">
+            <label for="name">User Name : </label>
+            <input type="text" name="userName" id="userName"><br><br>
+            <label for="points">Points : </label>
+            <input type="number" name="userPoint" id="userPoint">
 
+        </form>
+    </div>
 
 </body>
 </html>

@@ -43,4 +43,28 @@
     border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
   
   }
+  #myForm{
+    display: none;
+    margin: 10px;
+  }
+  #btnGroup{
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  #btnGroup button{
+    padding: 10px;
+    background-color: antiquewhite;
+    border: none;
+  }
+  #btnGroup button:hover{
+    
+    border: 1px solid black;
+    font-weight: bold;
+  }
+  #container{
+    display: inline-flex;
+    flex-direction: row;
+  }
  
