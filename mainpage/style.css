@@ -1,0 +1,206 @@
+*
+{
+margin: 0px;
+padding: 0px;
+box-sizing: border-box;
+}
+
+html,body{
+    background: black;
+}
+
+#wrapper{
+    width: 70%;
+    background: rgba(54, 53, 53, 0.096);
+    margin: auto;
+    height: 100%;
+}
+header
+{
+
+display: grid;
+grid-template-columns: repeat(3,1fr);
+}
+
+
+.topleftcircle
+{
+background: rgb(8, 57, 63);
+width: 100px;
+height: 100px;
+border-radius: 50%;
+margin: auto;
+border: 20px black solid;
+}
+.toprightcircle
+{
+    background: rgb(54, 51, 51);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: auto;
+
+}
+.smallcircle
+{
+    background: rgb(54, 51, 51);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation-name: smallcircleanimation;
+    animation-duration:10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    
+}
+
+@keyframes smallcircleanimation
+{
+    0%{background-color: rgb(175, 175, 94);}
+    25%{background-color: rgb(107, 96, 96);}
+    50%{background-color: rgb(51, 51, 90);}
+    75%{background-color: rgb(203, 209, 203)};
+    100%{background-color: rgb(156, 111, 85) }
+}
+
+
+header .titlecontainer
+{
+background: black;
+position: relative;
+padding: 50px;
+}
+
+.box
+{
+width: 10px;
+height: 10px;
+position: absolute;
+animation-name: snakeanimation;
+animation-duration:30s;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+}
+
+@keyframes snakeanimation
+{
+0%{background-color: rgb(19, 19, 18);left: 5%;top: 5%;}
+25%{background-color: rgb(107, 96, 96); left: 85%;top: 5%;}
+50%{background-color: rgb(223, 223, 236); left: 85%;top: 85%;}
+75%{background-color: rgb(203, 209, 203);left: 5%;top: 85%;}
+100%{background-color: rgb(247, 247, 244); left: 5%;top: 5%;}
+}
+
+
+
+header .title
+{
+text-align: center;
+color: white;
+font-size: 30px;
+letter-spacing: 2px;
+font-family: 'Sulphur Point', sans-serif;
+
+
+}
+
+header .title h1
+{
+border-bottom: solid goldenrod 0.2px;
+text-shadow: 5px 5px rgba(97, 74, 43, 0.788);
+font-weight: bold;
+
+}
+
+header .title h1::first-letter
+{
+font-size: 100px;
+}
+
+
+section
+{
+display:grid;
+grid-template-columns: repeat(3,1fr);
+height: 440px;
+justify-content: center;
+align-items: center;
+
+
+  
+}
+
+section ul
+{
+    list-style: none;
+    text-align:center;
+    border-radius: 2%;
+    border: 2px goldenrod solid;
+}
+section ul li
+{
+margin: 3%;
+}
+
+section a
+{
+color: white;
+text-decoration: none;
+font-size: 35px;
+font-family: 'Sulphur Point', sans-serif;
+
+}
+
+section a:hover
+{
+background: goldenrod;
+
+}
+
+.leftmidcircle
+{
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background: #281c3c;
+}
+
+.rightmidcircle
+{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1c253c; 
+    margin-left: 30%;  
+}
+
+.mediumcircle
+{
+    background: rgb(54, 51, 51);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-left: 10%;
+    animation-name:mediumcircleanimation;
+    animation-duration:20s;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+}
+
+@keyframes mediumcircleanimation
+{
+    0%{background-color: red;}
+    25%{background-color: blue;}
+    50%{background-color: rgb(7, 51, 54);}
+    75%{background-color: rgb(203, 209, 203)};
+    100%{background-color: rgb(156, 111, 85) }
+}
+
+footer
+{
+color: white;
+font-family: sans-serif;
+font-size: 10px;
+padding: 20px;
+margin-left: 80%;
+}
