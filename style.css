@@ -67,4 +67,6 @@
     display: inline-flex;
     flex-direction: row;
   }
- 
+ #scoreHeaderText{
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
