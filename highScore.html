@@ -12,17 +12,18 @@
 <body>
     
     <button id="startButton">Starta spelet</button>
-    <button id="showScore">Show Score</button>
+    <button id="submittBTN">Add Player</button>
+    <button id="deleteBTN">Delete Storage</button>
               
         <form id="myForm">
-          
-            <input type="text" name="userName" id="userName">
+            <label for="name">User Name : </label>
+            <input type="text" name="userName" id="userName"><br>
+            <label for="points">Points : </label>
             <input type="number" name="userPoint" id="userPoint">
 
         </form>
 
-        <button id="submittBTN">Add Player</button>
-        <button id="deleteBTN">Delete Storage</button>
+        
 
         <table id="scoreList">
             <tr class="head">
