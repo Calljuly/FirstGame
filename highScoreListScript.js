@@ -1,11 +1,10 @@
 var highScoreList = new Array();
-var storage;
 var choosenName;
 var count = 1;
 var startBTN = document.getElementById('startButton');
 var showScoreBTN = document.getElementById('showScore');
 var submittBTN = document.getElementById('submittBTN');
-var player;
+var deleteBTN = document.getElementById('deleteBTN');
 
 class Player 
 {
@@ -16,13 +15,17 @@ class Player
         this.time = time;
     }
 }
+deleteBTN.onclick = function(){
+    localStorage.removeItem("score");
 
+}
 startBTN.onclick = function()
 {
     $('#myForm').show();
 }
-function addUser()
+submittBTN.onclick = function()
 {
+
     choosenName = document.getElementById('userName').value;
     var myTest = document.getElementById('userPoint').value;
     if(choosenName == null || choosenName == undefined){
@@ -33,8 +36,9 @@ function addUser()
 
     highScoreList.push(new Player(choosenName, Number(myTest),1));
     
+    localStorage.setItem("score", highScoreList);
     sortHighScoreList(highScoreList);
-    updateHighScore();  
+    updateHighScore();
 }
 
 function sortHighScoreList(points) 
@@ -50,8 +54,8 @@ function insertToBoard(name, score, time)
     var cell2 = currentRow.insertCell(1);
     var cell3 = currentRow.insertCell(2);
     cell1.textContent = name;
-    cell2.textContent = score.toString();
-    cell3.textContent = time.toString();
+    cell2.textContent = score;
+    cell3.textContent = time;
     count++;
 }
 
@@ -59,9 +63,11 @@ function updateHighScore()
 {
     $("#scoreList tr").next().remove(); 
     count = 1;
-    
-    for(var p in highScoreList)
+    var ww = localStorage.getItem("score");
+    alert(ww[0]);
+
+    for(var p in ww)
     {
-        insertToBoard(highScoreList[p].name, highScoreList[p].score, highScoreList[p].time);
+        insertToBoard(ww[p].name, ww[p].score, ww[p].time);
     }
 }
