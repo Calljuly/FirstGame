@@ -1,22 +1,89 @@
+// Random variables
+var score = 0;
+var intervalSpeed = 500;
+var intervalForUpdate;
+var updatePending = false;
+var paused = false;
 
-// Variables
+var backgroundOpacity = 1;
+var backgroundSaturation = 0;
+var backgroundBlur = 5;
 
-    // Canvas
+
+
+// Canvas
 var canvas = document.getElementById("myCanvas");
 var canvasContent = canvas.getContext("2d");
 var video = document.getElementById("myVideo");
 
-var x = 60;
-var y = 60;
+    // Position of the head of the snake
+var headX = 60;
+var headY = 60;
 
+    // Position of the treat
 var treatX = 210;
 var treatY = 70;
 
 
-    // Direction
+
+// Draw on canvas
+function drawSnake(){
+    for (var i = 0; i < snake.length; i++){
+        canvasContent.beginPath();
+
+        // The first element in the array (the head) should always have opacity 1. The value of the rest of the elements depend
+        // on how long the snake is. If it's 4 elements long, then the values should be 1, 0.75, 0.50, 0.25. The values of the 
+        // opacity are always equally spaced, creating the illustion of the snake becoming smoother the longer it gets. 
+
+        /*To acheive this we loop through all the elements of the snake. For each position we take the the current part and divide 
+        it with the full length of the snake. That will give us a value between 0 and 1. In the example above this will give us
+        the value 0.25 for the second element of the snake. So we need to subtract 1 and then multiply that value with -1 to
+        turn that into 0.75. Also we don't want the tail to become too transparent so we use Math.max() to limit how low the
+        value can be. */
+
+        var opacity = Math.max(0.2, ((i / snake.length) - 1) * -1);
+        var limitedOpacity = Math.max(0.2, opacity);
+        canvasContent.fillStyle = "rgba(255,255,255," + limitedOpacity +")";
+
+        // First two values are the position and the other two are the size. So this writes out the snake at the positions in the
+        // array in the correct size. 
+        canvasContent.fillRect(snake[i][0],snake[i][1],20,20);
+    }
+}
+
+function drawTreat(){
+
+    if (score < 100){
+        canvasContent.beginPath();
+        
+        // Getting the image from an html-element, then drawing that image at the correct position. 
+        var img = document.getElementById("treat"); 
+        canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
+    }
+    else if (score < 200){
+        canvasContent.beginPath();
+        canvasContent.fillStyle = "rgba(255,255,255,0.8)";
+        canvasContent.arc(treatX,treatY,12.5,0,2*Math.PI);
+        canvasContent.fill();
+    }
+    else{
+        canvasContent.beginPath();
+        var img = document.getElementById("treat");
+        img.src = "Images/treat1.png";
+        canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
+    }
+}
+
+
+
+// Direction
 var direction = 39;
 
+    // Taking the key-down event and evaluate if the direction is permitted. 
+    // You cannot go right when the current directions is left since the
+    // snake will instantly collide with it's own body. 
 function directionPermitted(e){
+
     if (direction == 39 && (e.keyCode == 40 || e.keyCode == 38)){
         return true;
     }
@@ -35,27 +102,43 @@ function directionPermitted(e){
 }
 
 
-    // Snake
+
+// Snake
 var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
 
-    // other
-var score = 0;
-var interval = 500;
-var intervalFunction;
-var updatePending = false;
-var paused = false;
 
-var backgroundOpacity = 1;
-var backgroundSaturation = 0;
-var backgroundBlur = 5;
 
 // Sounds
 var eatSound = new sound('eat.mp3');
 var failSound = new sound('failure.mp3');
 
+//This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page. 
+//The audio element is then played in the script.js depending on different events.
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
+
+
+
 //Events
 document.onkeydown = function(e) { 
     
+    // !updatePending is needed because directionPermitted() only goes by your last key-press. That means that 
+    // if you go right (Meaning you shouldn't go left) then you can very quickly press up and then left. 
+    // If you did it so quickly that it didn't have time to go up before you pressed left, then the snake will go 
+    // go left and collide with it's own body. This is stopped by locking the code from registrating more key-presses
+    // until after the updatecycle is complete. Hence updatePending.   
     if (directionPermitted(e) && !updatePending)
     {
         direction = e.keyCode;
@@ -97,80 +180,75 @@ $('.virtualBtn').on('click', (event) =>{
     }
 })
 
-// Call methods on start
-drawSnake();
-startNewInterval();
 
 
-// Update
-function drawSnake(){
-    for (var i = 0; i < snake.length; i++){
-        canvasContent.beginPath();
-        var procent = ((i / snake.length) - 1) * -1;
-        canvasContent.fillStyle = "rgba(255,255,255," + procent +")";
-        canvasContent.fillRect(snake[i][0],snake[i][1],20,20);
-    }
-}
-
-function drawTreat(){
-    if (score < 100){
-
-
-        // canvasContent.beginPath();
-        // canvasContent.fillStyle = "rgba(255,255,255, 1)";
-        // canvasContent.fillRect(210, 70, 30, 30);
-
-        // canvasContent.beginPath();
-        // canvasContent.fillStyle = "rgba(255,255,255, 1)";
-        // canvasContent.translate(treatX - 15, treatY -15);
-        // canvasContent.rotate(45 * Math.PI / 180);
-        // canvasContent.fillRect(210, 70, 30, 30);
-        // canvasContent.rotate(-45 * Math.PI / 180);
-        // canvasContent.translate(-(treatX - 15), -(treatY -15));
-
-
-        canvasContent.beginPath();
-        var img = document.getElementById("treat");
-        canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
-    }
-    else if (score < 200){
-        canvasContent.beginPath();
-        canvasContent.fillStyle = "rgba(255,255,255,0.8)";
-        canvasContent.arc(treatX,treatY,12.5,0,2*Math.PI);
-        canvasContent.fill();
-    }
-    else{
-        canvasContent.beginPath();
-        var img = document.getElementById("treat");
-        img.src = "Images/treat1.png";
-        canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
-    }
-}
-
+// Updates
 function changePauseState(){
     if (paused){
         startNewInterval();
         paused = false;
     }
     else{
-        clearInterval(intervalFunction);
+         // Stops the intervalForUpdate
+        clearInterval(intervalForUpdate);
+
+        // Writes out the text Paused when the game is... well... paused.
         canvasContent.font = "80px Calibri";
         canvasContent.fillStyle = "white";
         canvasContent.textAlign = "center";
+
+        // This aligns the text in the middle. The above line is not enough. 
         canvasContent.fillText("Paused", canvas.width / 2, canvas.height / 2 );
         paused = true;
     }
 }
 
+
 function updateState() {
 
     updatePending = true;
+    newSnakePosition();
+    
+    // Clears the canvas of all previous images. 
+    canvasContent.clearRect(0, 0, canvas.width, canvas.height); 
 
-    if (collisionDetected()){
-        alert("Game over");
+    // If the snake found a treat, then skip snake.pop() once so that it get's longer.. Also
+    // update the score, get a new position of treat, speed up the game slightly, and draw. 
+    // The x and y position of each rectangle of the snake is at the top left corner. The + 10
+    // makes sure that it registers a fruit as eaten when approaching it head on, as opposed to
+    // touching the side of the fruit. 
+    if (treatX == snake[0][0] + 10 && treatY == snake[0][1] + 10){
+        eatSound.play();
+        score += 10;
+        var h2 = document.getElementsByTagName("h2");
+        h2[0].textContent = "Score: " + score;
+        newTreatPosition();
+        intervalSpeed *= 0.95;
+        drawSnake();
+        drawTreat();
+        updatePending = false;
+        
+        updateBackground();
+        startNewInterval(); 
     }
 
-    if (direction == 37)
+    else {
+        snake.pop();
+        drawSnake();
+        drawTreat();
+        updatePending = false;
+        
+    }
+
+    checkCollision();
+    
+}
+
+function newSnakePosition(){
+
+    // Inserts a new head position into the snake array. If it is on it's way into the edge then
+    // make it show up on the opposite site of that edge. 
+     if (direction == 37)
     {
         if (edgeDetected()){
             newY = snake[0][1];
@@ -225,56 +303,50 @@ function updateState() {
 
         snake.unshift([newX, newY]);
     }
-    
-    canvasContent.clearRect(0, 0, canvas.width, canvas.height); 
-
-    if (treatX == snake[0][0] + 10 && treatY == snake[0][1] + 10){
-        eatSound.play();
-        score += 10;
-        var h2 = document.getElementsByTagName("h2");
-        h2[0].textContent = "Score: " + score;
-        newTreatPosition();
-        interval *= 0.95;
-        drawSnake();
-        drawTreat();
-        updatePending = false;
-
-        if (backgroundOpacity < 0.1){
-            backgroundSaturation += 10;
-            backgroundBlur -= 0.5;
-            video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
-        }
-        else{
-            backgroundOpacity -= 0.1;
-            canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
-        }
-        
-        startNewInterval(); 
-    }
-
-    else {
-        drawSnake();
-        drawTreat();
-        updatePending = false;
-        snake.pop();
-    }
-
-    
-    
 }
 
 function newTreatPosition(){
     do {
-        // - 10 means the minimum number to be randomized and for some reason you then do + that number. 
-        treatY = Math.floor(Math.random() * (canvas.height - 10)) + 10;
+        // There is no advanced collission detection in this game. Either the XY position of the head of the snake
+        // is the exact same as the XY position of the treat and only then is it registered as eaten. This demands
+        // carefully calculated size of the canvas, how much the snake can move each step and of course where the 
+        // treat can be positioned. 
+
+        // This was a game of trail and error. I figured I needed to use "% 20 == 0" since the snake 
+        // moves +20 or -20 depending on direction. That worked well until I changed the start position of
+        // the snake. Because of how I changed the position I figured I could try "%20 == 10" and it worked. 
+        
+        // Here a value between 10 and (canvas.height - 10) is randomized. That becomes the new Y position of the new treat. This loops checks of it's 
+        // an acceptable position and randomizes a new number if it's not. 
+
+        treatY = Math.floor(Math.random() * (canvas.height - 20)) + 20;
+
     } while(treatY % 20 !== 10)
 
     do {
-        treatX = Math.floor(Math.random() * (canvas.width - 10)) + 10;
+        treatX = Math.floor(Math.random() * (canvas.width - 20)) + 20;
     } while (treatX % 20 !== 10)
 }
 
+function updateBackground(){
+    // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
+    // the video is fully visible then start making the video sharper and more colorful. 
+    if (backgroundOpacity < 0.1){
+        backgroundSaturation += 10;
+        backgroundBlur -= 0.5;
+        video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
+    }
+    else{
+        backgroundOpacity -= 0.1;
+        canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
+    }
+}
+
 function edgeDetected(){
+    // In order to detect if the snake should be appearing on the opposite side of the canvas we need
+    // both position and direction. You can for example move parallell with the right edge and press left
+    // and that shouldn't do anything. So need to be by the edge and still going towards it. 
+
     if (snake[0][0] <= 0 && direction == 37){
 
         return true;
@@ -299,41 +371,28 @@ function edgeDetected(){
     }
 }
 
-function collisionDetected(){
+function checkCollision(){
 
+    // Loops through all the body parts of the snake, except the head and checks if the head is
+    // in the same position as either of these parts. If so then Game over. 
     for (var i = 1; i < snake.length; i++){
         if (snake[0][0] == snake[i][0] && (snake[0][1] == snake[i][1])){
             failSound.play();
-            return true;
+            alert("Game over");
         }
-    }
-    return false;
-    
+    }   
 }
 
 function startNewInterval(){
-    clearInterval(intervalFunction)
-    intervalFunction = setInterval(function(){ 
+    clearInterval(intervalForUpdate)
+    intervalForUpdate = setInterval(function(){ 
         
         updateState();
        
-   }, interval);
+   }, intervalSpeed);
 
 }
 
-//This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page. 
-//The audio element is then played in the script.js depending on different events.
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function(){
-      this.sound.play();
-    }
-    this.stop = function(){
-      this.sound.pause();
-    }
-  }
+// Call methods on start
+drawSnake();
+startNewInterval();
