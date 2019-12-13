@@ -45,7 +45,7 @@ var intervalFunction;
 var updatePending = false;
 var paused = false;
 
-var backgroundOpacity = 1.1;
+var backgroundOpacity = 1;
 var backgroundSaturation = 0;
 var backgroundBlur = 5;
 
@@ -84,7 +84,7 @@ $('.virtualBtn').on('click', (event) =>{
                 e.keyCode = 39;
                 break;
         case 'playPause':
-                changePauseStatus();
+                changePauseState();
                 break;
         default:
                 alert('unknown');
@@ -114,6 +114,21 @@ function drawSnake(){
 
 function drawTreat(){
     if (score < 100){
+
+
+        // canvasContent.beginPath();
+        // canvasContent.fillStyle = "rgba(255,255,255, 1)";
+        // canvasContent.fillRect(210, 70, 30, 30);
+
+        // canvasContent.beginPath();
+        // canvasContent.fillStyle = "rgba(255,255,255, 1)";
+        // canvasContent.translate(treatX - 15, treatY -15);
+        // canvasContent.rotate(45 * Math.PI / 180);
+        // canvasContent.fillRect(210, 70, 30, 30);
+        // canvasContent.rotate(-45 * Math.PI / 180);
+        // canvasContent.translate(-(treatX - 15), -(treatY -15));
+
+
         canvasContent.beginPath();
         var img = document.getElementById("treat");
         canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
@@ -186,7 +201,7 @@ function updateState() {
         drawTreat();
         updatePending = false;
 
-        if (backgroundOpacity < 0.2){
+        if (backgroundOpacity < 0.1){
             backgroundSaturation += 10;
             backgroundBlur -= 0.5;
             video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
