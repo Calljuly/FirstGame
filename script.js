@@ -28,26 +28,30 @@ var treatY = 70;
 
 // Draw on canvas
 function drawSnake(){
-    for (var i = 0; i < snake.length; i++){
+
+    // The first element in the array (the head) should always have opacity 1 And the last element should always have 
+    // opacity around 0.25 (Because lower values in opacity aren't visible enough). The value of the rest of the elements 
+    // depend on how long the snake is. It's important though that the values are equally spaced, so that you get that 
+    // smooth toning effect once the snake gets longer.  
+
+    /*To acheive this we set the opacity of the head of the snake to one then calculate how big of a jump in values we 
+    need to make between each element in order to end up at the last element with a value of around 0.25. 
+    Then we loop through the elements, assign the opacity value and for each loop subtract that "jumpValue"*/
+
+    canvasContent.beginPath();
+    canvasContent.fillStyle = "rgba(255,255,255, 1)";
+    canvasContent.fillRect(snake[0][0],snake[0][1],20,20);
+    var jumpValue = 0.75  / (snake.length -1);
+    var opacity = 1 - jumpValue;
+
+    for (var i = 1; i < snake.length; i++){
         canvasContent.beginPath();
-
-        // The first element in the array (the head) should always have opacity 1. The value of the rest of the elements depend
-        // on how long the snake is. If it's 4 elements long, then the values should be 1, 0.75, 0.50, 0.25. The values of the 
-        // opacity are always equally spaced, creating the illustion of the snake becoming smoother the longer it gets. 
-
-        /*To acheive this we loop through all the elements of the snake. For each position we take the the current part and divide 
-        it with the full length of the snake. That will give us a value between 0 and 1. In the example above this will give us
-        the value 0.25 for the second element of the snake. So we need to subtract 1 and then multiply that value with -1 to
-        turn that into 0.75. Also we don't want the tail to become too transparent so we use Math.max() to limit how low the
-        value can be. */
-
-        var opacity = ((i / snake.length) - 1) * -1;
-        var limitedOpacity = Math.max(0.2, opacity);
-        canvasContent.fillStyle = "rgba(255,255,255," + limitedOpacity +")";
-
+        canvasContent.fillStyle = "rgba(255,255,255," + opacity +")";
+        console.log(opacity);
         // First two values are the position and the other two are the size. So this writes out the snake at the positions in the
         // array in the correct size. 
         canvasContent.fillRect(snake[i][0],snake[i][1],20,20);
+        opacity -= jumpValue;
     }
 }
 
