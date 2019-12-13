@@ -41,7 +41,7 @@ function drawSnake(){
         turn that into 0.75. Also we don't want the tail to become too transparent so we use Math.max() to limit how low the
         value can be. */
 
-        var opacity = Math.max(0.2, ((i / snake.length) - 1) * -1);
+        var opacity = ((i / snake.length) - 1) * -1;
         var limitedOpacity = Math.max(0.2, opacity);
         canvasContent.fillStyle = "rgba(255,255,255," + limitedOpacity +")";
 
@@ -319,12 +319,12 @@ function newTreatPosition(){
         // Here a value between 10 and (canvas.height - 10) is randomized. That becomes the new Y position of the new treat. This loops checks of it's 
         // an acceptable position and randomizes a new number if it's not. 
 
-        treatY = Math.floor(Math.random() * (canvas.height - 20)) + 20;
+        treatY = Math.floor(Math.random() * (canvas.height - 25)) + 25;
 
     } while(treatY % 20 !== 10)
 
     do {
-        treatX = Math.floor(Math.random() * (canvas.width - 20)) + 20;
+        treatX = Math.floor(Math.random() * (canvas.width - 25)) + 25;
     } while (treatX % 20 !== 10)
 }
 
