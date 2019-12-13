@@ -154,6 +154,10 @@ function changePauseState(){
     }
     else{
         clearInterval(intervalFunction);
+        canvasContent.font = "80px Calibri";
+        canvasContent.fillStyle = "white";
+        canvasContent.textAlign = "center";
+        canvasContent.fillText("Paused", canvas.width / 2, canvas.height / 2 );
         paused = true;
     }
 }
