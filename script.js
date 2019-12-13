@@ -172,23 +172,57 @@ function updateState() {
 
     if (direction == 37)
     {
-        newY = snake[0][1];
-        newX = snake[0][0] -20;
+        if (edgeDetected()){
+            newY = snake[0][1];
+            newX = canvas.width - 20;
+        }
+        else{
+            newY = snake[0][1];
+            newX = snake[0][0] -20;
+        }
+        
         snake.unshift([newX, newY]);
     }
     else if (direction == 38){
+
+        if (edgeDetected()){
+            newY = canvas.height - 20;
+            newX = snake[0][0];
+        }
+        else{
         newY = snake[0][1] - 20;
         newX = snake[0][0];
+        
+        }
+
         snake.unshift([newX, newY]);
     }
     else if (direction == 39){
+
+        if (edgeDetected()){
+            newY = snake[0][1];
+            newX = 0;
+        }
+        else{
         newY = snake[0][1];
         newX = snake[0][0] + 20;
+        
+        }
+
         snake.unshift([newX, newY]);
     }
     else if (direction == 40){
+
+        if (edgeDetected()){
+            newY = 0;
+            newX = snake[0][0];
+        }
+        else{
         newY = snake[0][1] + 20;
         newX = snake[0][0];
+        
+        }
+
         snake.unshift([newX, newY]);
     }
     
@@ -240,27 +274,41 @@ function newTreatPosition(){
     } while (treatX % 20 !== 10)
 }
 
-function collisionDetected(){
-    if (snake[0][0] < 0 || snake[0][0] >= canvas.width){
-        failSound.play();
+function edgeDetected(){
+    if (snake[0][0] <= 0 && direction == 37){
+
         return true;
     }
 
-    else if (snake[0][1] < 0 || snake[0][1] >= canvas.height){
-        failSound.play();
+    else if (snake[0][0] >= canvas.width - 20 && direction == 39){
         return true;
     }
+
+    else if (snake[0][1] <= 0 && direction == 38){
+        return true;
+    }
+
+    else if (snake[0][1] >= canvas.height - 20 && direction == 40){
+
+        return true;
+    }
+
     
     else{
-
-        for (var i = 1; i < snake.length; i++){
-            if (snake[0][0] == snake[i][0] && (snake[0][1] == snake[i][1])){
-                failSound.play();
-                return true;
-            }
-        }
         return false;
     }
+}
+
+function collisionDetected(){
+
+    for (var i = 1; i < snake.length; i++){
+        if (snake[0][0] == snake[i][0] && (snake[0][1] == snake[i][1])){
+            failSound.play();
+            return true;
+        }
+    }
+    return false;
+    
 }
 
 function startNewInterval(){
