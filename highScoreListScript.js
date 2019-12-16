@@ -1,3 +1,4 @@
+//Variabler
 var highScoreList = new Array();
 var choosenName;
 var count = 1;
@@ -5,6 +6,7 @@ var startBTN = document.getElementById('startButton');
 var submittBTN = document.getElementById('submittBTN');
 var deleteBTN = document.getElementById('deleteBTN');
 
+//Set or get localStorage
 if(localStorage.getItem("score")== null)
 {
     localStorage.setItem("score", JSON.stringify(highScoreList));
@@ -16,6 +18,7 @@ else
 
 updateHighScore();
 
+//Class to create player
 class Player 
 {
     constructor(name, score, time)
@@ -31,14 +34,21 @@ deleteBTN.onclick = function()
     localStorage.removeItem("score");
 
 }
+//Show form to enter name
 startBTN.onclick = function()
 {
     $('#myForm').show();
 }
+//Add name and points to player and add to highScore
 submittBTN.onclick = function()
 {
+    var data = JSON.parse(localStorage.getItem('data'));
+    var name = data[0];
+    var scorePlay = data[1];
+    
     choosenName = document.getElementById('userName').value;
     var myTest = document.getElementById('userPoint').value;
+
     if(choosenName =="")
     {
         alert('Invallid name');
@@ -54,12 +64,13 @@ submittBTN.onclick = function()
         updateHighScore();
     }
 }
-
+//Sorting Array of players by thier score
 function sortHighScoreList(points) 
 {
     points.sort((a, b) => (a.score < b.score) ? 1 : -1)
 }
 
+//Insert row, cells and their information
 function insertToBoard(name, score, time)
 {
     var tableScore = document.getElementById('scoreList');
@@ -93,14 +104,15 @@ function insertToBoard(name, score, time)
     count++;
 }
 
+//Get array from storage and create the highscorelist with table
 function updateHighScore()
 {
     $("#scoreList tr").next().remove(); 
     count = 1;
-    var ww = JSON.parse(localStorage.getItem("score"));
+    var arrayFromStorage = JSON.parse(localStorage.getItem("score"));
 
-    for(var p in ww)
+    for(var p in arrayFromStorage)
     {
-        insertToBoard(ww[p].name, ww[p].score, ww[p].time);
+        insertToBoard(arrayFromStorage[p].name, arrayFromStorage[p].score, arrayFromStorage[p].time);
     }
 }
