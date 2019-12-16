@@ -400,6 +400,7 @@ function checkCollision(){
     for (var i = 1; i < snake.length; i++){
         if (snake[0][0] == snake[i][0] && (snake[0][1] == snake[i][1])){
             failSound.play();
+            document.getElementById("gameOver").style.display = "block";
             alert("Game over");
         }
     }
