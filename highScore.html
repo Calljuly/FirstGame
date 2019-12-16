@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' type='text/css' href='style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="highScoreListScript.js" type="text/javaScript" defer></script>
     <title>Document</title>
 </head>
 <body>
-    
+    <head>
+            <h1 id="scoreHeaderText">HighScore list</h1>
+    </head>
+        <table id="scoreList">
+            <tr class="head">
+                <th>
+                    Name
+                </th>
+                <th>
+                    Points
+                </th>
+                <th>
+                    Time
+                </th>
+
+            </tr>
+
+        </table>
+      
+    <div id="container">
+     <div id="btnGroup"> 
+        <button id="startButton">Starta spelet</button>
+        <button id="submittBTN">Add Player</button>
+        <button id="deleteBTN">Delete Storage</button>
+    </div>     
+        <form id="myForm">
+            <label for="name">User Name : </label>
+            <input type="text" name="userName" id="userName"><br><br>
+            <label for="points">Points : </label>
+            <input type="number" name="userPoint" id="userPoint">
+
+        </form>
+    </div>
+
 </body>
 </html>
