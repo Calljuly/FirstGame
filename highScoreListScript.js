@@ -42,10 +42,6 @@ startBTN.onclick = function()
 //Add name and points to player and add to highScore
 submittBTN.onclick = function()
 {
-    var data = JSON.parse(localStorage.getItem('data'));
-    var name = data[0];
-    var scorePlay = data[1];
-    
     choosenName = document.getElementById('userName').value;
     var myTest = document.getElementById('userPoint').value;
 
