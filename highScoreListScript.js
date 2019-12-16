@@ -16,7 +16,22 @@ else
     highScoreList = JSON.parse(localStorage.getItem("score"));
 }
 
-updateHighScore();
+//Get data sent from user to add to scoreboard
+if(localStorage.getItem("data") != null)
+{
+    var data = JSON.parse(localStorage.getItem('data'));
+    var name = data[0];
+    var scorePlay = data[1];
+
+    highScoreList.push(new Player(name, scorePlay,1));
+        
+    sortHighScoreList(highScoreList);
+    localStorage.setItem("score", JSON.stringify(highScoreList));
+    updateHighScore();
+    localStorage.removeItem("data");
+}
+
+//updateHighScore();
 
 //Class to create player
 class Player 
