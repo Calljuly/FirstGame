@@ -43,4 +43,39 @@ body{
     width: 15%;
     padding: 1%;
   }
- 
+  #scoreList{
+    width: 40%;
+    border: 1px solid black;
+    margin: 0px auto;
+    border-spacing:0; /* Removes the cell spacing via CSS */
+    border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
+  
+  }
+  #myForm{
+    display: none;
+    margin: 10px;
+    
+  }
+  #btnGroup{
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  #btnGroup button{
+    padding: 10px;
+    background-color: antiquewhite;
+    border: none;
+  }
+  #btnGroup button:hover{
+    
+    border: 1px solid black;
+    font-weight: bold;
+  }
+  #container{
+    display: inline-flex;
+    flex-direction: row;
+  }
+ #scoreHeaderText{
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
