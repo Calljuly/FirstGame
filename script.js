@@ -1,4 +1,5 @@
 //Set or get localStorage
+
 // if(localStorage.getItem("score")== null)
 // {
 //     localStorage.setItem("score", JSON.stringify(highScoreList));
@@ -7,6 +8,7 @@
 // {
 //     highScoreList = JSON.parse(localStorage.getItem("score"));
 // }
+
 
 // Highscore
 class Player 
