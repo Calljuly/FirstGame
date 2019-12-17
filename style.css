@@ -1,6 +1,7 @@
 body{
   text-align: center;
   margin: 0px;
+  overflow: hidden;
 }
 
 #gameDiv{
@@ -52,6 +53,9 @@ body{
     Top: 0;
     background-color: rgba(0, 0, 0, 0.8);
     display: none;
+    color: white;
+    padding:100px;
+    box-sizing: border-box;
   }
  
   #scoreList{
