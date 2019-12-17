@@ -4,6 +4,10 @@ body{
   overflow: hidden;
 }
 
+#scoreCount{
+  margin: 5px;
+}
+
 #gameDiv{
     --gameWidth: 800px;
     max-width: var(--gameWidth);
