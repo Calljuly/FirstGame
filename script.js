@@ -1,32 +1,11 @@
-// Highscore
-class Player 
-{
-    constructor(name, score, time)
-    {
-        this.name = name;
-        this.score = score;
-        this.time = time;
-    }
-}
+import {addPlayer } from './highScoreModule.js';
 
-var highScoreList = new Array();
-highScoreList = JSON.parse(localStorage.getItem("score"));
-
-function AddPlayerToBoard()
-{
-    var name = document.getElementById("userName").value;
-    var newPlayer = new Player(name, score, 1);
-    highScoreList = JSON.parse(localStorage.getItem("score"));
-    highScoreList.push(newPlayer);
-    sortHighScoreList(highScoreList);
-    localStorage.setItem("score", JSON.stringify(highScoreList));
-    alert(highScoreList.length);
-    windows.location.href("highScore.html");
-}
+//Player variables
+var name = "";
+var score = 0;
 
 // Random variables
-var score = 0;
-var intervalSpeed = 500;
+var intervalSpeed = 300;
 var intervalForUpdate;
 var updatePending = false;
 var paused = false;
@@ -228,7 +207,10 @@ $('.virtualBtn').on('click', (event) =>{
     }
 })
 
-submitHighscore.onclick = AddPlayerToBoard;
+submitHighscore.onclick =  function(){
+    name = document.getElementById('userName').value;
+    addPlayer(name, score)};
+
 tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
@@ -297,6 +279,8 @@ function updateState() {
 }
 
 function newSnakePosition(){
+    var newY = [];
+    var newX = [];
 
     // Inserts a new head position into the snake array. If it is on it's way into the edge then
     // make it show up on the opposite site of that edge.
