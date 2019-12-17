@@ -1,3 +1,29 @@
+// Highscore
+class Player 
+{
+    constructor(name, score, time)
+    {
+        this.name = name;
+        this.score = score;
+        this.time = time;
+    }
+}
+
+var highScoreList = new Array();
+highScoreList = JSON.parse(localStorage.getItem("score"));
+
+function AddPlayerToBoard()
+{
+    var name = document.getElementById("userName").value;
+    var newPlayer = new Player(name, score, 1);
+    highScoreList = JSON.parse(localStorage.getItem("score"));
+    highScoreList.push(newPlayer);
+    sortHighScoreList(highScoreList);
+    localStorage.setItem("score", JSON.stringify(highScoreList));
+    alert(highScoreList.length);
+    windows.location.href("highScore.html");
+}
+
 // Random variables
 var score = 0;
 var intervalSpeed = 500;
@@ -202,7 +228,11 @@ $('.virtualBtn').on('click', (event) =>{
     }
 })
 
-
+submitHighscore.onclick = AddPlayerToBoard;
+tryAgain.onclick = function(){
+    document.getElementById("gameOver").style.display = "none";
+    score = 0;
+    location.reload()};
 
 // Updates
 function changePauseState(){
@@ -400,10 +430,17 @@ function checkCollision(){
     for (var i = 1; i < snake.length; i++){
         if (snake[0][0] == snake[i][0] && (snake[0][1] == snake[i][1])){
             failSound.play();
-            document.getElementById("gameOver").style.display = "block";
-            alert("Game over");
+            gameOver();
         }
     }
+}
+
+function gameOver(){
+    document.getElementById("gameOver").style.display = "block";
+    document.getElementById("myForm").style.display = "block";
+    document.getElementById("totalPoints").textContent = "You've got " + score + " points";
+
+    clearInterval(intervalForUpdate);
 }
 
 function startNewInterval(){
