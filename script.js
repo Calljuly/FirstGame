@@ -1,3 +1,13 @@
+//Set or get localStorage
+if(localStorage.getItem("score")== null)
+{
+    localStorage.setItem("score", JSON.stringify(highScoreList));
+}
+else
+{
+    highScoreList = JSON.parse(localStorage.getItem("score"));
+}
+
 // Highscore
 class Player 
 {
@@ -18,7 +28,6 @@ function AddPlayerToBoard()
     var newPlayer = new Player(name, score, 1);
     highScoreList = JSON.parse(localStorage.getItem("score"));
     highScoreList.push(newPlayer);
-    sortHighScoreList(highScoreList);
     localStorage.setItem("score", JSON.stringify(highScoreList));
     alert(highScoreList.length);
     windows.location.href("highScore.html");
