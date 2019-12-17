@@ -9,6 +9,7 @@ class Player
     }
 }
 
+var score = 0;
 var highScoreList = new Array();
 highScoreList = JSON.parse(localStorage.getItem("score"));
 
@@ -24,8 +25,9 @@ function AddPlayerToBoard()
     windows.location.href("highScore.html");
 }
 
+
+
 // Random variables
-var score = 0;
 var intervalSpeed = 500;
 var intervalForUpdate;
 var updatePending = false;
