@@ -1,4 +1,4 @@
-// Classes
+// Highscore
 class Player 
 {
     constructor(name, score, time)
@@ -7,6 +7,21 @@ class Player
         this.score = score;
         this.time = time;
     }
+}
+
+var highScoreList = new Array();
+highScoreList = JSON.parse(localStorage.getItem("score"));
+
+function AddPlayerToBoard()
+{
+    var name = document.getElementById("userName").value;
+    var newPlayer = new Player(name, score, 1);
+    highScoreList = JSON.parse(localStorage.getItem("score"));
+    highScoreList.push(newPlayer);
+    sortHighScoreList(highScoreList);
+    localStorage.setItem("score", JSON.stringify(highScoreList));
+    alert(highScoreList.length);
+    windows.location.href("highScore.html");
 }
 
 // Random variables
@@ -436,18 +451,6 @@ function startNewInterval(){
 
    }, intervalSpeed);
 
-}
-
-// Highscore
-function AddPlayerToBoard()
-{
-    var name = document.getElementById("userName").value;
-    var newPlayer = new Player(name, score, 1);
-    highScoreList.push(newPlayer);
-    sortHighScoreList(highScoreList);
-    localStorage.setItem("score", JSON.stringify(highScoreList));
-    alert(highScoreList.length);
-    location.replace("highScore.html");
 }
 
 // Call methods on start
