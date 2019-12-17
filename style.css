@@ -98,3 +98,15 @@ body{
  #scoreHeaderText{
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  }
+
+ @media only screen and (orientation: landscape) and (max-width: 900px){
+
+  #gameDiv{
+    height: 100vh;   
+  }
+
+  #myCanvas{
+      height: 100vh;
+  }
+
+ }
