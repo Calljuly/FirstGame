@@ -1,12 +1,14 @@
 //Set or get localStorage
-if(localStorage.getItem("score")== null)
-{
-    localStorage.setItem("score", JSON.stringify(highScoreList));
-}
-else
-{
-    highScoreList = JSON.parse(localStorage.getItem("score"));
-}
+
+// if(localStorage.getItem("score")== null)
+// {
+//     localStorage.setItem("score", JSON.stringify(highScoreList));
+// }
+// else
+// {
+//     highScoreList = JSON.parse(localStorage.getItem("score"));
+// }
+
 
 // Highscore
 class Player 
@@ -34,6 +36,7 @@ function AddPlayerToBoard()
     console.log(highScoreList);
 }
 
+submitHighscore.onclick = AddPlayerToBoard;
 
 
 // Random variables
@@ -215,6 +218,12 @@ document.ontouchstart = function(e){
     YStart = e.touches[0].clientY;
 }
 
+document.ontouchend = function(e){
+    if (XStart == e.changedTouches[0].clientX && YStart == e.changedTouches[0].clientY){
+        changePauseState();
+    }
+}
+
 document.ontouchmove = function(e) {
 
     // Checking if the finger movement is horisontal. In other words, if the x-value has changed more than the y value has
@@ -241,7 +250,6 @@ document.ontouchmove = function(e) {
     }
 };
 
-submitHighscore.onclick = AddPlayerToBoard;
 tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
