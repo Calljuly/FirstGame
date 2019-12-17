@@ -4,6 +4,7 @@ import {addPlayer } from './highScoreModule.js';
 var name = "";
 var score = 0;
 
+
 // Random variables
 var intervalSpeed = 300;
 var intervalForUpdate;
@@ -68,21 +69,6 @@ function drawTreat(){
     if (score < 100){
         canvasContent.beginPath();
 
-        // canvasContent.fillStyle = "white";
-        // canvasContent.fillRect(100, 100, 20, 20);
-
-        // canvasContent.translate(100 + 10, 100 + 10);
-        // canvasContent.rotate((45 * Math.PI / 180));
- 
-        // canvasContent.fillRect(-10, -10, 20 , 20);
-
-        // canvasContent.rotate((22 * Math.PI / 180));
- 
-        // canvasContent.fillRect(-10, -10, 20 , 20); 
-
-        // canvasContent.rotate(-(67 * Math.PI / 180));
-        // canvasContent.translate(-(100 + 10), -(100 + 10));
-
         // Getting the image from an html-element, then drawing that image at the correct position.
         var img = document.getElementById("treat");
         canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
@@ -104,27 +90,35 @@ function drawTreat(){
 
 
 // Direction
-var direction = 39;
+var direction = "right";
 
-    // Taking the key-down event and evaluate if the direction is permitted.
-    // You cannot go right when the current directions is left since the
+    // Taking the desired direction and compare it with the current.
+    // Ex: You cannot go right when the current directions is left since the
     // snake will instantly collide with it's own body.
-function directionPermitted(e){
+function processNewDirection(newDirection){
 
-    if (direction == 39 && (e.keyCode == 40 || e.keyCode == 38)){
-        return true;
-    }
-    else if (direction == 37 && (e.keyCode == 40 || e.keyCode == 38)){
-        return true;
-    }
-    else if (direction == 38 && (e.keyCode == 37 || e.keyCode == 39)){
-        return true;
-    }
-    else if (direction == 40 && (e.keyCode == 37 || e.keyCode == 39)){
-        return true;
-    }
-    else{
-        return false;
+    // !updatePending is needed because processNewDirection() only goes by your last key-press. That means that
+    // if you go right (Meaning you shouldn't go left) then you can very quickly press up and then left.
+    // If you did quickly enough, then the snake didn't have time to go up before you pressed left, then the snake will go
+    // go left and collide with it's own body. This is fixed by locking the code from registrating more directions
+    // until after the updatecycle is complete. Hence updatePending.
+    if (!updatePending){
+        if (newDirection == "left" && (direction == "up" || direction == "down")){
+            direction = "left";
+            updatePending = true;
+        }
+        else if (newDirection == "up" && (direction == "left" || direction == "right")){
+            direction = "up";
+            updatePending = true;
+        }
+        else if (newDirection == "right" && (direction == "up" || direction == "down")){
+            direction = "right";
+            updatePending = true;
+        }
+        else if (newDirection == "down" && (direction == "left" || direction == "right")){
+            direction = "down";
+            updatePending = true;
+        }
     }
 }
 
@@ -161,51 +155,66 @@ function Sound(src) {
 //Events
 document.onkeydown = function(e) {
 
-    // !updatePending is needed because directionPermitted() only goes by your last key-press. That means that
-    // if you go right (Meaning you shouldn't go left) then you can very quickly press up and then left.
-    // If you did it so quickly that it didn't have time to go up before you pressed left, then the snake will go
-    // go left and collide with it's own body. This is stopped by locking the code from registrating more key-presses
-    // until after the updatecycle is complete. Hence updatePending.
-    if (directionPermitted(e) && !updatePending)
-    {
-        direction = e.keyCode;
-        updatePending = true;
+    // Check what direction we are trying to go and then send it to processNewDirection(). 
+    if (e.keyCode == 37){
+        processNewDirection("left");
+    }
+    else if (e.keyCode == 38){
+        processNewDirection("up");
+    }
+    else if (e.keyCode == 39){
+        processNewDirection("right");
+    }
+    else if (e.keyCode == 40){
+        processNewDirection("down");
     }
     else if(e.keyCode == 80 || e.keyCode == 32){
         changePauseState();
-
     }
 };
 
-$('.virtualBtn').on('click', (event) =>{
-    var e = {};
-    var id = event.target.getAttribute('id');
-    switch(id){
-        case 'up':
-            e.keyCode = 38;
-            break;
-        case 'down':
-                e.keyCode = 40;
-                break;
-        case 'left':
-                e.keyCode = 37;
-                break;
-        case 'right':
-                e.keyCode = 39;
-                break;
-        case 'playPause':
-                changePauseState();
-                break;
-        default:
-                alert('unknown');
+
+// The touchevents. First we check where the user first put their finger. Then we compare that XY position
+// with the XY positions registered while swiping in order to figure out what direction the finger is going. 
+var XStart;
+var YStart;
+
+document.ontouchstart = function(e){
+    XStart = e.touches[0].clientX;
+    YStart = e.touches[0].clientY;
+}
+
+document.ontouchend = function(e){
+    if (XStart == e.changedTouches[0].clientX && YStart == e.changedTouches[0].clientY){
+        changePauseState();
+    }
+}
+
+document.ontouchmove = function(e) {
+
+    // Checking if the finger movement is horisontal. In other words, if the x-value has changed more than the y value has
+    // compared to the start position.  
+    if (Math.abs(e.touches[0].clientX - XStart) > Math.abs(e.touches[0].clientY - YStart)){
+
+        // If the movement is horisontal, then in what direction is it going? If the number increases in relation to the start position then it's towards right. 
+        if (e.touches[0].clientX > XStart){
+            processNewDirection("right");
+        }
+        else{
+            processNewDirection("left");
+        }
     }
 
-    if (directionPermitted(e) && !updatePending)
-    {
-        direction = e.keyCode;
-        updatePending = true;
+    // Same but for the vertical movement. 
+    else if (Math.abs(e.touches[0].clientY - YStart) > Math.abs(e.touches[0].clientX - XStart)){
+        if (e.touches[0].clientY > YStart){
+            processNewDirection("down");
+        }
+        else{
+            processNewDirection("up");
+        }
     }
-})
+};
 
 submitHighscore.onclick =  function(){
     name = document.getElementById('userName').value;
@@ -215,6 +224,8 @@ tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
     location.reload()};
+
+
 
 // Updates
 function changePauseState(){
@@ -260,7 +271,6 @@ function updateState() {
         intervalSpeed *= 0.95;
         drawSnake();
         drawTreat();
-        updatePending = false;
 
         updateBackground();
         startNewInterval();
@@ -270,11 +280,10 @@ function updateState() {
         snake.pop();
         drawSnake();
         drawTreat();
-        updatePending = false;
-
     }
 
     checkCollision();
+    updatePending = false;
 
 }
 
@@ -284,7 +293,7 @@ function newSnakePosition(){
 
     // Inserts a new head position into the snake array. If it is on it's way into the edge then
     // make it show up on the opposite site of that edge.
-     if (direction == 37)
+     if (direction == "left")
     {
         if (edgeDetected()){
             newY = snake[0][1];
@@ -297,7 +306,7 @@ function newSnakePosition(){
 
         snake.unshift([newX, newY]);
     }
-    else if (direction == 38){
+    else if (direction == "up"){
 
         if (edgeDetected()){
             newY = canvas.height - 20;
@@ -311,7 +320,7 @@ function newSnakePosition(){
 
         snake.unshift([newX, newY]);
     }
-    else if (direction == 39){
+    else if (direction == "right"){
 
         if (edgeDetected()){
             newY = snake[0][1];
@@ -325,7 +334,7 @@ function newSnakePosition(){
 
         snake.unshift([newX, newY]);
     }
-    else if (direction == 40){
+    else if (direction == "down"){
 
         if (edgeDetected()){
             newY = 0;
@@ -383,20 +392,20 @@ function edgeDetected(){
     // both position and direction. You can for example move parallell with the right edge and press left
     // and that shouldn't do anything. So need to be by the edge and still going towards it.
 
-    if (snake[0][0] <= 0 && direction == 37){
+    if (snake[0][0] <= 0 && direction == "left"){
 
         return true;
     }
 
-    else if (snake[0][0] >= canvas.width - 20 && direction == 39){
+    else if (snake[0][0] >= canvas.width - 20 && direction == "right"){
         return true;
     }
 
-    else if (snake[0][1] <= 0 && direction == 38){
+    else if (snake[0][1] <= 0 && direction == "up"){
         return true;
     }
 
-    else if (snake[0][1] >= canvas.height - 20 && direction == 40){
+    else if (snake[0][1] >= canvas.height - 20 && direction == "down"){
 
         return true;
     }

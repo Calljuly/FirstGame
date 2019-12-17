@@ -4,6 +4,10 @@ body{
   overflow: hidden;
 }
 
+#scoreCount{
+  margin: 5px;
+}
+
 #gameDiv{
     --gameWidth: 800px;
     max-width: var(--gameWidth);
@@ -93,4 +97,16 @@ body{
   }
  #scoreHeaderText{
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+ @media only screen and (orientation: landscape) and (max-width: 900px){
+
+  #gameDiv{
+    height: 100vh;   
+  }
+
+  #myCanvas{
+      height: 100vh;
+  }
+
  }
