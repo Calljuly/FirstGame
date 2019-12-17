@@ -23,6 +23,7 @@ function AddPlayerToBoard()
     localStorage.setItem("score", JSON.stringify(highScoreList));
     alert(highScoreList.length);
     windows.location.href("highScore.html");
+    console.log(highScoreList);
 }
 
 
@@ -200,6 +201,28 @@ document.onkeydown = function(e) {
     }
 };
 
+var XStart;
+var YStart;
+
+document.ontouchstart = function(e){
+    XStart = e.touches[0].clientX;
+    YStart = e.touches[0].clientY;
+}
+
+document.ontouchmove = function(e) {
+
+    if ((XStart - e.touches[0].clientX) > (YStart - e.touches[0].clientY)){
+        console.log("vertical");
+    }
+
+    else if ((XStart - e.touches[0].clientX) < (YStart - e.touches[0].clientY)){
+        console.log("horisontal");
+    }
+    
+    
+
+};
+
 $('.virtualBtn').on('click', (event) =>{
     var e = {};
     var id = event.target.getAttribute('id');
@@ -235,6 +258,8 @@ tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
     location.reload()};
+
+
 
 // Updates
 function changePauseState(){
