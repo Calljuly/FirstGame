@@ -1,10 +1,6 @@
 //Variabler
-var highScoreList = new Array();
-var choosenName;
+var highScoreList = [];
 var count = 1;
-var startBTN = document.getElementById('startButton');
-var submittBTN = document.getElementById('submittBTN');
-var deleteBTN = document.getElementById('deleteBTN');
 
 //Set or get localStorage
 if(localStorage.getItem("score")== null)
@@ -16,73 +12,41 @@ else
     highScoreList = JSON.parse(localStorage.getItem("score"));
 }
 
-//Get data sent from user to add to scoreboard
-if(localStorage.getItem("data") != null)
-{
-    var data = JSON.parse(localStorage.getItem('data'));
-    var name = data[0];
-    var scorePlay = data[1];
-
-    highScoreList.push(new Player(name, scorePlay,1));
-        
-    sortHighScoreList(highScoreList);
-    localStorage.setItem("score", JSON.stringify(highScoreList));
-    updateHighScore();
-    localStorage.removeItem("data");
-}
-
-updateHighScore();
-
 //Class to create player
-class Player 
+export class Player 
 {
-    constructor(name, score, time)
+    constructor(name, score)
     {
         this.name = name;
         this.score = score;
-        this.time = time;
     }
 }
 
-deleteBTN.onclick = function()
+//Add player to highScoreList
+export function addPlayer(name, points)
 {
-    localStorage.removeItem("score");
-
-}
-//Show form to enter name
-startBTN.onclick = function()
-{
-    $('#myForm').show();
-}
-//Add name and points to player and add to highScore
-submittBTN.onclick = function()
-{
-    choosenName = document.getElementById('userName').value;
-    var myTest = document.getElementById('userPoint').value;
-
-    if(choosenName =="")
-    {
-        alert('Invallid name');
+    if(name.length == ""){
+        alert("User name can't be empty");
     }
-    else
-    {
-        $('#myForm').hide();
-
-        highScoreList.push(new Player(choosenName, Number(myTest),1));
+    else{
+        highScoreList.push(new Player(name, Number(points)));
         
         sortHighScoreList(highScoreList);
         localStorage.setItem("score", JSON.stringify(highScoreList));
-        updateHighScore();
+        
+        window.location.href = "highScore.html";
     }
+
+    
 }
-//Sorting Array of players by thier score
+//Sorting highScoreList based on players score
 function sortHighScoreList(points) 
 {
     points.sort((a, b) => (a.score < b.score) ? 1 : -1)
 }
 
-//Insert row, cells and their information
-function insertToBoard(name, score, time)
+//Insert row, cells and information to highScore table
+function insertToBoard(name, score)
 {
     var tableScore = document.getElementById('scoreList');
     var currentRow;
@@ -111,12 +75,12 @@ function insertToBoard(name, score, time)
     var cell3 = currentRow.insertCell(2);
     cell1.textContent = name;
     cell2.textContent = score;
-    cell3.textContent = time;
+    cell3.textContent = 1;
     count++;
 }
 
 //Get array from storage and create the highscorelist with table
-function updateHighScore()
+export function updateHighScore()
 {
     $("#scoreList tr").next().remove(); 
     count = 1;

@@ -1,46 +1,12 @@
-//Set or get localStorage
+import {addPlayer } from './highScoreModule.js';
 
-// if(localStorage.getItem("score")== null)
-// {
-//     localStorage.setItem("score", JSON.stringify(highScoreList));
-// }
-// else
-// {
-//     highScoreList = JSON.parse(localStorage.getItem("score"));
-// }
-
-
-// Highscore
-class Player 
-{
-    constructor(name, score, time)
-    {
-        this.name = name;
-        this.score = score;
-        this.time = time;
-    }
-}
-
+//Player variables
+var name = "";
 var score = 0;
-var highScoreList = new Array();
-
-function AddPlayerToBoard()
-{
-    var name = document.getElementById("userName").value;
-    var newPlayer = new Player(name, score, 1);
-    highScoreList = JSON.parse(localStorage.getItem("score"));
-    highScoreList.push(newPlayer);
-    localStorage.setItem("score", JSON.stringify(highScoreList));
-    alert(highScoreList.length);
-    windows.location.href("highScore.html");
-    console.log(highScoreList);
-}
-
-submitHighscore.onclick = AddPlayerToBoard;
 
 
 // Random variables
-var intervalSpeed = 500;
+var intervalSpeed = 300;
 var intervalForUpdate;
 var updatePending = false;
 var paused = false;
@@ -164,12 +130,12 @@ var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
 
 
 // Sounds
-var eatSound = new sound('eat.mp3');
-var failSound = new sound('failure.mp3');
+var eatSound = new Sound('eat.mp3');
+var failSound = new Sound('failure.mp3');
 
 //This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page.
 //The audio element is then played in the script.js depending on different events.
-function sound(src) {
+function Sound(src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
     this.sound.setAttribute("preload", "auto");
@@ -250,6 +216,10 @@ document.ontouchmove = function(e) {
     }
 };
 
+submitHighscore.onclick =  function(){
+    name = document.getElementById('userName').value;
+    addPlayer(name, score)};
+
 tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
@@ -318,6 +288,8 @@ function updateState() {
 }
 
 function newSnakePosition(){
+    var newY = [];
+    var newX = [];
 
     // Inserts a new head position into the snake array. If it is on it's way into the edge then
     // make it show up on the opposite site of that edge.
