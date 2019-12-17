@@ -31,7 +31,7 @@ if(localStorage.getItem("data") != null)
     localStorage.removeItem("data");
 }
 
-//updateHighScore();
+updateHighScore();
 
 //Class to create player
 class Player 
