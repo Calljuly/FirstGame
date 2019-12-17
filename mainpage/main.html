@@ -56,8 +56,13 @@
 </div>
 
 <script>
-    var audio= new Audio("/mainpage/audio/spacemusic.wav");
-    audio.play();
+     
+    window.addEventListener("load",(audio)=>
+    {
+        audio= new Audio("/mainpage/audio/spacemusic.wav");
+        audio.play();
+    });
+
 </script>
 </body>
 </html>

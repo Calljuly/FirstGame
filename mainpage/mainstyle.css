@@ -154,6 +154,8 @@ font-family: 'Sulphur Point', sans-serif;
 section a:hover
 {
 background: goldenrod;
+box-shadow: 0px 0px 20px  red;
+transition: 0.4s;
 
 }
 
@@ -182,7 +184,7 @@ background: #281c3c;
     border-radius: 50%;
     margin-left: 10%;
     animation-name:mediumcircleanimation;
-    animation-duration:20s;
+    animation-duration:5s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
