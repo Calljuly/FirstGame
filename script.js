@@ -1,8 +1,11 @@
 import {addPlayer } from './highScoreModule.js';
 
+
+
 //Player variables
 var name = "";
 var score = 0;
+
 
 
 // Random variables
@@ -377,11 +380,13 @@ function updateBackground(){
     // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
     // the video is fully visible then start making the video sharper and more colorful.
     if (backgroundOpacity < 0.1){
+        video.play();
         backgroundSaturation += 10;
         backgroundBlur -= 0.5;
         video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
     }
     else{
+
         backgroundOpacity -= 0.1;
         canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
     }
