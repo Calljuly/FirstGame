@@ -130,8 +130,8 @@ var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
 
 
 // Sounds
-var eatSound = new Sound('eat.mp3');
-var failSound = new Sound('failure.mp3');
+var eatSound = new Sound("/SnakeGame/Snakeaudio/eat.mp3");
+var failSound = new Sound("/SnakeGame/Snakeaudio/failure.mp3");
 
 //This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page.
 //The audio element is then played in the script.js depending on different events.
@@ -271,19 +271,18 @@ function updateState() {
         intervalSpeed *= 0.95;
         drawSnake();
         drawTreat();
-        startNewInterval();
-        checkCollision();
+
         updateBackground();
+        startNewInterval();
     }
 
     else {
         snake.pop();
         drawSnake();
         drawTreat();
-        checkCollision();
     }
 
-    
+    checkCollision();
     updatePending = false;
 
 }
@@ -374,22 +373,15 @@ function newTreatPosition(){
     } while (treatX % 20 !== 10)
 }
 
-var videoPlaying = false;
 function updateBackground(){
     // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
     // the video is fully visible then start making the video sharper and more colorful.
     if (backgroundOpacity < 0.1){
-        if (!videoPlaying){
-            video.play();
-            videoPlaying = true;
-        }
-        
         backgroundSaturation += 10;
         backgroundBlur -= 0.5;
         video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
     }
     else{
-
         backgroundOpacity -= 0.1;
         canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
     }
