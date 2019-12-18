@@ -373,10 +373,17 @@ function newTreatPosition(){
     } while (treatX % 20 !== 10)
 }
 
+var videoPlaying = false;
+
 function updateBackground(){
     // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
     // the video is fully visible then start making the video sharper and more colorful.
+
     if (backgroundOpacity < 0.1){
+        if (!videoPlaying){
+            video.play();
+            videoPlaying = true;
+        }
         backgroundSaturation += 10;
         backgroundBlur -= 0.5;
         video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
