@@ -130,8 +130,8 @@ var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
 
 
 // Sounds
-var eatSound = new Sound('eat.mp3');
-var failSound = new Sound('failure.mp3');
+var eatSound = new Sound("/SnakeGame/Snakeaudio/eat.mp3");
+var failSound = new Sound("/SnakeGame/Snakeaudio/failure.mp3");
 
 //This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page.
 //The audio element is then played in the script.js depending on different events.
