@@ -1,0 +1,98 @@
+@import url("/mainpage/mainstyle.css");
+
+
+section
+{
+display: block;
+width: 75%;
+margin: auto;
+border-radius: 10%;
+border: 8px solid rgb(16, 83, 83);
+font-family: 'Sulphur Point', sans-serif;
+color: white;
+}
+
+section h1
+{
+color:white;
+text-align: center;
+width: 100%;
+background: rgb(16, 83, 83);
+border-radius: 10%;
+}
+
+#scoreList
+{
+color: white;
+margin: auto;
+border-collapse: separate;
+width: 100%;
+position: relative;
+}
+#scoreList th
+{
+padding: 20px;
+
+}
+#scoreList th span:nth-child(1)
+{
+position: absolute;
+top: 0px;
+left: -5%;
+width: 50%;
+height: 2px;
+background: linear-gradient(90deg,transparent,rgb(84, 224, 224));
+animation: animateline1 10s linear infinite;
+}
+@keyframes animateline1
+{
+0%{transform: translateX(-50%);}
+
+100%{transform: translateX(110%);}
+}
+
+
+#scoreList th span:nth-child(2)
+{
+position: absolute;
+top: 0;
+right: 0;
+width: 2px;
+height: 100%;
+background: linear-gradient(to bottom,transparent,rgb(13, 131, 105));
+animation: animateline2 3s linear infinite;
+}
+
+
+@keyframes animateline2
+{
+0%{transform: translateY(-20%);}
+
+100%{transform: translateY(5%);}
+
+}
+
+#scoreList th span:nth-child(3)
+{
+position: absolute;
+bottom: 0px;
+right: 0px;
+width: 50%;
+height: 2px;
+background: linear-gradient(to left,transparent,rgb(118, 200, 206));
+animation: animateline1 10s linear infinite;
+animation-direction: reverse;
+}
+
+#scoreList th span:nth-child(4)
+{
+position: absolute;
+top: 0px;
+left: 0px;
+width: 2px;
+height: 100%;
+background: linear-gradient(to top,transparent,rgb(86, 201, 166));
+animation: animateline2 3s linear infinite;
+animation-direction: reverse;
+}
+
