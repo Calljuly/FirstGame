@@ -1,34 +1,34 @@
 import {addPlayer } from '../highScoreModule.js';
 
 //Player variables
-var name = "";
-var score = 0;
+let name = "";
+let score = 0;
 
 
 // Random variables
-var intervalSpeed = 300;
-var intervalForUpdate;
-var updatePending = false;
-var paused = false;
+let intervalSpeed = 300;
+let intervalForUpdate;
+let updatePending = false;
+let paused = false;
 
-var backgroundOpacity = 1;
-var backgroundSaturation = 0;
-var backgroundBlur = 5;
+let backgroundOpacity = 1;
+let backgroundSaturation = 0;
+let backgroundBlur = 5;
 
 
 
 // Canvas
-var canvas = document.getElementById("myCanvas");
-var canvasContent = canvas.getContext("2d");
-var video = document.getElementById("myVideo");
+let canvas = document.getElementById("myCanvas");
+let canvasContent = canvas.getContext("2d");
+let video = document.getElementById("myVideo");
 
     // Position of the head of the snake
-var headX = 60;
-var headY = 60;
+let headX = 60;
+let headY = 60;
 
     // Position of the treat
-var treatX = 210;
-var treatY = 70;
+let treatX = 210;
+let treatY = 70;
 
 
 
@@ -51,10 +51,10 @@ function drawSnake(){
     canvasContent.beginPath();
     canvasContent.fillStyle = "rgba(255,255,255, 1)";
     canvasContent.fillRect(snake[0][0],snake[0][1],20,20);
-    var jumpValue = 0.75  / (snake.length -1);
-    var opacity = 1 - jumpValue;
+    let jumpValue = 0.75  / (snake.length -1);
+    let opacity = 1 - jumpValue;
 
-    for (var i = 1; i < snake.length; i++){
+    for (let i = 1; i < snake.length; i++){
         canvasContent.beginPath();
         canvasContent.fillStyle = "rgba(255,255,255," + opacity +")";
         // First two values are the position and the other two are the size. So this writes out the snake at the positions in the
@@ -70,7 +70,7 @@ function drawTreat(){
         canvasContent.beginPath();
 
         // Getting the image from an html-element, then drawing that image at the correct position.
-        var img = document.getElementById("treat");
+        let img = document.getElementById("treat");
         canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
     }
     else if (score < 200){
@@ -81,7 +81,7 @@ function drawTreat(){
     }
     else{
         canvasContent.beginPath();
-        var img = document.getElementById("treat");
+        let img = document.getElementById("treat");
         img.src = "Images/treat1.png";
         canvasContent.drawImage(img, treatX - 12.5, treatY -12.5, 25, 25);
     }
@@ -90,7 +90,7 @@ function drawTreat(){
 
 
 // Direction
-var direction = "right";
+let direction = "right";
 
     // Taking the desired direction and compare it with the current.
     // Ex: You cannot go right when the current directions is left since the
@@ -125,13 +125,13 @@ function processNewDirection(newDirection){
 
 
 // Snake
-var snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
+let snake = [[60, 60], [40, 60], [20, 60], [0, 60]];
 
 
 
 // Sounds
-var eatSound = new Sound("/SnakeGame/Snakeaudio/eat.mp3");
-var failSound = new Sound("/SnakeGame/Snakeaudio/failure.mp3");
+let eatSound = new Sound("/SnakeGame/Snakeaudio/eat.mp3");
+let failSound = new Sound("/SnakeGame/Snakeaudio/failure.mp3");
 
 //This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page.
 //The audio element is then played in the script.js depending on different events.
@@ -176,8 +176,8 @@ document.onkeydown = function(e) {
 
 // The touchevents. First we check where the user first put their finger. Then we compare that XY position
 // with the XY positions registered while swiping in order to figure out what direction the finger is going. 
-var XStart;
-var YStart;
+let XStart;
+let YStart;
 
 document.ontouchstart = function(e){
     XStart = e.touches[0].clientX;
@@ -265,7 +265,7 @@ function updateState() {
     if (treatX == snake[0][0] + 10 && treatY == snake[0][1] + 10){
         eatSound.play();
         score += 10;
-        var h2 = document.getElementsByTagName("h2");
+        let h2 = document.getElementsByTagName("h2");
         h2[0].textContent = "Score: " + score;
         newTreatPosition();
         intervalSpeed *= 0.95;
@@ -288,8 +288,8 @@ function updateState() {
 }
 
 function newSnakePosition(){
-    var newY = [];
-    var newX = [];
+    let newY = [];
+    let newX = [];
 
     // Inserts a new head position into the snake array. If it is on it's way into the edge then
     // make it show up on the opposite site of that edge.
@@ -373,7 +373,7 @@ function newTreatPosition(){
     } while (treatX % 20 !== 10)
 }
 
-var videoPlaying = false;
+let videoPlaying = false;
 
 function updateBackground(){
     // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
@@ -427,7 +427,7 @@ function checkCollision(){
 
     // Loops through all the body parts of the snake, except the head and checks if the head is
     // in the same position as either of these parts. If so then Game over.
-    for (var i = 1; i < snake.length; i++){
+    for (let i = 1; i < snake.length; i++){
         if (snake[0][0] == snake[i][0] && (snake[0][1] == snake[i][1])){
             failSound.play();
             gameOver();
