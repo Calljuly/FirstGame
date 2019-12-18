@@ -1,6 +1,6 @@
 //Variabler
-var highScoreList = [];
-var count = 1;
+let highScoreList = [];
+let count = 1;
 
 //Set or get localStorage
 if(localStorage.getItem("score")== null)
@@ -48,8 +48,8 @@ function sortHighScoreList(points)
 //Insert row, cells and information to highScore table
 function insertToBoard(name, score)
 {
-    var tableScore = document.getElementById('scoreList');
-    var currentRow;
+    let tableScore = document.getElementById('scoreList');
+    let currentRow;
     if(count == 1)
     {
         currentRow = tableScore.insertRow(count);
@@ -70,9 +70,9 @@ function insertToBoard(name, score)
     }
     
     
-    var cell1 = currentRow.insertCell(0);
-    var cell2 = currentRow.insertCell(1);
-    var cell3 = currentRow.insertCell(2);
+    let cell1 = currentRow.insertCell(0);
+    let cell2 = currentRow.insertCell(1);
+    let cell3 = currentRow.insertCell(2);
     cell1.textContent = name;
     cell2.textContent = score;
     cell3.textContent = 1;
@@ -86,7 +86,7 @@ export function updateHighScore()
     count = 1;
     var arrayFromStorage = JSON.parse(localStorage.getItem("score"));
 
-    for(var p in arrayFromStorage)
+    for(let p in arrayFromStorage)
     {
         insertToBoard(arrayFromStorage[p].name, arrayFromStorage[p].score, arrayFromStorage[p].time);
     }
