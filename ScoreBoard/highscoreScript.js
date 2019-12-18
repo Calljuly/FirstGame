@@ -1,4 +1,4 @@
-import{updateHighScore} from './highScoreModule.js';
+import{updateHighScore} from '../highScoreModule.js';
 
 updateHighScore();
 
