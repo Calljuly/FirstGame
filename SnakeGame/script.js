@@ -7,7 +7,7 @@ let score = 0;
 
 // Random variables
 let intervalSpeed = 300;
-let intervalForUpdate;
+let intervalFunction;
 let updatePending = false;
 let paused = false;
 
@@ -18,9 +18,9 @@ let backgroundBlur = 5;
 
 
 // Canvas
-let canvas = document.getElementById("myCanvas");
-let canvasContent = canvas.getContext("2d");
-let video = document.getElementById("myVideo");
+const canvas = document.getElementById("myCanvas");
+const canvasContent = canvas.getContext("2d");
+const video = document.getElementById("myVideo");
 
     // Position of the head of the snake
 let headX = 60;
@@ -235,7 +235,7 @@ function changePauseState(){
     }
     else{
          // Stops the intervalForUpdate
-        clearInterval(intervalForUpdate);
+        clearInterval(intervalFunction);
 
         // Writes out the text Paused when the game is... well... paused.
         canvasContent.font = "80px Calibri";
@@ -440,12 +440,12 @@ function gameOver(){
     document.getElementById("myForm").style.display = "block";
     document.getElementById("totalPoints").textContent = "You've got " + score + " points";
 
-    clearInterval(intervalForUpdate);
+    clearInterval(intervalFunction);
 }
 
 function startNewInterval(){
-    clearInterval(intervalForUpdate)
-    intervalForUpdate = setInterval(function(){
+    clearInterval(intervalFunction)
+    intervalFunction = setInterval(function(){
 
         updateState();
 
