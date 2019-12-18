@@ -274,18 +274,19 @@ function updateState() {
         intervalSpeed *= 0.95;
         drawSnake();
         drawTreat();
-
-        updateBackground();
         startNewInterval();
+        checkCollision();
+        updateBackground();
     }
 
     else {
         snake.pop();
         drawSnake();
         drawTreat();
+        checkCollision();
     }
 
-    checkCollision();
+    
     updatePending = false;
 
 }
@@ -376,11 +377,16 @@ function newTreatPosition(){
     } while (treatX % 20 !== 10)
 }
 
+var videoPlaying = false;
 function updateBackground(){
     // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
     // the video is fully visible then start making the video sharper and more colorful.
     if (backgroundOpacity < 0.1){
-        video.play();
+        if (!videoPlaying){
+            video.play();
+            videoPlaying = true;
+        }
+        
         backgroundSaturation += 10;
         backgroundBlur -= 0.5;
         video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
