@@ -84,7 +84,7 @@ export function updateHighScore()
 {
     $("#scoreList tr").next().remove(); 
     count = 1;
-    var arrayFromStorage = JSON.parse(localStorage.getItem("score"));
+    let arrayFromStorage = JSON.parse(localStorage.getItem("score"));
 
     for(let p in arrayFromStorage)
     {
