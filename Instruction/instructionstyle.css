@@ -1,0 +1,26 @@
+@import url("/mainpage/mainstyle.css");
+
+
+#ruleBox
+{
+color: white;
+text-align: center;
+background: black;
+font-size: 17px;
+border-radius: 10%;
+font-family: 'Sulphur Point', sans-serif;
+border: 8px solid rgb(16, 83, 83);
+padding: 15px;
+width: 70%;
+margin: auto;
+
+
+}
+section
+{
+    display: block;
+    height: 100%;
+
+}
+
+
