@@ -34,7 +34,7 @@ export function addPlayer(name, points)
         sortHighScoreList(highScoreList);
         localStorage.setItem("score", JSON.stringify(highScoreList));
         
-        window.location.href = "highScore.html";
+        window.location.href = "/ScoreBoard/Score.html";
     }
 
     

@@ -1,11 +1,8 @@
-import {addPlayer } from './highScoreModule.js';
-
-
+import {addPlayer } from '../highScoreModule.js';
 
 //Player variables
 var name = "";
 var score = 0;
-
 
 
 // Random variables
