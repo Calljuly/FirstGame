@@ -33,12 +33,11 @@ body{
   #myCanvas{
       background-color: rgba(0, 0, 0, 1);
       width: 100%;
-      border: solid 2px black;
+      /* border: solid 2px black; */
   }
 
-  #treat{
+  #treat, #powerUp{
     display: none;
-
   }
 
   .vrtBtnCont{
