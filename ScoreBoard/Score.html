@@ -62,8 +62,30 @@
             &#169 2019 Emil,Lydia,Julia,Peter
         </footer>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/ScoreBoard/highscoreScript.js" type="module"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCVjVs2FiENEUVyN05mnL9ftD0B8dIFjFM",
+    authDomain: "highscorestorage.firebaseapp.com",
+    databaseURL: "https://highscorestorage.firebaseio.com",
+    projectId: "highscorestorage",
+    storageBucket: "highscorestorage.appspot.com",
+    messagingSenderId: "407629551770",
+    appId: "1:407629551770:web:b5ce7c376a3441d7e02723"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/ScoreBoard/highscoreScript.js" type="module"></script>
     
 </body>
 
