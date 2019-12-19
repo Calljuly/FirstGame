@@ -34,7 +34,7 @@ body{
       border: solid 2px black;
   }
 
-  #treat{
+  #treat, #powerUp{
     display: none;
 
   }
