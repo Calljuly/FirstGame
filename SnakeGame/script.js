@@ -25,6 +25,7 @@ let paused = false;
 let backgroundOpacity = 1;
 let backgroundSaturation = 0;
 let backgroundBlur = 5;
+let backgroundHue = 0;
 let time;
 
 
@@ -33,6 +34,7 @@ let time;
 const canvas = document.getElementById("myCanvas");
 const canvasContent = canvas.getContext("2d");
 const video = document.getElementById("myVideo");
+const bubble = document.getElementById("treat");
 
      
     
@@ -84,8 +86,10 @@ class Snake{
     
     becomeInvincible(){
         this.invincible = true;
-        this.color = "152, 236, 207,";
+        this.color = "0, 0, 0,";
         let initialSpeed = this.speed;
+        video.style.filter = "invert(100%) hue-rotate(190deg)";
+        bubble.style.filter = "invert(100%)";
         this.speed = 100; 
         startNewInterval(); 
         let thisSnake = this;
@@ -93,6 +97,8 @@ class Snake{
             thisSnake.invincible = false; 
             thisSnake.color = "255, 255, 255,";
             thisSnake.speed = initialSpeed;
+            video.style.filter = "hue-rotate(" + backgroundHue + "deg" + ")";
+            bubble.style.filter = "invert(0%)";
             startNewInterval();
         }, powerUp.timeLimit);
     }
@@ -100,7 +106,7 @@ class Snake{
 }
 
 let bodyAtStart = [new Position(60, 60), new Position(40, 60), new Position(20, 60), new Position(0, 60)];
-let snake = new Snake(bodyAtStart, "255, 199, 180,", false, 300);
+let snake = new Snake(bodyAtStart, "255, 255, 255,", false, 300);
 
 function newSnakePosition(){
     let newY = [];
@@ -216,8 +222,7 @@ function drawTreat(){
         canvasContent.beginPath();
 
         // Getting the image from an html-element, then drawing that image at the correct position.
-        let img = document.getElementById("treat");
-        canvasContent.drawImage(img, treatPosition.X - 12.5, treatPosition.Y -12.5, 25, 25);
+        canvasContent.drawImage(bubble, treatPosition.X - 12.5, treatPosition.Y -12.5, 25, 25);
     }
     else if (score < 200){
         canvasContent.beginPath();
@@ -227,9 +232,13 @@ function drawTreat(){
     }
     else{
         canvasContent.beginPath();
-        let img = document.getElementById("treat");
-        img.src = "Images/treat1.png";
-        canvasContent.drawImage(img, treatPosition.X - 12.5, treatPosition.Y -12.5, 25, 25);
+        bubble.src = "Images/treat1.png";
+        if (snake.invincible){
+            canvasContent.filter = "invert(100%)";
+        }
+        
+        canvasContent.drawImage(bubble, treatPosition.X - 12.5, treatPosition.Y -12.5, 25, 25);
+        canvasContent.filter = "invert(0%)";
     }
 }
 
@@ -451,7 +460,12 @@ function updateBackground(){
     // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
     // the video is fully visible then start making the video sharper and more colorful.
 
-    if (backgroundOpacity < 0.1){
+    if (score <= 100){
+        backgroundOpacity -= 0.1;
+        backgroundOpacity = Math.round(backgroundOpacity * 10) / 10;
+        canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
+    }
+    else if (score <= 200){
         if (!videoPlaying){
             video.play();
             videoPlaying = true;
@@ -460,9 +474,10 @@ function updateBackground(){
         backgroundBlur -= 0.5;
         video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
     }
-    else{
-        backgroundOpacity -= 0.1;
-        canvas.style.backgroundColor = "rgba(0, 0, 0, " + backgroundOpacity + ")";
+    else if(score <= 300){
+        backgroundHue += 21;
+        video.style.filter = "hue-rotate(" + backgroundHue + "deg" + ")";
+        console.log(backgroundHue);
     }
 }
 
