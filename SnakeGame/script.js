@@ -9,18 +9,25 @@ let score = 0;
 //Why does this work without ref to document.getElementById('#submitHighscore')?
 submitHighscore.onclick =  function(){
     name = document.getElementById('userName').value;
-    addPlayer(name, score)};
+    addPlayer(name, score)
+};
 
 tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
-    location.reload()};
+    location.reload()
+};
 
-    backToStart.onclick = function(){
-    window.location.href = "/mainpage/main.html";
-}
+backToStart.onclick = function(){
+window.location.href = "/mainpage/main.html";
+};
 
 
+function increaseScoreBy(amount){
+    score += amount;
+    let h2 = document.getElementsByTagName("h2");
+    h2[0].textContent = "Score: " + score;
+};
 
 
 // Random variables
@@ -90,6 +97,10 @@ class Snake{
         this.speed = speed;
     }
     
+    increaseSpeed(){
+        this.speed = Math.max(this.speed *= 0.95, 45); 
+    }
+
     becomeInvincible(){
         this.invincible = true;
         this.color = "0, 0, 0,";
@@ -384,11 +395,15 @@ function Sound(src) {
 // Updates
 function changePauseState(){
     if (paused){
-        startNewInterval();
         paused = false;
+        startNewInterval();
+        
     }
     else{
-         // Stops the intervalForUpdate
+
+        paused = true;
+
+        // Stops the intervalForUpdate
         clearInterval(intervalFunction);
 
         // Writes out the text Paused when the game is... well... paused.
@@ -398,7 +413,7 @@ function changePauseState(){
 
         // This aligns the text in the middle. The above line is not enough.
         canvasContent.fillText("Paused", canvas.width / 2, canvas.height / 2 );
-        paused = true;
+        
     }
 }
 
@@ -425,19 +440,15 @@ function updateState() {
 
     if (powerUp.position.X == snake.body[0].X + 10 && powerUp.position.Y == snake.body[0].Y + 10 && powerUp.activated){
         snake.becomeInvincible();
-        powerUp.activated = false;   
-        score += 10;    
-        let h2 = document.getElementsByTagName("h2");
-        h2[0].textContent = "Score: " + score;
+        powerUp.activated = false;  
+        increaseScoreBy(10);
     }
 
     if (treatPosition.X == snake.body[0].X + 10 && treatPosition.Y == snake.body[0].Y + 10){
         eatSound.play();
-        score += 10;
-        let h2 = document.getElementsByTagName("h2");
-        h2[0].textContent = "Score: " + score;
+        increaseScoreBy(10);
         treatPosition = getRandomPosition();
-        snake.speed *= 0.95;
+        snake.increaseSpeed();
         drawSnake();
         drawTreat();
 
@@ -480,10 +491,9 @@ function updateBackground(){
         backgroundBlur -= 0.5;
         video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
     }
-    else if(score <= 300){
-        backgroundHue += 21;
+    else if(score <= 400){
+        backgroundHue += 10.5;
         video.style.filter = "hue-rotate(" + backgroundHue + "deg" + ")";
-        console.log(backgroundHue);
     }
 }
 
@@ -525,9 +535,10 @@ function checkCollision(){
             if (snake.body[0].X == snake.body[i].X && (snake.body[0].Y == snake.body[i].Y)){
                 failSound.play();
                 gameOver();
-            }
+            }               
         }
     }
+
     
 }
 
@@ -550,13 +561,16 @@ function gameOver(){
 }
 
 function startNewInterval(){
-    clearInterval(intervalFunction)
-    intervalFunction = setInterval(function(){
+    if (!paused){
 
-        updateState();
+        clearInterval(intervalFunction)
+        intervalFunction = setInterval(function(){
 
-   }, snake.speed);
+            updateState();
 
+    }, snake.speed);
+
+    }
 }
 
 // Call methods on start
