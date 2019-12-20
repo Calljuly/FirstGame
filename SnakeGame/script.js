@@ -1,8 +1,7 @@
 import {addPlayer } from '../highScoreModule.js';
 
 
-
-//Highscore thingies
+//Highscore functionality
 let name = "";
 let score = 0;
 

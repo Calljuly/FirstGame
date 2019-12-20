@@ -29,10 +29,10 @@ export function addPlayer(name, points)
         alert("User name can't be empty");
     }
     else{
-        highScoreList.push(new Player(name, Number(points)));
+        ref.push({name: name, score: points});
         
-        sortHighScoreList(highScoreList);
-        localStorage.setItem("score", JSON.stringify(highScoreList));
+        // sortHighScoreList(highScoreList);
+        // localStorage.setItem("score", JSON.stringify(highScoreList));
         
         window.location.href = "/ScoreBoard/Score.html";
     }
@@ -40,7 +40,7 @@ export function addPlayer(name, points)
     
 }
 //Sorting highScoreList based on players score
-function sortHighScoreList(points) 
+export function sortHighScoreList(points) 
 {
     points.sort((a, b) => (a.score < b.score) ? 1 : -1)
 }
@@ -80,14 +80,13 @@ function insertToBoard(name, score)
 }
 
 //Get array from storage and create the highscorelist with table
-export function updateHighScore()
+export function updateHighScore(arr)
 {
     $("#scoreList tr").next().remove(); 
     count = 1;
-    let arrayFromStorage = JSON.parse(localStorage.getItem("score"));
 
-    for(let p in arrayFromStorage)
+    for(let p in arr)
     {
-        insertToBoard(arrayFromStorage[p].name, arrayFromStorage[p].score, arrayFromStorage[p].time);
+        insertToBoard(arr[p].nameKey, arr[p].scoreKey, 1);
     }
 }
