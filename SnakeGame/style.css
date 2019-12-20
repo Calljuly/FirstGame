@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Abel|Domine|Exo|Saira+Semi+Condensed|Sulphur+Point&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Anton&display=swap");
 body{
   text-align: center;
   margin: 0px;
@@ -31,12 +33,11 @@ body{
   #myCanvas{
       background-color: rgba(0, 0, 0, 1);
       width: 100%;
-      border: solid 2px black;
+      /* border: solid 2px black; */
   }
 
-  #treat{
+  #treat, #powerUp{
     display: none;
-
   }
 
   .vrtBtnCont{
@@ -56,13 +57,57 @@ body{
     height: 100%;
     left: 0;
     Top: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: black;
     display: none;
     color: white;
     padding:100px;
     box-sizing: border-box;
+    font-family: 'Sulphur Point', sans-serif;
+    
   }
- 
+
+  .gameOver-style
+  {
+    width: 70%;
+    background-color:rgb(27, 53, 48); 
+    padding-bottom:50px;  
+    border-radius: 20%;
+    margin: auto;
+  }
+  .gameOver-style h1
+  {
+    color: white;
+    font-family: 'Anton', sans-serif;
+    text-shadow: 0px 0px 30px rgb(231, 11, 11);
+    font-size: 40px;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+  }
+  
+  .gameOver-style h2{
+    font-size: 15px;
+    color: rgb(204, 178, 28);
+
+  }
+
+  button
+  {
+    background:rgb(9, 78, 55);
+    color: white;
+    font-family: 'Sulphur Point', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    width: 20%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgb(75, 8, 66);
+    
+  }
+
+ button:hover
+ {
+color: red;
+
+ }
   #scoreList{
     width: 40%;
     border: 1px solid black;
@@ -73,8 +118,16 @@ body{
   }
   #myForm{
     display: none;
-    margin: 10px;
-    
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+  }
+  input
+  {
+    width: 50%;
+    border-radius: 5px;
+    margin-right:15%;
   }
   #btnGroup{
     display: inline-flex;
