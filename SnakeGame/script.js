@@ -16,6 +16,10 @@ tryAgain.onclick = function(){
     score = 0;
     location.reload()};
 
+    backToStart.onclick = function(){
+    window.location.href = "/mainpage/main.html";
+}
+
 
 
 
