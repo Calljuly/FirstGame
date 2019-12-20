@@ -8,7 +8,8 @@ ref.once('value', function(data){
         var k = keys[i];
         var name = scores[k].name;
         var score = scores[k].score;
-        arr.push({nameKey: name, scoreKey: score})
+        var date = scores[k].date;
+        arr.push({name: name, score: score, date: date})
     }
     sortHighScoreList(arr);
     updateHighScore(arr);
