@@ -1,26 +1,5 @@
 //Variabler
-let highScoreList = [];
 let count = 1;
-
-//Set or get localStorage
-if(localStorage.getItem("score")== null)
-{
-    localStorage.setItem("score", JSON.stringify(highScoreList));
-}
-else
-{
-    highScoreList = JSON.parse(localStorage.getItem("score"));
-}
-
-//Class to create player
-export class Player 
-{
-    constructor(name, score)
-    {
-        this.name = name;
-        this.score = score;
-    }
-}
 
 //Add player to highScoreList
 export function addPlayer(name, points)
@@ -30,19 +9,15 @@ export function addPlayer(name, points)
     }
     else{
         ref.push({name: name, score: points});
-        
-        // sortHighScoreList(highScoreList);
-        // localStorage.setItem("score", JSON.stringify(highScoreList));
-        
         window.location.href = "/ScoreBoard/Score.html";
     }
 
     
 }
 //Sorting highScoreList based on players score
-export function sortHighScoreList(points) 
+export function sortHighScoreList(arr) 
 {
-    points.sort((a, b) => (a.score < b.score) ? 1 : -1)
+    arr.sort((a, b) => (a.scoreKey < b.scoreKey) ? 1 : -1)
 }
 
 //Insert row, cells and information to highScore table
