@@ -1,6 +1,3 @@
-// import {updateHighScore} from '../highScoreModule.js';
-
-
 // Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyCVjVs2FiENEUVyN05mnL9ftD0B8dIFjFM",
@@ -13,20 +10,8 @@ var firebaseConfig = {
 
 };
 
-// Initialize Firebase
+// Initialize Firebase connection
 firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 var ref = database.ref('scores');
-
-ref.on('value', gotData, errData);
-
-function gotData(data){
-    console.log("I'm triggered");
-    console.log(data);
-}
-
-function errData(error){
-    console.log("Error!");
-    console.log(err);
-}
