@@ -1,26 +1,5 @@
 //Variabler
-let highScoreList = [];
 let count = 1;
-
-//Set or get localStorage
-if(localStorage.getItem("score")== null)
-{
-    localStorage.setItem("score", JSON.stringify(highScoreList));
-}
-else
-{
-    highScoreList = JSON.parse(localStorage.getItem("score"));
-}
-
-//Class to create player
-export class Player 
-{
-    constructor(name, score)
-    {
-        this.name = name;
-        this.score = score;
-    }
-}
 
 //Add player to highScoreList
 export function addPlayer(name, points)
@@ -29,41 +8,55 @@ export function addPlayer(name, points)
         alert("User name can't be empty");
     }
     else{
-        highScoreList.push(new Player(name, Number(points)));
-        
-        sortHighScoreList(highScoreList);
-        localStorage.setItem("score", JSON.stringify(highScoreList));
-        
+        var date = getDateInDesiredFormat();
+        ref.push({name: name, score: points, date: date});
         window.location.href = "/ScoreBoard/Score.html";
     }
 
     
 }
+
+function getDateInDesiredFormat(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+    dd = '0' + dd;
+    } 
+    if (mm < 10) {
+    mm = '0' + mm;
+    } 
+    var today = dd + '/' + mm + '/' + yyyy;
+    
+    return today;
+}
 //Sorting highScoreList based on players score
-function sortHighScoreList(points) 
+export function sortHighScoreList(arr) 
 {
-    points.sort((a, b) => (a.score < b.score) ? 1 : -1)
+    arr.sort((a, b) => (a.score < b.score) ? 1 : -1)
 }
 
 //Insert row, cells and information to highScore table
-function insertToBoard(name, score)
+function insertToBoard(name, score, date)
 {
     let tableScore = document.getElementById('scoreList');
-    let currentRow;
+    let currentRow = tableScore.insertRow(count);
     if(count == 1)
     {
-        currentRow = tableScore.insertRow(count);
         currentRow.style.backgroundColor ="#ffd700";
+        currentRow.style.color = 'black';
     } 
     else if(count == 2)
     {
-        currentRow = tableScore.insertRow(count);
         currentRow.style.backgroundColor ="#c0c0c0";
+        currentRow.style.color = 'black';
     }
     else if(count == 3)
     {
-        currentRow = tableScore.insertRow(count);
         currentRow.style.backgroundColor ="#cd7f32";
+        currentRow.style.color = 'black';
     }
     else{
         currentRow = tableScore.insertRow(count);
@@ -75,19 +68,18 @@ function insertToBoard(name, score)
     let cell3 = currentRow.insertCell(2);
     cell1.textContent = name;
     cell2.textContent = score;
-    cell3.textContent = 1;
+    cell3.textContent = date;
     count++;
 }
 
-//Get array from storage and create the highscorelist with table
-export function updateHighScore()
+//Get array from database and create the highscorelist with table
+export function updateHighScore(arr)
 {
     $("#scoreList tr").next().remove(); 
     count = 1;
-    let arrayFromStorage = JSON.parse(localStorage.getItem("score"));
 
-    for(let p in arrayFromStorage)
+    for(let p in arr)
     {
-        insertToBoard(arrayFromStorage[p].name, arrayFromStorage[p].score, arrayFromStorage[p].time);
+        insertToBoard(arr[p].name, arr[p].score, arr[p].date);
     }
 }

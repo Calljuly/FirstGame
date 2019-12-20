@@ -1,25 +1,33 @@
 import {addPlayer } from '../highScoreModule.js';
 
 
-
-//Highscore thingies
+//Highscore functionality
 let name = "";
 let score = 0;
 
+
+//Why does this work without ref to document.getElementById('#submitHighscore')?
 submitHighscore.onclick =  function(){
     name = document.getElementById('userName').value;
-    addPlayer(name, score)};
+    addPlayer(name, score)
+};
 
 tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
-    location.reload()};
+    location.reload()
+};
+
+backToStart.onclick = function(){
+window.location.href = "/mainpage/main.html";
+};
+
 
 function increaseScoreBy(amount){
     score += amount;
     let h2 = document.getElementsByTagName("h2");
     h2[0].textContent = "Score: " + score;
-}
+};
 
 
 // Random variables
@@ -538,8 +546,18 @@ function gameOver(){
     document.getElementById("gameOver").style.display = "block";
     document.getElementById("myForm").style.display = "block";
     document.getElementById("totalPoints").textContent = "You've got " + score + " points";
-
+    
     clearInterval(intervalFunction);
+    
+    document.addEventListener('keypress', function(e){
+        let key = e.which || e.keyCode;
+        
+        if(key == 13){
+            e.preventDefault();
+            name = document.getElementById('userName').value;
+            addPlayer(name, score);
+        }
+    })
 }
 
 function startNewInterval(){
