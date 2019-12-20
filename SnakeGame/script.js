@@ -378,11 +378,15 @@ function Sound(src) {
 // Updates
 function changePauseState(){
     if (paused){
-        startNewInterval();
         paused = false;
+        startNewInterval();
+        
     }
     else{
-         // Stops the intervalForUpdate
+
+        paused = true;
+
+        // Stops the intervalForUpdate
         clearInterval(intervalFunction);
 
         // Writes out the text Paused when the game is... well... paused.
@@ -392,7 +396,7 @@ function changePauseState(){
 
         // This aligns the text in the middle. The above line is not enough.
         canvasContent.fillText("Paused", canvas.width / 2, canvas.height / 2 );
-        paused = true;
+        
     }
 }
 
@@ -474,8 +478,8 @@ function updateBackground(){
         backgroundBlur -= 0.5;
         video.style.filter = "saturate("+ backgroundSaturation + "%) blur(" + backgroundBlur + "px)";
     }
-    else if(score <= 300){
-        backgroundHue += 21;
+    else if(score <= 400){
+        backgroundHue += 10.5;
         video.style.filter = "hue-rotate(" + backgroundHue + "deg" + ")";
         console.log(backgroundHue);
     }
@@ -534,13 +538,16 @@ function gameOver(){
 }
 
 function startNewInterval(){
-    clearInterval(intervalFunction)
-    intervalFunction = setInterval(function(){
+    if (!paused){
 
-        updateState();
+        clearInterval(intervalFunction)
+        intervalFunction = setInterval(function(){
 
-   }, snake.speed);
+            updateState();
 
+    }, snake.speed);
+
+    }
 }
 
 // Call methods on start
