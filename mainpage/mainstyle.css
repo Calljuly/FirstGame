@@ -1,250 +1,299 @@
-*
-{
-margin: 0px;
-padding: 0px;
-box-sizing: border-box;
+/* default setting for the page */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
-html,body{
+/* set a default color value for background */
+
+html, body {
     background: black;
 }
 
-#wrapper{
+/* take 70% out of the whole width size and position it in center. So basically, header,section and footer will be
+take 70% of screen.*/
+
+#wrapper {
     width: 70%;
     background: rgba(54, 53, 53, 0.096);
     margin: auto;
     height: 100%;
 }
-header
-{
 
-display: grid;
-grid-template-columns: repeat(3,1fr);
+/* Using grid to divide into three section */
+
+header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
+/* Create a big circle for left side at header  */
 
-.topleftcircle
-{
-background: rgb(8, 57, 63);
-width: 100px;
-height: 100px;
-border-radius: 50%;
-margin: auto;
-border: 20px black solid;
+#topLeftCircle {
+    background: rgb(8, 57, 63);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    border: 20px black solid;
 }
-.toprightcircle
-{
+
+/* Create a circle at right side header */
+
+#toprightcircle {
     background: rgb(54, 51, 51);
     width: 20px;
     height: 20px;
     border-radius: 50%;
     margin: auto;
-
 }
-.smallcircle
-{
+
+/* two small circles for both left side and right side at header plus using animation
+for two small circles to change color */
+
+.smallcircle {
     background: rgb(54, 51, 51);
     width: 5px;
     height: 5px;
     border-radius: 50%;
     animation-name: smallcircleanimation;
-    animation-duration:10s;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    
 }
 
-@keyframes smallcircleanimation
-{
-    0%{background-color: rgb(175, 175, 94);}
-    25%{background-color: rgb(107, 96, 96);}
-    50%{background-color: rgb(51, 51, 90);}
-    75%{background-color: rgb(203, 209, 203)};
-    100%{background-color: rgb(156, 111, 85) }
+/* this keyframe use to change colors of the two small circles */
+
+@keyframes smallcircleanimation {
+    0% {
+        background-color: rgb(175, 175, 94);
+    }
+    25% {
+        background-color: rgb(107, 96, 96);
+    }
+    50% {
+        background-color: rgb(51, 51, 90);
+    }
+    75% {
+        background-color: rgb(203, 209, 203)
+    }
+    ;
+    100% {
+        background-color: rgb(156, 111, 85)
+    }
 }
 
+/* this is the title container where it will contain logo and and a box.Set padding 50px because
+it will create some space between elements from other sections and position relative because later
+on, the circle will run accordingly to side of the container */
 
-header .titlecontainer
-{
-background: black;
-position: relative;
-padding: 50px;
+header #logoContainer {
+    background: black;
+    position: relative;
+    padding: 50px;
 }
 
-.box
-{
-width: 10px;
-height: 10px;
-position: absolute;
-animation-name: snakeanimation;
-animation-duration:30s;
-animation-iteration-count: infinite;
-animation-timing-function: linear;
+/* set the size for the box and position as absolute so that it will relatively run in the container.
+Using animation to make the box move infinitely in the container*/
+
+.box {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    animation-name: snakeanimation;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
-@keyframes snakeanimation
-{
-0%{background-color: rgb(19, 19, 18);left: 5%;top: 5%;}
-25%{background-color: rgb(107, 96, 96); left: 85%;top: 5%;}
-50%{background-color: rgb(223, 223, 236); left: 85%;top: 85%;}
-75%{background-color: rgb(203, 209, 203);left: 5%;top: 85%;}
-100%{background-color: rgb(247, 247, 244); left: 5%;top: 5%;}
+/* Using this keyframe to manipulate the direction of the snake, using percentage so even smaller
+     screen will be able to adapt to it*/
+
+@keyframes snakeanimation {
+    0% {
+        /* Start point, which is the top and left side*/
+        background-color: rgb(19, 19, 18);
+        left: 5%;
+        top: 5%;
+    }
+    25% {
+        /* Move from left side to right side by only using left and top(instead for right or top) because
+        it will create a continuation of the box's positioning*/
+        background-color: rgb(107, 96, 96);
+        left: 85%;
+        top: 5%;
+    }
+    50% {
+        /* The box moves to bottom */
+        background-color: rgb(223, 223, 236);
+        left: 85%;
+        top: 85%;
+    }
+    75% {
+        /* The box moves to left side */
+        background-color: rgb(203, 209, 203);
+        left: 5%;
+        top: 85%;
+    }
+    100% {
+        /* The box moves back to its original spot */
+        background-color: rgb(247, 247, 244);
+        left: 5%;
+        top: 5%;
+    }
 }
 
+/* Decorate the the text with different properties */
 
-
-header .title
-{
-text-align: center;
-color: white;
-font-size: 30px;
-letter-spacing: 2px;
-font-family: 'Sulphur Point', sans-serif;
-text-decoration: none;
-
+header #logoContainer .title {
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-family: 'Sulphur Point', sans-serif;
+    text-decoration: none;
 }
 
-header .title h1
-{
-border-bottom: solid goldenrod 0.2px;
-text-shadow: 5px 5px rgba(97, 74, 43, 0.788);
-font-weight: bold;
+/* Decorate the 'Snake' text with shadow */
 
+header #logoContainer .title h1 {
+    border-bottom: solid goldenrod 0.2px;
+    text-shadow: 5px 5px rgba(97, 74, 43, 0.788);
+    font-weight: bold;
 }
 
-header .title h1::first-letter
-{
-font-size: 100px;
+/* Target the first letter so that it will be bigger than the rest. */
+
+header .title h1::first-letter {
+    font-size: 100px;
 }
 
+/* Using grid to divide into sections, the left circles and the mid section which will take two columns of the grid
+and the right circles */
 
-section
-{
-display:grid;
-grid-template-columns: repeat(4,1fr);
-height: 440px;
-justify-content: center;
-align-items: center;
-height: 70%;
-
+section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
-section ul
-{
+/* Circle without animation on the left of the Section */
+
+.leftmidcircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #281c3c;
+}
+
+/* Using grid-column to take up two columns. Align the text in the center and create border for it */
+
+section #mid {
     grid-column: span 2;
     list-style: none;
-    text-align:center;
+    text-align: center;
     border-radius: 2%;
     border: 2px goldenrod solid;
 }
-section ul li
-{
-margin: 3%;
+
+/* Create space between the list */
+
+section #mid li {
+    margin: 3%;
 }
 
-section a
-{
-color: white;
-text-decoration: none;
-font-size: 35px;
-font-family: 'Sulphur Point', sans-serif;
+/* Decorate text for the links */
 
+section #mid a {
+    color: white;
+    text-decoration: none;
+    font-size: 35px;
+    font-family: 'Sulphur Point', sans-serif;
 }
 
-section a:hover
-{
-background: goldenrod;
-box-shadow: 0px 0px 20px  red;
-transition: 0.4s;
-
+/* Using hover to create some effects on the text for instance box-shadow which create the red light shadow on the
+background of the text */
+section a:hover {
+    background: goldenrod;
+    box-shadow: 0px 0px 20px red;
+    transition: 0.4s;
 }
 
-.leftmidcircle
-{
-width: 50px;
-height: 50px;
-border-radius: 50%;
-background: #281c3c;
-}
-
-.rightmidcircle
-{
+/* The right circle on the right section */
+.rightmidcircle {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: #1c253c; 
-    margin-left: 30%;  
+    background: #1c253c;
+    margin-left: 30%;
 }
-
-.mediumcircle
-{
+/* The two animated circles from both right and left side of the section
+They work pretty much the same as the small circles above. */
+.mediumcircle {
     background: rgb(54, 51, 51);
     width: 15px;
     height: 15px;
     border-radius: 50%;
     margin-left: 10%;
-    animation-name:mediumcircleanimation;
-    animation-duration:5s;
+    animation-name: mediumcircleanimation;
+    animation-duration: 5s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
 
-@keyframes mediumcircleanimation
-{
-    0%{background-color: red;}
-    25%{background-color: blue;}
-    50%{background-color: rgb(7, 51, 54);}
-    75%{background-color: rgb(203, 209, 203)};
-    100%{background-color: rgb(156, 111, 85) }
+@keyframes mediumcircleanimation {
+    0% {
+        background-color: red;
+    }
+    25% {
+        background-color: blue;
+    }
+    50% {
+        background-color: rgb(7, 51, 54);
+    }
+    75% {
+        background-color: rgb(203, 209, 203)
+    }
+    ;
+    100% {
+        background-color: rgb(156, 111, 85)
+    }
 }
 
-@media screen and (max-width:656px)
-{
-    #wrapper
-    {
+@media screen and (max-width:656px) {
+    #wrapper {
         width: 100%;
     }
-    .toprightcircle{
+    .toprightcircle {
         display: none;
     }
-    .topleftcircle
-    {
-        display: none   ;
-    }
-    .smallcircle{
+    .topleftcircle {
         display: none;
     }
-    .leftmidcircle
-    {
+    .smallcircle {
         display: none;
     }
-    .rightmidcircle{
+    .leftmidcircle {
         display: none;
     }
-    .mediumcircle
-    {
+    .rightmidcircle {
         display: none;
     }
-
-   
-    section
-    {
+    .mediumcircle {
+        display: none;
+    }
+    section {
         height: 50%;
-
     }
-
-    section a{
+    section a {
         font-size: 20px;
     }
-  
 }
-
-
-footer
-{
-color: white;
-font-family: sans-serif;
-font-size: 10px;
-padding: 20px;
-
+/* Footer's decoration */
+footer {
+    color: white;
+    font-family: sans-serif;
+    font-size: 10px;
+    padding: 20px;
 }
