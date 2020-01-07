@@ -16,7 +16,7 @@ html, body {
 take 70% of screen.*/
 
 #wrapper {
-    width: 70%;
+    width: 80%;
     background: rgba(54, 53, 53, 0.096);
     margin: auto;
     height: 100%;
@@ -42,7 +42,7 @@ header {
 
 /* Create a circle at right side header */
 
-#toprightcircle {
+#topRightCircle{
     background: rgb(54, 51, 51);
     width: 20px;
     height: 20px;
@@ -53,7 +53,7 @@ header {
 /* two small circles for both left side and right side at header plus using animation
 for two small circles to change color */
 
-.smallcircle {
+.smallCircle{
     background: rgb(54, 51, 51);
     width: 5px;
     height: 5px;
@@ -180,7 +180,7 @@ section {
 
 /* Circle without animation on the left of the Section */
 
-.leftmidcircle {
+.leftMidCircle {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -221,7 +221,7 @@ section a:hover {
 }
 
 /* The right circle on the right section */
-.rightmidcircle {
+.rightMidCircle {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -230,7 +230,7 @@ section a:hover {
 }
 /* The two animated circles from both right and left side of the section
 They work pretty much the same as the small circles above. */
-.mediumcircle {
+.mediumCircle{
     background: rgb(54, 51, 51);
     width: 15px;
     height: 15px;
@@ -261,39 +261,127 @@ They work pretty much the same as the small circles above. */
     }
 }
 
-@media screen and (max-width:656px) {
+@media screen and (max-width:425px) {
     #wrapper {
         width: 100%;
+        
     }
-    .toprightcircle {
+    header{
+        margin-top: 30px;
+    }
+    #topLeftCircle{
+        width: 80px;
+        height: 80px;
+        margin: 0px;
+        
+    }
+    header #logoContainer{
+        padding: 0px;
+        margin-bottom: 20px;
+        
+    }
+    header #logoContainer .title {
+        font-size: 20px;
+    }
+    header .title h1::first-letter {
+        font-size: 50px;
+    }
+    .box{
         display: none;
     }
-    .topleftcircle {
+
+    #topRightCircle{
+        margin: auto;
+    }
+    .smallCircle {
         display: none;
     }
-    .smallcircle {
-        display: none;
+    .leftMidCircle{
+        width: 40px;
+        height: 40px;
+        
     }
-    .leftmidcircle {
-        display: none;
+    .rightMidCircle {
+        width: 30px;
+        height: 30px;
     }
-    .rightmidcircle {
-        display: none;
-    }
-    .mediumcircle {
+    .mediumCircle {
         display: none;
     }
     section {
-        height: 50%;
+        height: 100%;
+        margin-top: 80px;
+       
     }
-    section a {
-        font-size: 20px;
+    section #mid a{
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width:656px) and (min-width:425px){
+    #wrapper {
+        width: 100%;
+    }
+    header{
+        margin-top: 30px;
+        
+    }
+    #topLeftCircle{
+        width: 100px;
+        height: 100px;
+        margin: 0px;
+        
+    }
+    header #logoContainer{
+        padding: 30px;
+        margin-bottom: 20px;
+       
+        
+    }
+    header #logoContainer .title {
+        font-size: 25px;
+    }
+    header .title h1::first-letter {
+        font-size: 60px;
+    }
+   
+
+    #topRightCircle{
+        margin: auto;
+        
+    }
+
+    .smallCircle{
+        margin: auto;
+    }
+    
+    .leftMidCircle{
+        width: 50px;
+        height: 50px;
+        
+    }
+    .rightMidCircle {
+        width: 30px;
+        height: 30px;
+    }
+   
+    section {
+        height: 100%;
+        width: 80%;
+        margin: auto;
+        margin-top: 80px;
+       
+    }
+    section #mid a{
+        font-size: 22px;
     }
 }
 /* Footer's decoration */
 footer {
+    margin-top: 7%;
     color: white;
     font-family: sans-serif;
     font-size: 10px;
     padding: 20px;
+    
 }
