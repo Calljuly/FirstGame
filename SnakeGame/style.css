@@ -4,32 +4,77 @@ html, body {
   text-align: center;
   margin: 0px;
   overflow: hidden;
-  height: 100%;
   background-color: black;
+  height: 100%;
 }
 
 #gamdivContainer {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(10, 1fr);
   background: linear-gradient(black, black, black, black, rgb(8, 57, 63), black);
-  height: 100%;
-  padding: 20px;
+  margin-top: 2%;
+}
+
+#planet0 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient( white, black, black, black, black);
+  opacity: 0.7;
+}
+
+#planet1 {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient( rgb(83, 71, 4), black);
+  box-shadow: 0px 0px 5px #1f3e5a;
+  opacity: 0.6;
+}
+
+#planet2 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient( #281c3c, black);
+  opacity: 0.8;
+}
+
+#planet3 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient( lightgreen, gray, black, black, black, black);
+  opacity: 0.7;
+}
+
+#rightPlanet{
+  margin-left: 10%;
+}
+#planet4 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient( #1f3e5a, black);
+  margin-top: 70%;
+  opacity: 0.8;
 }
 
 #scoreContainer {
   width: 100%;
   height: 82%;
+  margin-left: 10%;
+  grid-column: span 2;
 }
 
 #scoreCount {
-  color: white;
+  color: #aac6df;
   font-family: 'Sulphur Point', sans-serif;
-  font-size: 30px;
+  font-size: 34px;
   height: 70px;
   text-align: center;
-  text-shadow: 2px 2px #1f3e5a;
 }
 
 #gameDiv {
@@ -41,7 +86,7 @@ html, body {
   border: 1px solid #1f3e5a;
   border-radius: 10px;
   box-shadow: 0px 0px 40px #1f3e5a;
-  grid-column: 2/-1;
+  grid-column: span 7;
   z-index: 1;
 }
 
@@ -90,15 +135,12 @@ html, body {
   z-index: 1;
 }
 
-
-
-#gameOverTable{
+#gameOverTable {
   font-size: 50px;
   letter-spacing: 10px;
   background: red;
   margin: auto;
   text-transform: uppercase;
-  
 }
 
 .gameOver-style h2 {
@@ -106,16 +148,14 @@ html, body {
   color: white;
   opacity: 0.7;
   font-weight: bold;
- 
 }
 
-label{
-
+label {
   font-size: 20px;
   font-weight: bold;
 }
 
-#totalPoints{
+#totalPoints {
   font-size: 30px;
   color: goldenrod;
 }
@@ -129,12 +169,10 @@ button {
   width: 20%;
   border-radius: 10px;
   border: #1c253c 1px solid;
-  
 }
 
 button:hover {
   border: white 1px solid;
-  
 }
 
 #scoreList {
@@ -147,22 +185,20 @@ button:hover {
   /* Optional - if you don't want to have double border where cells touch */
 }
 
-#inputContainer{
-
- display: flex;
- justify-content: space-between;
- align-items: center;
- flex-direction: column;
- height: 100%;
- padding: 10px;
-
+#inputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
 }
+
 #myForm {
   display: none;
   width: 80%;
   margin: auto;
   text-align: center;
- 
 }
 
 input {
@@ -179,7 +215,7 @@ input {
   margin-right: 10px;
 }
 
-#btnGroup button{
+#btnGroup button {
   padding: 5px;
   background-color: antiquewhite;
   border: none;
