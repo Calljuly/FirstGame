@@ -1,16 +1,17 @@
 import{sortHighScoreList, updateHighScore} from '../highScoreModule.js';
 
-ref.once('value', function(data){
-    var arr = [];
-    var scores = data.val();
-    var keys = Object.keys(scores);
-    for(let i = 0; i < keys.length; i++ ){
-        var k = keys[i];
-        var name = scores[k].name;
-        var score = scores[k].score;
-        var date = scores[k].date;
-        arr.push({name: name, score: score, date: date})
-    }
-    sortHighScoreList(arr);
-    updateHighScore(arr);
-})
+const query = firebase.database().ref('scores')
+        .orderByChild('score')
+        .limitToLast(10);
+
+
+query.once('value', function (snapshot) {
+   var tempArr = [];
+    snapshot.forEach(function (childSnapshot) {    
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+        tempArr.push(childData);
+    });
+    tempArr.reverse();
+    updateHighScore(tempArr);
+});
