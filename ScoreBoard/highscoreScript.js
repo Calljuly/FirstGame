@@ -1,4 +1,4 @@
-import{sortHighScoreList, updateHighScore} from '../highScoreModule.js';
+import{updateHighScore} from '../highScoreModule.js';
 
 const query = firebase.database().ref('scores')
         .orderByChild('score')
