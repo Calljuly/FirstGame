@@ -1,58 +1,68 @@
 ﻿<!DOCTYPE html>
 <html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+
 <head>
-<meta charset='utf-8' />
-<link rel='stylesheet' type='text/css' href='/SnakeGame/style.css' />
-<title></title>
+        <meta charset='utf-8' />
+        <link rel='stylesheet' type='text/css' href='/SnakeGame/style.css' />
+        <title></title>
 </head>
+
 <body>
-        
+
         <img src="Images/bubble1.png" id="treat" width="25" height="25">
         <img src="Images/powerUp.png" id="powerUp" width="25" height="25">
 
-        
+        <div id="gamdivContainer">
+                <div id="scoreContainer">
+                        <h2 id="scoreCount">Score: 0</h2>
+                        
+                        
+                </div>
+                <div id="gameDiv">
 
-        <div id="gameDiv">
-                
-                <canvas id="myCanvas" width="800" height="500">
-                
-                Your browser does not support the HTML5 canvas tag.
-                </canvas>
+                        <canvas id="myCanvas" width="800" height="500">
 
-                <video muted loop id="myVideo">
-                        <source src="/SnakeGame/Images/space.mp4" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                </video>
+                                Your browser does not support the HTML5 canvas tag.
+                        </canvas>
+
+                        <video muted loop id="myVideo">
+                                <source src="/SnakeGame/Images/space.mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                        </video>
+                </div>
+                
+                
+
         </div>
-        <h2 id="scoreCount">Score: 0</h2>
-        <div id = "gameOver">
+        <div id="gameOver">
                 <div class="gameOver-style">
-                <h1>Game over!</h1>
-                <h2 id = "totalPoints"></h2><br>
-                <button id="tryAgain">Try again?</button><br><br>
-                
-                <h2>...or register your score:</h2><br>
+                        <h1>Game over!</h1>
+                        <h2 id="totalPoints"></h2><br>
+                        <button id="tryAgain">Try again?</button><br><br>
 
-                <form id="myForm">
-                        <label for="name" style="color: white;">User's Name:</label>
-                        <input type="text" name="userName" id="userName"><br><br>
-                </form>
+                        <h2>...or register your score:</h2><br>
 
-                <button id="submitHighscore">Submit to highscore</button><br><br><br>
-                
-                <h2>...Don't want to play more?</h2>
-                <button id="backToStart">Back to Start</button>
+                        <form id="myForm">
+                                <label for="name" style="color: white;">User's Name:</label>
+                                <input type="text" name="userName" id="userName"><br><br>
+                        </form>
 
+                        <button id="submitHighscore">Submit to highscore</button><br><br><br>
+
+                        <h2>...Don't want to play more?</h2>
+                        <button id="backToStart">Back to Start</button>
+
+                </div>
         </div>
-        </div>
-        
-<!-- jQuery script -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Firebase script -->
-<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
-<!-- Our script -->
-<script type="text/javascript" src="../fireBase.js"></script>
-<script type='module' src='/SnakeGame/script.js' charset='utf-8'></script>
+
+        <!-- jQuery script -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Firebase script -->
+        <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+        <!-- Our script -->
+        <script type="text/javascript" src="../fireBase.js"></script>
+        <script type='module' src='/SnakeGame/script.js' charset='utf-8'></script>
 </body>
+
 </html>
