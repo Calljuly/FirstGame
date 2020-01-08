@@ -13,14 +13,15 @@
 </head>
 
 <body>
-
+    <!-- Structure will be similar as the main page. The header is the same as the mainpage.
+    Section will be used to display the table -->
     <div id="wrapper">
         <header>
-            <div class="topleft">
-                <div class="topleftcircle"></div>
-                <div class="smallcircle"></div>
+            <div id="topLeft">
+                <div id="topLeftCircle"></div>
+                <div class="smallCircle"></div>
             </div>
-            <div class="titlecontainer">
+            <div id="logoContainer">
                 <div class="box"></div>
                 <a href="/mainpage/main.html" class="title">
                     <h1>Snake </h1>
@@ -28,21 +29,23 @@
                 </a>
             </div>
 
-            <div class="topright">
-                <div class="toprightcircle"></div>
-                <div class="smallcircle"></div>
+            <div class="topRight">
+                <div id="topRightCircle"></div>
+                <div class="smallCircle"></div>
             </div>
 
 
         </header>
-        <section>
-            <h1 id="scoreHeaderText">Score Board</h1>
 
+        <!-- Section will contain the title, table, table head and four spans.Table uses to display
+        the scores and spans are used for animation -->
+        <section>
+            <h1 id="scoreHeaderText">Top 10 Score Board</h1>         
             <table id="scoreList">
                 <tr class="head">
                     <th>
                         Name
-                        <span ></span>
+                        <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -58,6 +61,7 @@
 
             </table>
         </section>
+        <!-- Copyright -->
         <footer>
             &#169 2019 Emil,Lydia,Julia,Peter
         </footer>
@@ -71,7 +75,7 @@
     <!-- Our script -->
     <script src="../fireBase.js" type="text/javascript"></script>
     <script src="highscoreScript.js" type="module"></script>
-    
+
 </body>
 
 </html>

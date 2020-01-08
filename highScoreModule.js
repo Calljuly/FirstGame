@@ -32,11 +32,6 @@ function getDateInDesiredFormat(){
     
     return today;
 }
-//Sorting highScoreList based on players score
-export function sortHighScoreList(arr) 
-{
-    arr.sort((a, b) => (a.score < b.score) ? 1 : -1)
-}
 
 //Insert row, cells and information to highScore table
 function insertToBoard(name, score, date)
