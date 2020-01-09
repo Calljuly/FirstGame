@@ -1,23 +1,40 @@
 @import url("https://fonts.googleapis.com/css?family=Abel|Domine|Exo|Saira+Semi+Condensed|Sulphur+Point&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Anton&display=swap");
-html, body {
+html,body {
   text-align: center;
+  box-sizing: border-box;
   margin: 0px;
   overflow: hidden;
-  background-color: black;
+  background: linear-gradient(black, black, black, black, rgb(8, 57, 63), black);
+  display: flex;
+  justify-content: center;
   height: 100%;
 }
 
 #gamdivContainer {
   display: grid;
+  grid-template-columns: repeat(11, 1fr);
   justify-content: center;
   align-items: center;
-  grid-template-columns: repeat(10, 1fr);
-  background: linear-gradient(black, black, black, black, rgb(8, 57, 63), black);
-  margin-top: 2%;
+  padding: 10px;
+  width: 100%;
 }
 
-#planet0 {
+#leftContainer {
+  width: 100%;
+  height: 82%;
+  padding: 5px;
+  grid-column: span 2;
+}
+
+#scoreCount {
+  color: #aac6df;
+  font-family: 'Sulphur Point', sans-serif;
+  font-size: 34px;
+  text-align: center;
+}
+
+#leftPlanet0 {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -25,7 +42,7 @@ html, body {
   opacity: 0.7;
 }
 
-#planet1 {
+#leftPlanet1 {
   width: 160px;
   height: 160px;
   border-radius: 50%;
@@ -34,47 +51,12 @@ html, body {
   opacity: 0.6;
 }
 
-#planet2 {
+#leftPlanet2 {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background: radial-gradient( #281c3c, black);
   opacity: 0.8;
-}
-
-#planet3 {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: radial-gradient( lightgreen, gray, black, black, black, black);
-  opacity: 0.7;
-}
-
-#rightPlanet{
-  margin-left: 10%;
-}
-#planet4 {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: radial-gradient( #1f3e5a, black);
-  margin-top: 70%;
-  opacity: 0.8;
-}
-
-#scoreContainer {
-  width: 100%;
-  height: 82%;
-  margin-left: 10%;
-  grid-column: span 2;
-}
-
-#scoreCount {
-  color: #aac6df;
-  font-family: 'Sulphur Point', sans-serif;
-  font-size: 34px;
-  height: 70px;
-  text-align: center;
 }
 
 #gameDiv {
@@ -87,6 +69,7 @@ html, body {
   border-radius: 10px;
   box-shadow: 0px 0px 40px #1f3e5a;
   grid-column: span 7;
+  margin-top: 4%;
   z-index: 1;
 }
 
@@ -99,10 +82,31 @@ html, body {
   filter: saturate(0%) blur(5px);
 }
 
+#rightContainer {
+  padding: 20px;
+  grid-column: span 1;
+}
+
+#rightPlanet3 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient( lightgreen, gray, black, black, black, black);
+  opacity: 0.7;
+}
+
+#rightPlanet4 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient( #1f3e5a, black);
+  margin-top: 70%;
+  opacity: 0.8;
+}
+
 #myCanvas {
   background-color: rgba(0, 0, 0, 1);
   width: 100%;
-  /* border: solid 2px black; */
 }
 
 #treat, #powerUp {
@@ -241,5 +245,62 @@ input {
   }
   #myCanvas {
     height: 100vh;
+  }
+}
+
+@media screen and (max-width:613px) {
+  #rightContainer {
+    display: none;
+  }
+  #scoreCount {
+    font-size: 10px;
+  }
+  #rightContainer {
+    display: none;
+  }
+  #gameDiv {
+    grid-column: 3/-1;
+    height: 90%;
+    width: 100%;
+  }
+  #myCanvas {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width:610px) and (max-width:676px) {
+  #rightContainer {
+    display: none;
+  }
+  #scoreCount {
+    font-size: 20px;
+  }
+  #gameDiv {
+    grid-column: 3/-1;
+    height: 90%;
+    width: 100%;
+  }
+  #myCanvas {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width:676px) and (max-width:1024px) {
+  #rightContainer {
+    display: none;
+  }
+  #scoreCount {
+    font-size: 20px;
+  }
+  #gameDiv {
+    grid-column: 3/-1;
+    height: 90%;
+    width: 100%;
+  }
+  #myCanvas {
+    height: 100%;
+    width: 100%;
   }
 }

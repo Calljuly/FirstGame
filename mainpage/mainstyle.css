@@ -10,6 +10,7 @@
 
 html, body {
     background: black;
+   
 }
 
 /* take 70% out of the whole width size and position it in center. So basically, header,section and footer will be
@@ -20,6 +21,7 @@ take 70% of screen.*/
     background: rgba(54, 53, 53, 0.096);
     margin: auto;
     height: 100%;
+    
 }
 
 /* Using grid to divide into three section */
@@ -311,16 +313,23 @@ They work pretty much the same as the small circles above. */
     section {
         height: 100%;
         margin-top: 80px;
+        
        
     }
     section #mid a{
         font-size: 22px;
+    }
+
+    footer{
+        
+        margin-top: 70px;
     }
 }
 
 @media screen and (max-width:656px) and (min-width:425px){
     #wrapper {
         width: 100%;
+        margin-top: 10%;
     }
     header{
         margin-top: 30px;
@@ -375,13 +384,38 @@ They work pretty much the same as the small circles above. */
     section #mid a{
         font-size: 22px;
     }
+  
+}
+
+@media screen and (max-width:768px){
+
+    #wrapper{
+        margin-top: 20%;
+        height: 100%;
+    }
+
+    footer{
+        
+        margin-top: 100px;
+    }
 }
 /* Footer's decoration */
 footer {
-    margin-top: 7%;
     color: white;
     font-family: sans-serif;
     font-size: 10px;
-    padding: 20px;
-    
+    padding: 30px;
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 40px;
+}
+
+#audioMode{
+    cursor: pointer;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: white ;
+    box-shadow: 0px 0px 10px white;
+   
 }
