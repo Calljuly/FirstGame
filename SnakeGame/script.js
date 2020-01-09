@@ -6,12 +6,12 @@ let name = "";
 let score = 0;
 
 
-//Why does this work without ref to document.getElementById('#submitHighscore')?
 submitHighscore.onclick =  function(){
     name = document.getElementById('userName').value;
     addPlayer(name, score)
 };
 
+// Remove the gameOver div, reset the highscore and reload the page/game.
 tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
@@ -22,7 +22,7 @@ backToStart.onclick = function(){
 window.location.href = "/mainpage/main.html";
 };
 
-
+// Increases the score and update the score shown. 
 function increaseScoreBy(amount){
     score += amount;
     let h2 = document.getElementsByTagName("h2");
@@ -32,7 +32,6 @@ function increaseScoreBy(amount){
 
 // Random variables
 let intervalFunction;
-let updatePending = false;
 let paused = false; 
 
 let backgroundOpacity = 1;
@@ -51,40 +50,40 @@ const bubble = document.getElementById("treat");
 
      
     
-    class Position{
-        constructor(X, Y){
-            this.X = X;
-            this.Y = Y;
-        }
+class Position{
+    constructor(X, Y){
+        this.X = X;
+        this.Y = Y;
     }
+}
 
-    function getRandomPosition(){
+// Gets a random position within the frames of the canvas. 
+function getRandomPosition(){
 
-        let newPosition = new Position(0, 0);
-    
-        do {
-            // There is no advanced collission detection in this game. Either the XY position of the head of the snake
-            // is the exact same as the XY position of the treat and only then is it registered as eaten. This demands
-            // carefully calculated size of the canvas, how much the snake can move each step and of course where the
-            // treat can be positioned.
-    
-            // This was a game of trail and error. I figured I needed to use "% 20 == 0" since the snake
-            // moves +20 or -20 depending on direction. That worked well until I changed the start position of
-            // the snake. Because of how I changed the position I figured I could try "%20 == 10" and it worked.
-    
-            // Here a value between 10 and (canvas.height - 10) is randomized. That becomes the new Y position of the new treat. This loops checks of it's
-            // an acceptable position and randomizes a new number if it's not.
-    
-            newPosition.Y = Math.floor(Math.random() * (canvas.height - 25)) + 25;
-    
-        } while(newPosition.Y % 20 !== 10)
-    
-        do {
-            newPosition.X = Math.floor(Math.random() * (canvas.width - 25)) + 25;
-        } while (newPosition.X % 20 !== 10)
-    
-        return newPosition;
-    }
+    let newPosition = new Position(0, 0);
+
+    do {
+        // There is no advanced collission detection in this game. This demands
+        // carefully calculation of the following things: The size of the canvas, how much the snake 
+        // can move each step and of course where the treat can be positioned.
+        // The reason for this is that if the treat is at a certain XY position, the head of the snake 
+        // has to be able to reach that XY position exactly.  
+
+        // This was a game of trail and error. I figured I needed to use "% 20 == 0" since the snake
+        // moves +20 or -20 depending on direction. That worked well until I changed the start position of
+
+        newPosition.Y = Math.floor(Math.random() * (canvas.height - 25)) + 25;
+
+    } while(newPosition.Y % 20 !== 10)
+
+    do {
+        // Here a value between 25 and (canvas.height - 25) is randomized. That becomes the new Y position of the new treat. This loops checks of it's
+        // an acceptable position and randomizes a new number if it's not.
+        newPosition.X = Math.floor(Math.random() * (canvas.width - 25)) + 25;
+    } while (newPosition.X % 20 !== 10)
+
+    return newPosition;
+}
 
 
 
@@ -101,6 +100,7 @@ class Snake{
         this.speed = Math.max(this.speed *= 0.95, 45); 
     }
 
+    // Changes the speed of the snake, changes visuals and resets all after a cetain amount of time. 
     becomeInvincible(){
         this.invincible = true;
         this.color = "0, 0, 0,";
@@ -197,11 +197,10 @@ function drawSnake(){
 
     /* To acheive this we set the opacity of the head of the snake to 1, then calculate how big of a jump in values we
     need to make between each element in order to end up at the last element with a value of around 0.25.
-    Then we loop through the elements, assign the opacity value and for each loop subtract that "jumpValue"*/
+    Then we loop through the elements, and for each loop subtract that "jumpValue" to the opacity value*/
 
-    /* For my own memory the jump value is calculated by taking the value I want to start with "1" subtract that by the
-    value I want to end up with "0,25". Then devide that value by snake.length - 1. WHy -1? Probably because we start on
-    one element already then use that value to calculate the next value. So that first element isn't counted.*/
+    /* For my own memory the jump value is calculated by taking the value I want to start with "1", subtract that by the
+    value I want to end up with "0,25". Then devide that value by snake.length - 1.*/
 
     canvasContent.beginPath();
     canvasContent.fillStyle = "rgba(" + snake.color + "1)";
@@ -230,11 +229,15 @@ class PowerUp{
     }
 }
 
+// Setting a dummy position for the powerUp just for now. Then adding the other values needed. 
 var powerUp = new PowerUp(new Position(0,0), false, 10000); 
+
+// The position of the first treat. 
 let treatPosition = new Position(210, 70);
 
 function drawTreat(){
 
+    // The position of the treat will change appearance depending on your score. 
     if (score < 100){
         canvasContent.beginPath();
 
@@ -250,6 +253,8 @@ function drawTreat(){
     else{
         canvasContent.beginPath();
         bubble.src = "Images/treat1.png";
+
+        // The treat also needs to change appearance if the snake is invincible.
         if (snake.invincible){
             canvasContent.filter = "invert(100%)";
         }
@@ -272,55 +277,71 @@ function drawPowerUp(){
 // Direction
 let direction = "right";
 
+    /* The thought behind the directionArray is this: Look at the processNewDirection-method below. 
+    It stops you from going left if your current direction is right. This way, you won't instantly eat yourself. 
+    However, I can get around that by quickly pressing up and then left. If I do it quickly the snake won't have time
+    to move up, but the current direction will still be registered as up, meaning that it will allow the snake to
+    go left, even if the actual direction still is right. Saving both keys will force the snake to go up before it
+    goes left. At the same time your timing won't matter. You will not have to wait for the right timing to first press
+    up then left. You can just press the buttons and the snake will move accordingly.  
+     */
+let directionArray = [];
+
     // Taking the desired direction and compare it with the current.
     // Ex: You cannot go right when the current directions is left since the
     // snake will instantly collide with it's own body.
 function processNewDirection(newDirection){
 
-    // !updatePending is needed because processNewDirection() only goes by your last key-press. That means that
-    // if you go right (Meaning you shouldn't go left) then you can very quickly press up and then left.
-    // If you did quickly enough, then the snake didn't have time to go up before you pressed left, then the snake will go
-    // go left and collide with it's own body. This is fixed by locking the code from registrating more directions
-    // until after the updatecycle is complete. Hence updatePending.
-    if (!updatePending){
         if (newDirection == "left" && (direction == "up" || direction == "down")){
             direction = "left";
-            updatePending = true;
         }
         else if (newDirection == "up" && (direction == "left" || direction == "right")){
             direction = "up";
-            updatePending = true;
         }
         else if (newDirection == "right" && (direction == "up" || direction == "down")){
             direction = "right";
-            updatePending = true;
         }
         else if (newDirection == "down" && (direction == "left" || direction == "right")){
             direction = "down";
-            updatePending = true;
         }
-    }
+    
 }
+
+
 
     // KeyEvents
 document.onkeydown = function(e) {
 
-    // Check what direction we are trying to go and then send it to processNewDirection(). 
-    if (e.keyCode == 37){
-        processNewDirection("left");
-    }
-    else if (e.keyCode == 38){
-        processNewDirection("up");
-    }
-    else if (e.keyCode == 39){
-        processNewDirection("right");
-    }
-    else if (e.keyCode == 40){
-        processNewDirection("down");
-    }
-    else if(e.keyCode == 80 || e.keyCode == 32){
+    if(e.keyCode == 80 || e.keyCode == 32){
         changePauseState();
     }
+
+    // As explained above, here we register the keys and add them to the directionArray. 
+    // Limit is 2 directions saved at once. More isn't needed. 
+    else if (directionArray.length < 2){
+        if (e.keyCode == 37){
+            
+            directionArray.push("left");
+            
+        }
+        else if (e.keyCode == 38){
+            
+            directionArray.push("up");
+            
+        }
+        else if (e.keyCode == 39){
+            
+            directionArray.push("right");
+            
+        }
+        else if (e.keyCode == 40){
+            
+            directionArray.push("down");
+            
+        }
+    }
+   
+    
 };
 
 
@@ -336,6 +357,7 @@ document.ontouchstart = function(e){
     YStart = e.touches[0].clientY;
 }
 
+// Just pressing the screen without sliding (change the position of your finger) then it should pause. 
 document.ontouchend = function(e){
     if (XStart == e.changedTouches[0].clientX && YStart == e.changedTouches[0].clientY){
         changePauseState();
@@ -349,22 +371,27 @@ document.ontouchmove = function(e) {
     if (Math.abs(e.touches[0].clientX - XStart) > Math.abs(e.touches[0].clientY - YStart)){
 
         // If the movement is horisontal, then in what direction is it going? If the number increases in relation to the start position then it's towards right. 
-        if (e.touches[0].clientX > XStart){
-            processNewDirection("right");
+        if (directionArray.length < 2){
+            if (e.touches[0].clientX > XStart){
+                directionArray.push("right");
+            }
+            else{
+                directionArray.push("left");
+            }
         }
-        else{
-            processNewDirection("left");
-        }
+        
     }
 
     // Same but for the vertical movement. 
     else if (Math.abs(e.touches[0].clientY - YStart) > Math.abs(e.touches[0].clientX - XStart)){
-        if (e.touches[0].clientY > YStart){
-            processNewDirection("down");
-        }
-        else{
-            processNewDirection("up");
-        }
+        if (directionArray.length < 2){
+            if (e.touches[0].clientY > YStart){
+                directionArray.push("down");
+            }
+            else{
+                directionArray.push("up");
+            }
+    }
     }
 };
 
@@ -393,6 +420,8 @@ function Sound(src) {
 
 
 // Updates
+
+  // Method for pausing
 function changePauseState(){
     if (paused){
         paused = false;
@@ -420,7 +449,12 @@ function changePauseState(){
 
 function updateState() {
 
-    updatePending = true;
+    // If a direction has been pressed then change to the direction pressed first and then delete that. 
+    if (directionArray != 0){
+        processNewDirection(directionArray[0]);
+        directionArray.shift();
+    }
+    
     newSnakePosition();
 
     // Clears the canvas of all previous images.
@@ -445,16 +479,21 @@ function updateState() {
         }, 10000);
     }
 
+    // If it reaches a powerup then become invincible. 
     if (powerUp.position.X == snake.body[0].X + 10 && powerUp.position.Y == snake.body[0].Y + 10 && powerUp.activated){
         snake.becomeInvincible();
         powerUp.activated = false;  
         increaseScoreBy(10);
     }
 
+    // Here is what happens when the snakes reaches a treat. 
     if (treatPosition.X == snake.body[0].X + 10 && treatPosition.Y == snake.body[0].Y + 10){
         eatSound.play();
         increaseScoreBy(10);
+
+        // Insert a new treat. 
         treatPosition = getRandomPosition();
+
         snake.increaseSpeed();
         drawSnake();
         drawTreat();
@@ -474,15 +513,14 @@ function updateState() {
     }
 
     checkCollision();
-    updatePending = false;
-
 }
 
 let videoPlaying = false;
 
 function updateBackground(){
     // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
-    // the video is fully visible then start making the video sharper and more colorful.
+    // the video is fully visible then start making the video sharper and more colorful. After that
+    // then change the color of the background. 
 
     if (score <= 100){
         backgroundOpacity -= 0.1;
@@ -550,6 +588,7 @@ function checkCollision(){
 }
 
 function gameOver(){
+    // Display gameOver graphics and take input from user. 
     document.getElementById("gameOver").style.display = "block";
     document.getElementById("myForm").style.display = "block";
     document.getElementById("totalPoints").textContent = "You've got " + score + " points";
@@ -567,6 +606,8 @@ function gameOver(){
     })
 }
 
+// This is what makes the snake move forward automatically. The state is updated through an interval. 
+// But if it's paused, then nothing happens.  
 function startNewInterval(){
     if (!paused){
 
