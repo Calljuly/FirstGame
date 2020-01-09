@@ -435,7 +435,14 @@ function updateState() {
     if (score % 200 == 0 && score != 0 && score != 200 && powerUp.activated == false){
         powerUp.position = getRandomPosition();
         powerUp.activated = true;
-        
+
+        setTimeout(function(){ 
+            powerUp.activated = false;
+            if (!snake.invincible){
+                increaseScoreBy(10);
+            }
+            
+        }, 10000);
     }
 
     if (powerUp.position.X == snake.body[0].X + 10 && powerUp.position.Y == snake.body[0].Y + 10 && powerUp.activated){
