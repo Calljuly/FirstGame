@@ -6,12 +6,12 @@ let name = "";
 let score = 0;
 
 
-//Why does this work without ref to document.getElementById('#submitHighscore')?
 submitHighscore.onclick =  function(){
     name = document.getElementById('userName').value;
     addPlayer(name, score)
 };
 
+// Remove the gameOver div, reset the highscore and reload the page/game.
 tryAgain.onclick = function(){
     document.getElementById("gameOver").style.display = "none";
     score = 0;
@@ -22,7 +22,7 @@ backToStart.onclick = function(){
 window.location.href = "/mainpage/main.html";
 };
 
-
+// Increases the score and update the score shown. 
 function increaseScoreBy(amount){
     score += amount;
     let h2 = document.getElementsByTagName("h2");
@@ -32,7 +32,6 @@ function increaseScoreBy(amount){
 
 // Random variables
 let intervalFunction;
-let updatePending = false;
 let paused = false; 
 
 let backgroundOpacity = 1;
@@ -51,40 +50,41 @@ const bubble = document.getElementById("treat");
 
      
     
-    class Position{
-        constructor(X, Y){
-            this.X = X;
-            this.Y = Y;
-        }
+class Position{
+    constructor(X, Y){
+        this.X = X;
+        this.Y = Y;
     }
+}
 
-    function getRandomPosition(){
+// Gets a random position within the frames of the canvas. 
+function getRandomPosition(){
 
-        let newPosition = new Position(0, 0);
-    
-        do {
-            // There is no advanced collission detection in this game. Either the XY position of the head of the snake
-            // is the exact same as the XY position of the treat and only then is it registered as eaten. This demands
-            // carefully calculated size of the canvas, how much the snake can move each step and of course where the
-            // treat can be positioned.
-    
-            // This was a game of trail and error. I figured I needed to use "% 20 == 0" since the snake
-            // moves +20 or -20 depending on direction. That worked well until I changed the start position of
-            // the snake. Because of how I changed the position I figured I could try "%20 == 10" and it worked.
-    
-            // Here a value between 10 and (canvas.height - 10) is randomized. That becomes the new Y position of the new treat. This loops checks of it's
-            // an acceptable position and randomizes a new number if it's not.
-    
-            newPosition.Y = Math.floor(Math.random() * (canvas.height - 25)) + 25;
-    
-        } while(newPosition.Y % 20 !== 10)
-    
-        do {
-            newPosition.X = Math.floor(Math.random() * (canvas.width - 25)) + 25;
-        } while (newPosition.X % 20 !== 10)
-    
-        return newPosition;
-    }
+    let newPosition = new Position(0, 0);
+
+    do {
+        // There is no advanced collission detection in this game. Either the XY position of the head of the snake
+        // is the exact same as the XY position of the treat and only then is it registered as eaten. This demands
+        // carefully calculated size of the canvas, how much the snake can move each step and of course where the
+        // treat can be positioned.
+
+        // This was a game of trail and error. I figured I needed to use "% 20 == 0" since the snake
+        // moves +20 or -20 depending on direction. That worked well until I changed the start position of
+        // the snake. Because of how I changed the position I figured I could try "%20 == 10" and it worked.
+
+        // Here a value between 10 and (canvas.height - 10) is randomized. That becomes the new Y position of the new treat. This loops checks of it's
+        // an acceptable position and randomizes a new number if it's not.
+
+        newPosition.Y = Math.floor(Math.random() * (canvas.height - 25)) + 25;
+
+    } while(newPosition.Y % 20 !== 10)
+
+    do {
+        newPosition.X = Math.floor(Math.random() * (canvas.width - 25)) + 25;
+    } while (newPosition.X % 20 !== 10)
+
+    return newPosition;
+}
 
 
 
@@ -272,55 +272,61 @@ function drawPowerUp(){
 // Direction
 let direction = "right";
 
+let directionArray = [];
+
     // Taking the desired direction and compare it with the current.
     // Ex: You cannot go right when the current directions is left since the
     // snake will instantly collide with it's own body.
 function processNewDirection(newDirection){
 
-    // !updatePending is needed because processNewDirection() only goes by your last key-press. That means that
-    // if you go right (Meaning you shouldn't go left) then you can very quickly press up and then left.
-    // If you did quickly enough, then the snake didn't have time to go up before you pressed left, then the snake will go
-    // go left and collide with it's own body. This is fixed by locking the code from registrating more directions
-    // until after the updatecycle is complete. Hence updatePending.
-    if (!updatePending){
         if (newDirection == "left" && (direction == "up" || direction == "down")){
             direction = "left";
-            updatePending = true;
         }
         else if (newDirection == "up" && (direction == "left" || direction == "right")){
             direction = "up";
-            updatePending = true;
         }
         else if (newDirection == "right" && (direction == "up" || direction == "down")){
             direction = "right";
-            updatePending = true;
         }
         else if (newDirection == "down" && (direction == "left" || direction == "right")){
             direction = "down";
-            updatePending = true;
         }
-    }
+    
 }
+
+
 
     // KeyEvents
 document.onkeydown = function(e) {
 
-    // Check what direction we are trying to go and then send it to processNewDirection(). 
-    if (e.keyCode == 37){
-        processNewDirection("left");
-    }
-    else if (e.keyCode == 38){
-        processNewDirection("up");
-    }
-    else if (e.keyCode == 39){
-        processNewDirection("right");
-    }
-    else if (e.keyCode == 40){
-        processNewDirection("down");
-    }
-    else if(e.keyCode == 80 || e.keyCode == 32){
+    if(e.keyCode == 80 || e.keyCode == 32){
         changePauseState();
     }
+
+    else if (directionArray.length < 2){
+        if (e.keyCode == 37){
+            
+            directionArray.push("left");
+            
+        }
+        else if (e.keyCode == 38){
+            
+            directionArray.push("up");
+            
+        }
+        else if (e.keyCode == 39){
+            
+            directionArray.push("right");
+            
+        }
+        else if (e.keyCode == 40){
+            
+            directionArray.push("down");
+            
+        }
+    }
+   
+    
 };
 
 
@@ -420,7 +426,12 @@ function changePauseState(){
 
 function updateState() {
 
-    updatePending = true;
+    if (directionArray != 0){
+        processNewDirection(directionArray[0]);
+        directionArray.shift();
+    }
+    
+
     newSnakePosition();
 
     // Clears the canvas of all previous images.
@@ -474,8 +485,6 @@ function updateState() {
     }
 
     checkCollision();
-    updatePending = false;
-
 }
 
 let videoPlaying = false;
