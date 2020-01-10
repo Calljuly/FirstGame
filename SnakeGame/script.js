@@ -399,6 +399,7 @@ document.ontouchmove = function(e) {
 // Sounds
 let eatSound = new Sound("/SnakeGame/Snakeaudio/eat.mp3");
 let failSound = new Sound("/SnakeGame/Snakeaudio/failure.mp3");
+let powerUpSound = new Sound("/SnakeGame/Snakeaudio/powerUp.mp3");
 
 //This is a function constructor that will create a variable representing an 'invisible' <audio> element on the page.
 //The audio element is then played in the script.js depending on different events.
@@ -482,6 +483,7 @@ function updateState() {
     // If it reaches a powerup then become invincible. 
     if (powerUp.position.X == snake.body[0].X + 10 && powerUp.position.Y == snake.body[0].Y + 10 && powerUp.activated){
         snake.becomeInvincible();
+        powerUpSound.play();
         powerUp.activated = false;  
         increaseScoreBy(10);
     }
