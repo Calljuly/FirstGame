@@ -38,7 +38,6 @@ let backgroundOpacity = 1;
 let backgroundSaturation = 0;
 let backgroundBlur = 5;
 let backgroundHue = 0;
-let time;
 
 
 
