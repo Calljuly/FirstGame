@@ -1,5 +1,5 @@
 // Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyCVjVs2FiENEUVyN05mnL9ftD0B8dIFjFM",
     authDomain: "highscorestorage.firebaseapp.com",
     databaseURL: "https://highscorestorage.firebaseio.com",
@@ -13,5 +13,5 @@ var firebaseConfig = {
 // Initialize Firebase connection
 firebase.initializeApp(firebaseConfig);
 
-var database = firebase.database();
-var ref = database.ref('scores');
+// Initialize variable representing the location in the database where we will hold our highscore information
+const database = firebase.database().ref('scores');

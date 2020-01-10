@@ -9,7 +9,7 @@ export function addPlayer(name, points)
     }
     else{
         var date = getDateInDesiredFormat();
-        ref.push({name: name, score: points, date: date});
+        database.push({name: name, score: points, date: date});
         window.location.href = "/ScoreBoard/Score.html";
     }
 
