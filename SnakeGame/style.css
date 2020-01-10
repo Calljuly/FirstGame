@@ -137,6 +137,7 @@ html,body {
   box-sizing: border-box;
   font-family: 'Sulphur Point', sans-serif;
   z-index: 1;
+  overflow: scroll;
 }
 
 #gameOverTable {
