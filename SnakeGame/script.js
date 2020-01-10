@@ -1,5 +1,4 @@
-import {addPlayer } from '../highScoreModule.js';
-
+import{highscoreModule} from '../highScoreModule.js';
 
 //Highscore functionality
 let name = "";
@@ -8,7 +7,7 @@ let score = 0;
 
 submitHighscore.onclick =  function(){
     name = document.getElementById('userName').value;
-    addPlayer(name, score);
+    highscoreModule.addplayer(name, score);
 };
 
 // Remove the gameOver div, reset the highscore and reload the page/game.
@@ -38,7 +37,6 @@ let backgroundOpacity = 1;
 let backgroundSaturation = 0;
 let backgroundBlur = 5;
 let backgroundHue = 0;
-let time;
 
 
 

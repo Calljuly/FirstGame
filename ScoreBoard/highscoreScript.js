@@ -1,4 +1,4 @@
-import{updateHighScore} from '../highScoreModule.js';
+import{highscoreModule} from '../highScoreModule.js';
 
 const query = firebase.database().ref('scores')
         .orderByChild('score')
@@ -12,5 +12,5 @@ query.once('value', function (snapshot) {
         tempArr.push(childData);
     });
     tempArr.reverse();
-    updateHighScore(tempArr);
+    highscoreModule.updateHighScore(tempArr);
 });
