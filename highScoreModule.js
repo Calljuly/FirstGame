@@ -38,7 +38,7 @@ function getDateInDesiredFormat(){
     return currentTimeFormatted;
 }
 
-//Insert row, cells and information to highScore table
+//Insert row, cells and information to highScore table, also coloring the first three rows as "gold", "silver" and "bronz".
 function insertToBoard(name, score, date)
 {
     let tableScore = document.getElementById('scoreList');
@@ -72,7 +72,7 @@ function insertToBoard(name, score, date)
     count++;
 }
 
-//Get array from database and create the highscorelist with table
+//Takes an array and creates the highscorelist from that array
 export function updateHighScore(arr)
 {
     $("#scoreList tr").next().remove(); 
