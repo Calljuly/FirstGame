@@ -1,11 +1,19 @@
-Use your keyboards arrows to guide the snake: up, left, right, and down.
- 
-If you are on a tablet or smartphone, use the virtual keybord.
+Use your keyboards arrows to guide the snake: up, left, right and down.
+If you are on a tablet or smartphone, swipe the direction you want the snake to go.
+
+The "space" key will pause the game, press "space" again to resume.
+If you are on tablet or smartphone, tap the screen to pause and resume.
 
 Eat the treats to gain points.
 
-Don't run the snake into the wall or his own tail.
+As you gain points the graphics of the game will gradually evolve.
 
-The "space" key will pause the game, press "space" again to resume.
+If you advance long enough in the game, not only will it look great, but you will also get the chance to eat "p-treats". 
+These ones hold a surprise... But you must be quick! They dissapear after 10 sec.
 
-If you score high enough, your name will be added to the highscore list!
+Can the snake "walk through" the walls? Oh it would be to easy if we just told you! Give it a go. 
+Worst thing that can happen is... you die... fortune favors the brave!
+
+If you score high enough, you just might make it to the top ten highscore list.
+
+Good luck and have fun!
