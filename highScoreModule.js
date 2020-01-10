@@ -8,7 +8,7 @@ export function addPlayer(name, points)
         alert("User name can't be empty");
     }
     else{
-        var date = getDateInDesiredFormat();
+        let date = getDateInDesiredFormat();
         database.push({name: name, score: points, date: date});
         window.location.href = "/ScoreBoard/Score.html";
     }

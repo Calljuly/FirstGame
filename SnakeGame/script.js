@@ -8,7 +8,7 @@ let score = 0;
 
 submitHighscore.onclick =  function(){
     name = document.getElementById('userName').value;
-    addPlayer(name, score)
+    addPlayer(name, score);
 };
 
 // Remove the gameOver div, reset the highscore and reload the page/game.
@@ -464,8 +464,8 @@ function updateState() {
     // If the snake found a treat, then skip snake.pop() once so that it get's longer.. Also
     // update the score, get a new position of treat, speed up the game slightly, and draw.
     // The x and y position of each rectangle of the snake is at the top left corner. The + 10
-    // makes sure that it registers a fruit as eaten when approaching it head on, as opposed to
-    // touching the side of the fruit.
+    // makes sure that it registers a treat as eaten when approaching it head on, as opposed to
+    // touching the side of the treat.
 
     if (score % 200 == 0 && score != 0 && score != 200 && powerUp.activated == false){
         powerUp.position = getRandomPosition();
@@ -520,7 +520,7 @@ function updateState() {
 let videoPlaying = false;
 
 function updateBackground(){
-    // Makes the background change gradually each eaten fruit. If the opacity is is 0 meaning that
+    // Makes the background change gradually each eaten treat. If the opacity is is 0 meaning that
     // the video is fully visible then start making the video sharper and more colorful. After that
     // then change the color of the background. 
 
