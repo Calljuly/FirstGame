@@ -13,8 +13,10 @@
         <!-- These images needed to be added here in order to be called and drawn on the canvas later -->
         <img src="Images/bubble1.png" id="treat" width="25" height="25">
         <img src="Images/powerUp.png" id="powerUp" width="25" height="25">
-
+        <!-- this gameDivContainer contains everthing for the game display and its designs. It is divided into 
+        three parts. The leftContainer, the gameDiv which is the game(display in canvas) and  the rightContainer-->
         <div id="gamdivContainer">
+                <!-- leftContainer consist of of score display and three planets. -->
                 <div id="leftContainer">
                         <h2 id="scoreCount">Score: 0</h2>
                         <div id="leftPlanet">
@@ -25,8 +27,9 @@
                         </div>
 
 
-
                 </div>
+
+                <!-- The gameDiv is where snake game displays -->
                 <div id="gameDiv">
                         <!-- The canvas is created and the video is added. The video is not set to autoplay since
                         it is supposed to start animating after a certain amount of score gotten.  -->
@@ -40,6 +43,7 @@
                                 Your browser does not support HTML5 video.
                         </video>
                 </div>
+                <!-- The rightContainer is used to display two designed planets -->
                 <div id="rightContainer">
                         <div id="rightPlanet3"></div>
                         <div id="rightPlanet4"></div>
@@ -48,8 +52,13 @@
 
 
         </div>
+        <!-- GameOver will take over after losing. In this div there will contain gameover text which
+        is made of table. An inputContainer which will include everything except gameover text, such as
+        displaying total points, total points and an input box where user name can do an input, a submit button
+        ,a button if user wants to play again and a button which lead to the main page.  -->
         <div id="gameOver">
                 <div class="gameOver-style">
+                        <!-- gameOverTable to create text -->
                         <table id="gameOverTable">
                                 <tr>
                                         <th>G</th>
@@ -62,6 +71,7 @@
                                         <th>R</th>
                                 </tr>
                         </table>
+                       
                         <div id="inputContainer">
                                 <div id="totalPoints"></div>
                                 <button id="tryAgain">Try again?</button>

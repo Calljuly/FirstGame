@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Abel|Domine|Exo|Saira+Semi+Condensed|Sulphur+Point&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Anton&display=swap");
-html,body {
+/* This is the default layout and properties for this page. Anything overflows, will be hidden, and using flex
+to align everything in the center at the Main-axis */
+
+html, body {
   text-align: center;
   box-sizing: border-box;
   margin: 0px;
@@ -11,6 +14,9 @@ html,body {
   height: 100%;
 }
 
+/* Display as grid because the aim is to create columns to divide the specific element into different sections.
+Align everything in the center */
+
 #gamdivContainer {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
@@ -20,12 +26,16 @@ html,body {
   width: 100%;
 }
 
+/* This is the left side. It will take up two columns from the grid */
+
 #leftContainer {
   width: 100%;
-  height: 82%;
+  height: 100%;
   padding: 5px;
   grid-column: span 2;
 }
+
+/* This is the Score design */
 
 #scoreCount {
   color: #aac6df;
@@ -33,6 +43,9 @@ html,body {
   font-size: 34px;
   text-align: center;
 }
+
+/* This is the smallest planet on the left side, Using radial-gradient and opacity to create the appearance
+and border-radius to make it a circle */
 
 #leftPlanet0 {
   width: 20px;
@@ -42,6 +55,8 @@ html,body {
   opacity: 0.7;
 }
 
+/* The biggest on the left side. The concept is similar above*/
+
 #leftPlanet1 {
   width: 160px;
   height: 160px;
@@ -50,6 +65,8 @@ html,body {
   box-shadow: 0px 0px 5px #1f3e5a;
   opacity: 0.6;
 }
+
+/* The medium size planet on the left side */
 
 #leftPlanet2 {
   width: 50px;
@@ -82,10 +99,14 @@ html,body {
   filter: saturate(0%) blur(5px);
 }
 
+/* The right side will take two columns from the grid  */
+
 #rightContainer {
   padding: 20px;
-  grid-column: span 1;
+  grid-column: span 2;
 }
+
+/* The smallest planet on the right side */
 
 #rightPlanet3 {
   width: 30px;
@@ -94,6 +115,8 @@ html,body {
   background: radial-gradient( lightgreen, gray, black, black, black, black);
   opacity: 0.7;
 }
+
+/* The biggest planet on the right side */
 
 #rightPlanet4 {
   width: 100px;
@@ -140,12 +163,13 @@ html,body {
   overflow: scroll;
 }
 
+/* Align it in the center by using margin auto and add other properties for it */
+
 #gameOverTable {
   font-size: 50px;
-  letter-spacing: 10px;
-  background: red;
+  letter-spacing: 15px;
+  background-color: red;
   margin: auto;
-  text-transform: uppercase;
 }
 
 .gameOver-style h2 {
@@ -154,12 +178,12 @@ html,body {
   opacity: 0.7;
   font-weight: bold;
 }
-
+/* Label Size */
 label {
   font-size: 20px;
   font-weight: bold;
 }
-
+/* Add fontsize and color for the total point */
 #totalPoints {
   font-size: 30px;
   color: goldenrod;
@@ -177,7 +201,7 @@ button {
 }
 
 button:hover {
-  border: white 1px solid;
+  border: rgb(66, 170, 196) 1px solid;
 }
 
 #scoreList {
@@ -190,6 +214,8 @@ button:hover {
   /* Optional - if you don't want to have double border where cells touch */
 }
 
+/* This is the container that includes everything except Gameover. Using flex and align everything items
+within it to align center at the direction of column */
 #inputContainer {
   display: flex;
   justify-content: space-between;
@@ -198,14 +224,13 @@ button:hover {
   height: 100%;
   padding: 10px;
 }
-
+/* This is the form which will take only 80% of the with and place it in the center */
 #myForm {
-  display: none;
   width: 80%;
   margin: auto;
-  text-align: center;
+  
 }
-
+/* This is the input box. Using margin-bottom to create some space the below items and margin-right to make it look better */
 input {
   width: 40%;
   border-radius: 2px;
