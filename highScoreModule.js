@@ -17,20 +17,25 @@ export function addPlayer(name, points)
 }
 
 function getDateInDesiredFormat(){
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-
-    var yyyy = today.getFullYear();
+    //current date
+    let currentTime = new Date();
+    
+    //extracting day, month, year. Adding 1 to month since january starts at 0.
+    let dd = currentTime.getDate();
+    let mm = currentTime.getMonth() + 1;
+    let yyyy = currentTime.getFullYear();
+    
+    //adding 0 before dd and mm if its less than 10 so format becomes 01/01/2020 instead of 1/1/2020
     if (dd < 10) {
     dd = '0' + dd;
     } 
     if (mm < 10) {
     mm = '0' + mm;
     } 
-    var today = dd + '/' + mm + '/' + yyyy;
     
-    return today;
+    let currentTimeFormatted = dd + '/' + mm + '/' + yyyy;
+    
+    return currentTimeFormatted;
 }
 
 //Insert row, cells and information to highScore table
