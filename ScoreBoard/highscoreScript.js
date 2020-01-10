@@ -6,10 +6,9 @@ const query = firebase.database().ref('scores')
 
 
 query.once('value', function (snapshot) {
-   var tempArr = [];
-    snapshot.forEach(function (childSnapshot) {    
-        var childKey = childSnapshot.key;
-        var childData = childSnapshot.val();
+   let tempArr = [];
+    snapshot.forEach(function (childSnapshot) {
+        let childData = childSnapshot.val();
         tempArr.push(childData);
     });
     tempArr.reverse();
