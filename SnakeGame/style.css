@@ -167,17 +167,13 @@ and border-radius to make it a circle */
 
 #gameOverTable {
   font-size: 50px;
-  letter-spacing: 15px;
   background-color: red;
+  width: 50%;
   margin: auto;
+ 
+
 }
 
-.gameOver-style h2 {
-  font-size: 20px;
-  color: white;
-  opacity: 0.7;
-  font-weight: bold;
-}
 /* Label Size */
 label {
   font-size: 20px;
@@ -194,8 +190,7 @@ button {
   color: white;
   font-family: 'Sulphur Point', sans-serif;
   font-weight: bold;
-  font-size: 17px;
-  width: 20%;
+  font-size: 20px;
   border-radius: 10px;
   border: #1c253c 1px solid;
 }
@@ -214,15 +209,14 @@ button:hover {
   /* Optional - if you don't want to have double border where cells touch */
 }
 
-/* This is the container that includes everything except Gameover. Using flex and align everything items
-within it to align center at the direction of column */
+/* This is the container that includes everything except Gameover. Using flex and align everything in the
+ center at the direction of column */
 #inputContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  height: 100%;
-  padding: 10px;
+ 
 }
 /* This is the form which will take only 80% of the with and place it in the center */
 #myForm {
@@ -272,6 +266,43 @@ input {
   #myCanvas {
     height: 100vh;
   }
+
+    
+  label{
+    font-size: 15px;
+  }
+
+  button{
+    font-size:13px ;
+  }
+  #totalPoints{
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width:466px){
+  #gameOverTable {
+    font-size: 20px;
+    
+  }
+  label{
+    font-size:16px ;
+  }
+  #totalPoints {
+    font-size: 15px;
+  }
+  input{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  button{
+    font-size: 12px;
+  }
+
+  #inputContainer h2{
+    font-size: 12px;
+  }
+
 }
 
 @media screen and (max-width:613px) {
@@ -293,6 +324,7 @@ input {
     height: 100%;
     width: 100%;
   }
+
 }
 
 @media screen and (min-width:610px) and (max-width:676px) {
