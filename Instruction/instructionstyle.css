@@ -1,6 +1,7 @@
+/* Import the css stylesheet from mainpage */
 @import url("/mainpage/mainstyle.css");
 
-
+/* Styling the ruleBox */
 #ruleBox
 {
 color: white;
