@@ -6,7 +6,7 @@
 color: white;
 text-align: center;
 background: black;
-font-size: 17px;
+font-size: 20px;
 border-radius: 10%;
 font-family: 'Sulphur Point', sans-serif;
 border: 8px solid rgb(16, 83, 83);
@@ -16,11 +16,23 @@ margin: auto;
 
 
 }
+
+/* Display the section as block */
 section
 {
     display: block;
     height: 100%;
 
+}
+
+/* Adjust the font-size for text and the border size in the ruleBox */
+@media screen and (max-width:475px){
+
+    #ruleBox{
+
+        font-size: 15px;
+        border: 4px solid rgb(16, 83, 83);
+    }
 }
 
 
