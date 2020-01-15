@@ -9,7 +9,7 @@
 /* set a default color value for background */
 
 html, body {
-    background: black;   
+    background: black;
 }
 
 /* take 70% out of the whole width size and position it in center. So basically, header,section and footer will be
@@ -20,7 +20,6 @@ take 70% of screen.*/
     background: rgba(54, 53, 53, 0.096);
     margin: auto;
     height: 100%;
-    
 }
 
 /* Using grid to divide into three section */
@@ -43,7 +42,7 @@ header {
 
 /* Create a circle at right side header */
 
-#topRightCircle{
+#topRightCircle {
     background: rgb(54, 51, 51);
     width: 20px;
     height: 20px;
@@ -54,7 +53,7 @@ header {
 /* two small circles for both left side and right side at header plus using animation
 for two small circles to change color */
 
-.smallCircle{
+.smallCircle {
     background: rgb(54, 51, 51);
     width: 5px;
     height: 5px;
@@ -215,6 +214,7 @@ section #mid a {
 
 /* Using hover to create some effects on the text for instance box-shadow which create the red light shadow on the
 background of the text */
+
 section a:hover {
     background: goldenrod;
     box-shadow: 0px 0px 20px red;
@@ -222,6 +222,7 @@ section a:hover {
 }
 
 /* The right circle on the right section */
+
 .rightMidCircle {
     width: 120px;
     height: 120px;
@@ -229,9 +230,11 @@ section a:hover {
     background: #1c253c;
     margin-left: 30%;
 }
+
 /* The two animated circles from both right and left side of the section
 They work pretty much the same as the small circles above. */
-.mediumCircle{
+
+.mediumCircle {
     background: rgb(54, 51, 51);
     width: 15px;
     height: 15px;
@@ -266,25 +269,23 @@ They work pretty much the same as the small circles above. */
 how content behave while responsiveness is avtive. Some font-sizes are not compatible with the screen size so it
 will be adjusted while other contents that are not fit to the screen will be chosen to be removed, for instance
 the #topLeftCircle and leftMidCircle becomes smaller as well as the logo. The box that moves around the logo is also
-being removed  */
+being removed at smaller device, because the animation might slower the page */
+
 @media screen and (max-width:425px) {
     #wrapper {
         width: 100%;
-        
     }
-    header{
+    header {
         margin-top: 30px;
     }
-    #topLeftCircle{
+    #topLeftCircle {
         width: 80px;
         height: 80px;
         margin: 0px;
-        
     }
-    header #logoContainer{
+    header #logoContainer {
         padding: 0px;
         margin-bottom: 20px;
-        
     }
     header #logoContainer .title {
         font-size: 20px;
@@ -292,20 +293,18 @@ being removed  */
     header .title h1::first-letter {
         font-size: 50px;
     }
-    .box{
+    .box {
         display: none;
     }
-
-    #topRightCircle{
+    #topRightCircle {
         margin: auto;
     }
     .smallCircle {
         display: none;
     }
-    .leftMidCircle{
+    .leftMidCircle {
         width: 40px;
         height: 40px;
-        
     }
     .rightMidCircle {
         width: 30px;
@@ -317,46 +316,46 @@ being removed  */
     section {
         height: 100%;
         margin-top: 80px;
-        
-       
     }
-    section #mid a{
+    section #mid a {
         font-size: 22px;
     }
-
-    footer{
-        
+    footer {
         margin-top: 70px;
     }
 }
 
-/* This is for the bigger screen mobile. The concept is similar as above, adjust the behavior of the content
+/* This is for the bigger screen for mobile. The concept is similar as above, adjust the behavior of the content
 If something is too big for the screen, then either adjust the size or remove it if it does not play an important
 roll for the content at a bigger picture. In this size setting will be applied for screen-size between 425px and
-656px. Almost everthing is the same as the original content, but the differences are only the size of content and how
-they position, for instance create some gap on the top of the wrapper(margin-top).
+656px. Almost everthing is the same as the original content, but the differences are the size of content and how
+they position, for instance create some gap on the top of the wrapper(margin-top).Also remove the animation from the
+the mediumCircle.
 */
 
-@media screen and (max-width:656px) and (min-width:425px){
+@media screen and (max-width:656px) and (min-width:425px) {
     #wrapper {
         width: 100%;
         margin-top: 10%;
     }
-    header{
+    header {
         margin-top: 30px;
-        
     }
-    #topLeftCircle{
+    #topLeftCircle {
         width: 100px;
         height: 100px;
         margin: 0px;
-        
     }
-    header #logoContainer{
+    header #logoContainer {
         padding: 30px;
         margin-bottom: 20px;
-       
-        
+    }
+    .box {
+        display: none;
+    }
+    .mediumCircle {
+        animation: none;
+        background-color: rgb(112, 85, 49);
     }
     header #logoContainer .title {
         font-size: 25px;
@@ -364,72 +363,81 @@ they position, for instance create some gap on the top of the wrapper(margin-top
     header .title h1::first-letter {
         font-size: 60px;
     }
-   
-
-    #topRightCircle{
-        margin: auto;
-        
-    }
-
-    .smallCircle{
+    #topRightCircle {
         margin: auto;
     }
-    
-    .leftMidCircle{
+    .smallCircle {
+        margin: auto;
+        animation: none;
+    }
+    .leftMidCircle {
         width: 50px;
         height: 50px;
-        
     }
     .rightMidCircle {
         width: 30px;
         height: 30px;
     }
-   
     section {
         height: 100%;
         width: 80%;
         margin: auto;
         margin-top: 80px;
-       
     }
-    section #mid a{
+    section #mid a {
         font-size: 22px;
     }
-
- 
 }
 
 /* This is for ipad. Nothing much has changed, only adjusting position */
-@media screen and (max-width:768px){
 
-    #wrapper{
+@media screen and (max-width:768px) {
+    #wrapper {
         margin-top: 20%;
         height: 100%;
     }
-
-    footer{
-        
+    footer {
         margin-top: 100px;
     }
 }
+
 /* Footer's decoration */
+
 footer {
     color: white;
     font-family: sans-serif;
     font-size: 10px;
     padding: 30px;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     margin-top: 40px;
 }
 
+/* This is for lanscape mode. 812px is the size of an Xiphone. Take out animation if it is a mobile device */
+
+@media only screen and (orientation:landscape) and (max-width:812px)
+{
+
+    .box
+    {
+        display: none;
+    }
+    .mediumCircle {
+        animation: none;
+        background-color: rgb(112, 85, 49);
+    }
+    .smallCircle {
+        animation: none;
+    }
+}
+
 /* This is the audio picture or div */
-#audioMode{
+
+#audioMode {
     cursor: pointer;
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    background-color: white ;
+    background-color: white;
     box-shadow: 0px 0px 10px white;
-   
 }

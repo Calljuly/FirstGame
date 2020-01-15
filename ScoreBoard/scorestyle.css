@@ -156,3 +156,14 @@ just all it needs is position-adjusting.Its starting point is top and right at 0
         display: none;
     }
 }
+
+/* Use Media query to remove animation even at landscape mode for mobile telephone */
+@media only screen and (orientation:landscape) and (max-width:812px)
+{
+    #scoreList th span {
+        display: none;
+      
+    }
+   
+}
+
