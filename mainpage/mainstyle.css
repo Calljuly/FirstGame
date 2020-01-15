@@ -9,8 +9,7 @@
 /* set a default color value for background */
 
 html, body {
-    background: black;
-   
+    background: black;   
 }
 
 /* take 70% out of the whole width size and position it in center. So basically, header,section and footer will be
@@ -263,6 +262,11 @@ They work pretty much the same as the small circles above. */
     }
 }
 
+/* Using media query to adjust the size of the content for mobile telephone. The max-width size is based on
+how content behave while responsiveness is avtive. Some font-sizes are not compatible with the screen size so it
+will be adjusted while other contents that are not fit to the screen will be chosen to be removed, for instance
+the #topLeftCircle and leftMidCircle becomes smaller as well as the logo. The box that moves around the logo is also
+being removed  */
 @media screen and (max-width:425px) {
     #wrapper {
         width: 100%;
@@ -326,6 +330,13 @@ They work pretty much the same as the small circles above. */
     }
 }
 
+/* This is for the bigger screen mobile. The concept is similar as above, adjust the behavior of the content
+If something is too big for the screen, then either adjust the size or remove it if it does not play an important
+roll for the content at a bigger picture. In this size setting will be applied for screen-size between 425px and
+656px. Almost everthing is the same as the original content, but the differences are only the size of content and how
+they position, for instance create some gap on the top of the wrapper(margin-top).
+*/
+
 @media screen and (max-width:656px) and (min-width:425px){
     #wrapper {
         width: 100%;
@@ -384,9 +395,11 @@ They work pretty much the same as the small circles above. */
     section #mid a{
         font-size: 22px;
     }
-  
+
+ 
 }
 
+/* This is for ipad. Nothing much has changed, only adjusting position */
 @media screen and (max-width:768px){
 
     #wrapper{
@@ -410,6 +423,7 @@ footer {
     margin-top: 40px;
 }
 
+/* This is the audio picture or div */
 #audioMode{
     cursor: pointer;
     border-radius: 50%;
