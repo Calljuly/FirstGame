@@ -76,9 +76,10 @@ and border-radius to make it a circle */
   opacity: 0.8;
 }
 
+/* The div that contains the game and the video background.
+  Content inside has position absolute so this is set as relative. */
 #gameDiv {
-  --gameWidth: 800px;
-  max-width: var(--gameWidth);
+  max-width: 800px;
   max-height: 500px;
   position: relative;
   overflow: hidden;
@@ -90,6 +91,7 @@ and border-radius to make it a circle */
   z-index: 1;
 }
 
+/* This is the video that is visible as the background in the game.*/
 #myVideo {
   position: absolute;
   left: 0;
@@ -132,6 +134,8 @@ and border-radius to make it a circle */
   width: 100%;
 }
 
+/* In order to draw images an canvas they first need to be added in the html code, however
+we don't want them to be visible. They are only put there to be used later. */
 #treat, #powerUp {
   display: none;
 }
@@ -147,6 +151,8 @@ and border-radius to make it a circle */
   padding: 1%;
 }
 
+/* The div that will fill the viewport on game over to ask what the user wants to do next.
+   Therefore it's not displayed at start */
 #gameOver {
   position: absolute;
   width: 100%;
@@ -170,7 +176,7 @@ and border-radius to make it a circle */
   background-color: red;
   width: 50%;
   margin: auto;
- 
+
 
 }
 
@@ -216,13 +222,13 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
- 
+
 }
 /* This is the form which will take only 80% of the with and place it in the center */
 #myForm {
   width: 80%;
   margin: auto;
-  
+
 }
 /* This is the input box. Using margin-bottom to create some space the below items and margin-right to make it look better */
 input {
@@ -267,7 +273,7 @@ input {
     height: 100vh;
   }
 
-    
+
   label{
     font-size: 15px;
   }
@@ -283,7 +289,7 @@ input {
 @media screen and (max-width:466px){
   #gameOverTable {
     font-size: 20px;
-    
+
   }
   label{
     font-size:16px ;
