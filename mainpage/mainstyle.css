@@ -318,10 +318,14 @@ being removed at smaller device, because the animation might slower the page */
         margin-top: 80px;
     }
     section #mid a {
-        font-size: 22px;
+        font-size: 24px;
+        padding-bottom: 10px;
     }
     footer {
         margin-top: 70px;
+    }
+    #audioMode{
+        display: none;
     }
 }
 
@@ -413,7 +417,7 @@ footer {
     margin-top: 40px;
 }
 
-/* This is for lanscape mode. 812px is the size of an Xiphone. Take out animation if it is a mobile device */
+/* This is for lanscape mode. 812px is the width-size of an X-iphone. Take out animation if it is a mobile device */
 
 @media only screen and (orientation:landscape) and (max-width:812px)
 {
@@ -428,6 +432,9 @@ footer {
     }
     .smallCircle {
         animation: none;
+    }
+    #audioMode{
+        display: none;
     }
 }
 

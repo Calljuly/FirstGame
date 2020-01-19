@@ -266,14 +266,13 @@ input {
   #myCanvas {
     height: 100vh;
   }
-
-    
+   
   label{
     font-size: 15px;
   }
 
   button{
-    font-size:13px ;
+    font-size:18px ;
   }
   #totalPoints{
     font-size: 20px;
@@ -296,7 +295,7 @@ input {
     margin-bottom: 10px;
   }
   button{
-    font-size: 12px;
+    font-size: 13px;
   }
 
   #inputContainer h2{
