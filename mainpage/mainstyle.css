@@ -265,7 +265,7 @@ They work pretty much the same as the small circles above. */
     }
 }
 
-/* Using media query to adjust the size of the content for mobile telephone. The max-width size is based on
+/* Using media query(potrait mode) to adjust the size of the content for mobile telephone. The max-width size is based on
 how content behave while responsiveness is avtive. Some font-sizes are not compatible with the screen size so it
 will be adjusted while other contents that are not fit to the screen will be chosen to be removed, for instance
 the #topLeftCircle and leftMidCircle becomes smaller as well as the logo. The box that moves around the logo is also
@@ -329,7 +329,7 @@ being removed at smaller device, because the animation might slower the page for
     }
 }
 
-/* This is for the bigger screen for mobile. The concept is similar as above, adjust the behavior of the content
+/* This is for the bigger screen for mobile (potrait mode). The concept is similar as above, adjust the behavior of the content
 If something is too big for the screen, then either adjust the size or remove it if it does not play an important
 roll for the content at a bigger picture. In this size setting will be applied for screen-size between 425px and
 656px. Almost everthing is the same as the original content, but the differences are the size of content and how
@@ -393,7 +393,7 @@ the mediumCircle.
     }
 }
 
-/* This is for ipad. Nothing much has changed, only adjusting position */
+/* This is for ipad (potrait mode). Nothing much has changed, only adjusting position */
 
 @media screen and (max-width:768px) {
     #wrapper {
