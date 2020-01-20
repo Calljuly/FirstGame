@@ -14,7 +14,7 @@ html, body {
   height: 100%;
 }
 
-/* Display as grid because the aim is to create columns to divide the specific element into different sections.
+/* Display as grid because the aim is to create columns to divide the specific element into different parts.
 Align everything in the center */
 
 #gamdivContainer {
@@ -171,7 +171,6 @@ and border-radius to make it a circle */
   width: 50%;
   margin: auto;
  
-
 }
 
 /* Label Size */
@@ -185,6 +184,7 @@ label {
   color: goldenrod;
 }
 
+/* These are the properties for the button in the inputContainer */
 button {
   background: linear-gradient(black, black, black, black, rgb(8, 57, 63), black);
   color: white;
@@ -194,7 +194,7 @@ button {
   border-radius: 10px;
   border: #1c253c 1px solid;
 }
-
+/* Hover the button */
 button:hover {
   border: rgb(66, 170, 196) 1px solid;
 }
@@ -259,14 +259,33 @@ input {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* This is landscape mode for mobile devices. Remove the planet on the right side and stretch the 
+gamediv and canvas to the end column of grid. Minimize the size of scorecount and also adjust the size of 
+button and label from gameover div */
 @media only screen and (orientation: landscape) and (max-width: 900px) {
-  #gameDiv {
-    height: 100vh;
-  }
-  #myCanvas {
-    height: 100vh;
-  }
    
+  #gameDiv {
+    grid-column: 3/-1;
+    height: 90%;
+    width: 100%;
+  }
+
+  #myCanvas {
+    height: 100%;
+    width: 100%;
+  }
+
+  #rightContainer {
+    display: none;
+  }
+
+  #scoreCount {
+    font-size: 15px;
+  }
+  #totalPoints{
+    font-size: 20px;
+  }
+  
   label{
     font-size: 15px;
   }
@@ -274,76 +293,36 @@ input {
   button{
     font-size:18px ;
   }
-  #totalPoints{
-    font-size: 20px;
-  }
+ 
 }
 
+
+/* Using media query to adjust the size of the gameover for mobile devices vertically  */
 @media screen and (max-width:466px){
   #gameOverTable {
-    font-size: 20px;
-    
+    font-size: 21px;  
   }
   label{
-    font-size:16px ;
-  }
-  #totalPoints {
-    font-size: 15px;
+    font-size:14px ;
   }
   input{
     width: 100%;
     margin-bottom: 10px;
   }
   button{
-    font-size: 13px;
+    font-size: 15px;
   }
 
   #inputContainer h2{
-    font-size: 12px;
+    font-size: 13px;
+  }
+  #totalPoints{
+    font-size: 15px;
   }
 
 }
 
-@media screen and (max-width:613px) {
-  #rightContainer {
-    display: none;
-  }
-  #scoreCount {
-    font-size: 10px;
-  }
-  #rightContainer {
-    display: none;
-  }
-  #gameDiv {
-    grid-column: 3/-1;
-    height: 90%;
-    width: 100%;
-  }
-  #myCanvas {
-    height: 100%;
-    width: 100%;
-  }
-
-}
-
-@media screen and (min-width:610px) and (max-width:676px) {
-  #rightContainer {
-    display: none;
-  }
-  #scoreCount {
-    font-size: 20px;
-  }
-  #gameDiv {
-    grid-column: 3/-1;
-    height: 90%;
-    width: 100%;
-  }
-  #myCanvas {
-    height: 100%;
-    width: 100%;
-  }
-}
-
+/* This is for ipad. Similar concept as above. Adjusting the size of different elements */
 @media screen and (min-width:676px) and (max-width:1024px) {
   #rightContainer {
     display: none;

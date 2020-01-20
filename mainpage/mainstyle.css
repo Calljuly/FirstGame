@@ -269,7 +269,7 @@ They work pretty much the same as the small circles above. */
 how content behave while responsiveness is avtive. Some font-sizes are not compatible with the screen size so it
 will be adjusted while other contents that are not fit to the screen will be chosen to be removed, for instance
 the #topLeftCircle and leftMidCircle becomes smaller as well as the logo. The box that moves around the logo is also
-being removed at smaller device, because the animation might slower the page */
+being removed at smaller device, because the animation might slower the page for mobile */
 
 @media screen and (max-width:425px) {
     #wrapper {
@@ -405,18 +405,6 @@ the mediumCircle.
     }
 }
 
-/* Footer's decoration */
-
-footer {
-    color: white;
-    font-family: sans-serif;
-    font-size: 10px;
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 40px;
-}
-
 /* This is for lanscape mode. 812px is the width-size of an X-iphone. Take out animation if it is a mobile device */
 
 @media only screen and (orientation:landscape) and (max-width:812px)
@@ -437,6 +425,20 @@ footer {
         display: none;
     }
 }
+
+/* Footer's decoration */
+
+footer {
+    color: white;
+    font-family: sans-serif;
+    font-size: 10px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+
 
 /* This is the audio picture or div */
 
