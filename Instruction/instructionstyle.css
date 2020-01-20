@@ -26,7 +26,7 @@ section
 
 }
 
-/* Adjust the font-size for text and the border size in the ruleBox */
+/* Adjust the font-size for text and the border size in the ruleBox for smaller mobile devices */
 @media screen and (max-width:475px){
 
     #ruleBox{

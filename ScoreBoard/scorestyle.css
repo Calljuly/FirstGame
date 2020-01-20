@@ -1,6 +1,7 @@
 /* Import css code from mainpage. Reuse header's codes*/
 
 @import url("/mainpage/mainstyle.css");
+
 /* Display content as block,create size for section and set som default properties for the whole Section */
 
 section {
@@ -13,7 +14,7 @@ section {
     overflow: hidden;
 }
 
-/* This is the h1 'Score Board', Decorate and align it in the center  */
+/* This is the h1 'Top 10 Score Board', Decorate and align it in the center */
 
 section #scoreHeaderText {
     color: white;
@@ -46,8 +47,8 @@ and set its position as relative so for four spans would be able to move relativ
 }
 
 /* The first span which locate on the top of the table data.This span will move from left to right.
-Posision the span as absolute  so it will move accordingly to the table box.Using e.g. left top, 
-right, bottom to adjust the position of the span.To make it move simple using keyframe. Let the size
+Posision the span as absolute so it will move accordingly to the table box.Using e.g. left, top, 
+right, bottom  to adjust the position of the span.To make it move simple using keyframe. Let the size
 of the span grow gradually. Use linear-gradient to create the color transformation, such as from
 transparent to blue. Animation-direction to make the span move back and forward */
 
