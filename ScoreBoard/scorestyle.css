@@ -145,7 +145,7 @@ just all it needs is position-adjusting.Its starting point is top and right at 0
     animation: animateline2 10s linear infinite;
     animation-direction: alternate-reverse;
 }
-/* Use Media query to adjust the font-size for smaller device(iphone 5) and remove the span of the table */
+/* Use Media query to adjust the font-size for smaller device(iphone 5) and remove the span of the table (potrait mode) */
 @media screen and (max-width:425px) {
     #scoreList {
         font-size: 10px;

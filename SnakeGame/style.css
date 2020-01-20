@@ -176,21 +176,25 @@ we don't want them to be visible. They are only put there to be used later. */
   background-color: red;
   width: 50%;
   margin: auto;
- 
+  margin-bottom:15px;
 }
 
 /* Label Size */
+
 label {
   font-size: 20px;
   font-weight: bold;
 }
+
 /* Add fontsize and color for the total point */
+
 #totalPoints {
   font-size: 30px;
   color: goldenrod;
 }
 
 /* These are the properties for the button in the inputContainer */
+
 button {
   background: linear-gradient(black, black, black, black, rgb(8, 57, 63), black);
   color: white;
@@ -200,7 +204,9 @@ button {
   border-radius: 10px;
   border: #1c253c 1px solid;
 }
+
 /* Hover the button */
+
 button:hover {
   border: rgb(66, 170, 196) 1px solid;
 }
@@ -217,20 +223,23 @@ button:hover {
 
 /* This is the container that includes everything except Gameover. Using flex and align everything in the
  center at the direction of column */
+
 #inputContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-
 }
+
 /* This is the form which will take only 80% of the with and place it in the center */
-#myForm {
+
+#inputContainer #myForm {
   width: 80%;
   margin: auto;
-
 }
+
 /* This is the input box. Using margin-bottom to create some space the below items and margin-right to make it look better */
+
 input {
   width: 40%;
   border-radius: 2px;
@@ -238,99 +247,72 @@ input {
   margin-right: 5%;
 }
 
-#btnGroup {
-  display: inline-flex;
-  flex-direction: column;
-  margin-top: 10px;
-  margin-right: 10px;
-}
+/* At this size the 718px-width of the video is not enough for the whole container, that is why black is applied on the
+background */
 
-#btnGroup button {
-  padding: 5px;
-  background-color: antiquewhite;
-  border: none;
-}
-
-#btnGroup button:hover {
-  border: 1px solid black;
-  font-weight: bold;
-}
-
-#container {
-  display: inline-flex;
-  flex-direction: row;
-}
-
-#scoreHeaderText {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+@media only screen and (orientation: landscape) and (min-width: 718px) {
+  #gameDiv {
+    background-color: black;
+  }
 }
 
 /* This is landscape mode for mobile devices. Remove the planet on the right side and stretch the 
 gamediv and canvas to the end column of grid. Minimize the size of scorecount and also adjust the size of 
 button and label from gameover div */
+
 @media only screen and (orientation: landscape) and (max-width: 900px) {
-   
   #gameDiv {
     grid-column: 3/-1;
     height: 90%;
     width: 100%;
   }
-
   #myCanvas {
     height: 100%;
     width: 100%;
   }
-
   #rightContainer {
     display: none;
   }
-
   #scoreCount {
     font-size: 15px;
   }
-  #totalPoints{
+  #totalPoints {
     font-size: 20px;
   }
-  
-  label{
+  label {
     font-size: 15px;
   }
-
-  button{
-    font-size:18px ;
+  button {
+    font-size: 18px;
   }
- 
 }
 
+/* Addjust the size of the elements in gameover for mobile devices(potrait mode)*/
 
-/* Using media query to adjust the size of the gameover for mobile devices vertically  */
-@media screen and (max-width:466px){
+@media screen and (max-width:466px) {
   #gameOverTable {
-
-    font-size: 21px;  
-
+    font-size: 21px;
   }
-  label{
-    font-size:14px ;
+  label {
+    font-size: 14px;
   }
-  input{
+  input {
     width: 100%;
     margin-bottom: 10px;
   }
-  button{
+  button {
     font-size: 15px;
   }
-
-  #inputContainer h2{
+  #inputContainer h2 {
     font-size: 13px;
   }
-  #totalPoints{
+  #totalPoints {
     font-size: 15px;
   }
-
 }
 
 /* This is for ipad. Similar concept as above. Adjusting the size of different elements */
+
 @media screen and (min-width:676px) and (max-width:1024px) {
   #rightContainer {
     display: none;
