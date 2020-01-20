@@ -1,5 +1,6 @@
-Use your keyboards arrows to guide the snake: up, left, right and down.
+Use your keyboard arrows to guide the snake: up, left, right and down.
 If you are on a tablet or smartphone, swipe the direction you want the snake to go.
+We recommend landscape mode if you're on a smartphone (this means you should flip your phone:)
 
 The "space" key will pause the game, press "space" again to resume.
 If you are on tablet or smartphone, tap the screen to pause and resume.
