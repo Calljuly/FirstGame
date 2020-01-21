@@ -350,22 +350,22 @@ document.onkeydown = function(e) {
 let XStart;
 let YStart;
 
-document.ontouchstart = function(e){
+document.getElementById("myCanvas").ontouchstart = function(e){
     XStart = e.touches[0].clientX;
     YStart = e.touches[0].clientY;
-}
+};
 
 // Just pressing the screen without sliding (change the position of your finger) then it should pause. 
-document.ontouchend = function(e){
+document.getElementById("myCanvas").ontouchend = function(e){
     if (XStart == e.changedTouches[0].clientX && YStart == e.changedTouches[0].clientY){
         changePauseState();
     }
-}
+};
 
-document.ontouchmove = function(e) {
+document.getElementById("myCanvas").ontouchmove = function(e) {
 
-    // Checking if the finger movement is horisontal. In other words, if the x-value has changed more than the y value has
-    // compared to the start position.  
+    // Checking if the finger movement is horisontal. In other words, if the x-value has 
+    // changed more than the y value has compared to the start position.  
     if (Math.abs(e.touches[0].clientX - XStart) > Math.abs(e.touches[0].clientY - YStart)){
 
         // If the movement is horisontal, then in what direction is it going? If the number increases in relation to the start position then it's towards right. 
