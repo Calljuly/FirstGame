@@ -26,18 +26,23 @@ audioOn();
 
 
 // This is the sound for the menu
-const menuSound=function(){
+const menuSound = function () {
 
     const list = document.querySelectorAll('.sound');
     const audio = new Audio("/mainpage/audio/click.wav");
-    
+    var context = new AudioContext();
 
-    list.forEach(link=>{
+    list.forEach(link => {
 
-        link.addEventListener('mouseenter',()=>{
 
-            audio.play();
+        link.addEventListener('mouseover', () => {
+            context.resume().then(() => {
+                audio.play();
+            });
+
         });
+
+
 
     });
 }
