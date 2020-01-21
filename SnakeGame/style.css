@@ -140,16 +140,6 @@ we don't want them to be visible. They are only put there to be used later. */
   display: none;
 }
 
-.vrtBtnCont {
-  display: flex;
-  justify-content: center;
-}
-
-.virtualBtn {
-  text-align: center;
-  width: 15%;
-  padding: 1%;
-}
 
 /* The div that will fill the viewport on game over to ask what the user wants to do next.
    Therefore it's not displayed at start */
